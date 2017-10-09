@@ -6,6 +6,7 @@ function Answer( answerText, isCorrect ) {
   this.isCorrect = isCorrect;
 }
 
+
 /*Question Constructor*/
 function Question( questionText ) {
   this.questionText = questionText;
@@ -19,7 +20,17 @@ Question.prototype.addAnswer = function( answerText, isCorrect ) { //add a new a
     isCorrect = false;
   }
   this.answers.push( new Answer( answerText, isCorrect ) );
-  this.setCorrectIndex(); //last correct answer added will be set as the correct answer
+  this.setCorrectAnswer(); //last correct answer added will be set as the correct answer
+};
+
+Question.prototype.addAllAnswers = function ( answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
+  answers.forEach( function( answer ) {
+    if ( typeof( answer ) === 'string' ) {
+      this.addAnswer( answer );
+    } else {
+      this.addAnswer( answer[ 0 ], true );
+    }
+  }.bind( this ) ); //binding to give the anonymous function context
 };
 
 Question.prototype.setCorrectAnswer = function() { //Set the correct answer, called on addAnswer
@@ -55,16 +66,27 @@ Question.prototype.renderQuestion = function() { //render question to the page
 };
 
 
+/*Quiz Constructor*/
+function Quiz( title, description ) {
+  this.title = title;
+  this.description = description;
+  this.questions = [];
+  this.currentQuestion = -1;
+}
 
-
-
+Quiz.prototype.addQuestion = function ( questionText ) {
+  this.questions.push( new Question( questionText ) );
+};
 
 
 
 
 
 var myQuestion = new Question( 'What color is the table?' );
-myQuestion.addAnswer( 'Purple' );
-myQuestion.addAnswer( 'Blue' );
-myQuestion.addAnswer( 'White', true );
-myQuestion.addAnswer( 'Green' );
+
+myQuestion.addAllAnswers( [
+  'Purple',
+  'Blue',
+  [ 'White' ], //array indicates correct answer
+  'Green'
+] );
