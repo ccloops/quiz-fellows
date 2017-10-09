@@ -3,6 +3,10 @@
 //+++++++++++++++++++++++++++++++++++++
 //Appending New Question Form
 //+++++++++++++++++++++++++++++++++++++
+var addQuestionButton = document.getElementById('newQuestion');
+
+
+// newQuestions = [];
 
 function addQuestionForm() {
   event.preventDefault();
@@ -16,21 +20,30 @@ function addQuestionForm() {
   newQuestionInput.name = 'newQuestion';
   newQuestionInput.type = 'text';
   newQuestionArticle.appendChild(newQuestionInput);
-  var newAnswerButton = document.createElement('button');
-  newAnswerButton.type = 'click';
-  newAnswerButton.textContent = 'New Answer';
-  newQuestionArticle.appendChild(newAnswerButton);
+
+  newAnswerForm(newQuestionArticle);
 
   entireQuizForm.appendChild(newQuestionArticle);
 }
 
-var addQuestionButton = document.getElementById('newQuestion');
 
 addQuestionButton.addEventListener('click', addQuestionForm);
 
-// function newAnswerForm() {
-//   var newAnswerLabel = document.createElement('label');
-//   newAnswerLabel.for = 'newAnswer';
-//   newAnswerLabel.textContent = 'New Answer';
-//
-// }
+
+function newAnswerForm(newQuestionArticle) {
+  event.preventDefault();
+  var newAnswerButton = document.createElement('button');
+  var newAnswerLabel = document.createElement('label');
+  newAnswerLabel.for = 'newAnswer';
+  newAnswerLabel.textContent = 'New Answer:';
+  newQuestionArticle.appendChild(newAnswerLabel);
+  var newAnswerInput = document.createElement('input');
+  newAnswerInput.name = 'newAnswer';
+  newAnswerInput.type = 'text';
+  newQuestionArticle.appendChild(newAnswerInput);
+  newAnswerButton.type = 'click';
+  newAnswerButton.textContent = 'New Answer:';
+  newQuestionArticle.appendChild(newAnswerButton);
+
+  newAnswerButton.addEventListener('click', newAnswerForm);
+}
