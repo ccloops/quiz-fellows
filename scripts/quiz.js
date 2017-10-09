@@ -74,19 +74,27 @@ function Quiz( title, description ) {
   this.currentQuestion = -1;
 }
 
-Quiz.prototype.addQuestion = function ( questionText ) {
+Quiz.prototype.addQuestionAndAnswers = function ( questionText, answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
   this.questions.push( new Question( questionText ) );
+  this.questions[ this.questions.length - 1 ].addAllAnswers( answers );
 };
 
 
 
-
-
-var myQuestion = new Question( 'What color is the table?' );
-
-myQuestion.addAllAnswers( [
+var myQuiz = new Quiz( 'My First Quiz', 'A quiz to test the functionality of stuff.' );
+myQuiz.addQuestionAndAnswers( 'What color is the table?', [
   'Purple',
   'Blue',
   [ 'White' ], //array indicates correct answer
   'Green'
 ] );
+
+
+// var myQuestion = new Question( 'What color is the table?' );
+//
+// myQuestion.addAllAnswers( [
+//   'Purple',
+//   'Blue',
+//   [ 'White' ], //array indicates correct answer
+//   'Green'
+// ] );
