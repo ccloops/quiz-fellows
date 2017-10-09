@@ -7,5 +7,30 @@
   <body>
     <h1>Make Your Own Quiz</h1>
 
+    <form id="new-quiz">
+      <fieldset>
+        <section id="entireQuizForm">
+          <legend>New Quiz Input</legend>
+          <article id="quizHeader">
+
+            <label for="quizTitles">Quiz Title:</label>
+            <input name="quizTitles" type="text" />
+
+            <label for="getMaxCustomers">Quiz Topic:</label>
+            <input name="getMaxCustomers" type="text" />
+
+            <label for="getAvgSale">Quiz Description:</label>
+            <input name="getAvgSale" type="text" />
+
+          </article>
+        </section>
+
+        <button id="newQuestion" type="submit">Add New Question</button>
+        <button type="submit">Submit Quiz</button>
+
+      </fieldset>
+    </form>
+
+    <script src="../scripts/template.js"></script>
   </body>
 </html>
