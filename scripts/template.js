@@ -5,6 +5,7 @@
 //+++++++++++++++++++++++++++++++++++++
 
 function addQuestionForm() {
+  event.preventDefault();
   var entireQuizForm = document.getElementById('entireQuizForm');
   var newQuestionArticle = document.createElement('article');
   var newQuestionLabel = document.createElement('label');
@@ -14,10 +15,22 @@ function addQuestionForm() {
   var newQuestionInput = document.createElement('input');
   newQuestionInput.name = 'newQuestion';
   newQuestionInput.type = 'text';
-  // var newAnswerButton = document.createElement
   newQuestionArticle.appendChild(newQuestionInput);
+  var newAnswerButton = document.createElement('button');
+  newAnswerButton.type = 'click';
+  newAnswerButton.textContent = 'New Answer';
+  newQuestionArticle.appendChild(newAnswerButton);
 
   entireQuizForm.appendChild(newQuestionArticle);
 }
 
-addQuestionForm();
+var addQuestionButton = document.getElementById('newQuestion');
+
+addQuestionButton.addEventListener('click', addQuestionForm);
+
+// function newAnswerForm() {
+//   var newAnswerLabel = document.createElement('label');
+//   newAnswerLabel.for = 'newAnswer';
+//   newAnswerLabel.textContent = 'New Answer';
+//
+// }
