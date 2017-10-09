@@ -21,15 +21,24 @@ Question.prototype.addAnswer = function( answerText, isCorrect ) { //add a new a
   this.answers.push( new Answer( answerText, isCorrect ) );
 };
 
-Question.prototype.renderQuestion = function() {
+Question.prototype.setCorrectIndex = function() {
+  for( var answer in this.answers ) {
+    if( this.answers[ answer ].isCorrect ) {
+      this.correctAnswer = Number( answer );
+      break;
+    }
+  }
+};
+
+Question.prototype.renderQuestion = function() { //render question to the page
   var sectionEl = document.getElementById( 'quiz' );
-  sectionEl.innerHTML = null;
+  sectionEl.innerHTML = null; //clear out old content
   var articleEl = document.createElement( 'article' );
   var h2El = document.createElement( 'h2' );
-  h2El.id = 'question-text';
   h2El.textContent = this.questionText;
   articleEl.appendChild( h2El );
   var olEl = document.createElement( 'ol' );
+  olEl.id = 'answers-list';
   this.answers.forEach( function( answer, index ) {
     var liEl = document.createElement( 'li' );
     liEl.id = 'answer' + index;
@@ -40,8 +49,17 @@ Question.prototype.renderQuestion = function() {
   sectionEl.appendChild( articleEl );
 };
 
-var myQuestion = new Question( 'Who are the best teammates?' );
-myQuestion.addAnswer( 'Catherine is the best teammate', true );
-myQuestion.addAnswer( 'Joel is the best teammate', true );
-myQuestion.addAnswer( 'Rob is the best teammate', true );
-myQuestion.addAnswer( 'None of the above' );
+
+
+
+
+
+
+
+
+
+var myQuestion = new Question( 'What color is the table?' );
+myQuestion.addAnswer( 'Purple' );
+myQuestion.addAnswer( 'Blue' );
+myQuestion.addAnswer( 'White', true );
+myQuestion.addAnswer( 'Green' );
