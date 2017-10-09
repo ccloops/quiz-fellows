@@ -19,15 +19,20 @@ Question.prototype.addAnswer = function( answerText, isCorrect ) { //add a new a
     isCorrect = false;
   }
   this.answers.push( new Answer( answerText, isCorrect ) );
+  this.setCorrectIndex(); //last correct answer added will be set as the correct answer
 };
 
-Question.prototype.setCorrectIndex = function() {
+Question.prototype.setCorrectAnswer = function() { //Set the correct answer, called on addAnswer
   for( var answer in this.answers ) {
     if( this.answers[ answer ].isCorrect ) {
       this.correctAnswer = Number( answer );
       break;
     }
   }
+};
+
+Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the selected answer (called on answer click)
+  this.selectedAnswer = selectedAnswer;
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
