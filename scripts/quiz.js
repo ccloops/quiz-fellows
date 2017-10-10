@@ -6,7 +6,6 @@ function Answer( answerText, isCorrect ) {
   this.isCorrect = isCorrect;
 }
 
-
 /*Question Constructor*/
 function Question( questionText ) {
   this.questionText = questionText;
@@ -47,9 +46,8 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
-  var sectionEl = document.getElementById( 'quiz' );
-  sectionEl.lastElementChild.remove();
-  var articleEl = document.createElement( 'article' );
+  var articleEl = document.getElementById( 'quiz-content' );
+  articleEl.innerHTML = null;
   var h2El = document.createElement( 'h2' );
   h2El.textContent = this.questionText;
   articleEl.appendChild( h2El );
@@ -62,9 +60,7 @@ Question.prototype.renderQuestion = function() { //render question to the page
     olEl.appendChild( liEl );
   } );
   articleEl.appendChild( olEl );
-  sectionEl.appendChild( articleEl );
 };
-
 
 /*Quiz Constructor*/
 function Quiz( title, description ) {
@@ -92,7 +88,7 @@ Quiz.prototype.renderNext = function() { //change to the next question
   }
 };
 
-Quiz.prototype.renderLast = function() { //change to the last question
+Quiz.prototype.renderPrevious = function() { //change to the last question
   if( this.currentQuestion > 0 ) {
     this.currentQuestion--;
     this.questions[ this.currentQuestion ].renderQuestion();
@@ -105,7 +101,7 @@ Quiz.prototype.renderLast = function() { //change to the last question
   }
 };
 
-Quiz.prototype.renderButtons = function () { //called when a quiz is loaded for the first time to create the back and next buttons
+Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the first time to create the back and next buttons
   var sectionEl = document.getElementById( 'quiz' );
   sectionEl.innerHTML = null; //clears out main page
 
@@ -115,15 +111,26 @@ Quiz.prototype.renderButtons = function () { //called when a quiz is loaded for 
     if( Number( index ) === 0 ) {
       buttEl.setAttribute( 'class', 'hidden' ); //used to hide previous button on first page
       buttEl.id = 'previous-button';
-      buttEl.addEventListener( 'click', this.renderLast.bind( this ) );
+      buttEl.addEventListener( 'click', this.renderPrevious.bind( this ) );
     } else {
       buttEl.id = 'next-button';
       buttEl.addEventListener( 'click', this.renderNext.bind( this ) );
     }
     sectionEl.appendChild( buttEl );
   }.bind( this )); //bind added to give context to anonymous function
-  sectionEl.appendChild( document.createElement( 'div' ) );
+  var articleEl = document.createElement( 'article' );
+  articleEl.id = 'quiz-content';
+  articleEl.addEventListener( 'click', this.handleSelectAnswer.bind( this ) );
+  sectionEl.appendChild( articleEl );
   this.questions[ 0 ].renderQuestion();
+};
+
+Quiz.prototype.handleSelectAnswer = function ( e ) {
+  if( e.target.id ) {
+    var ansNum = Number( e.target.id.replace( 'answer', '' ) );
+    this.questions[ this.currentQuestion ].setSelectedAnswer( ansNum );
+    console.log( this.questions[ this.currentQuestion ] );
+  }
 };
 
 
@@ -152,5 +159,4 @@ myQuiz.addQuestionAndAnswers( 'Did Rob eat too much pizza?', [
   'Rob ate pineapples ya dummy'
 ] );
 
-myQuiz.renderButtons();
-// myQuiz.questions[ 0 ].renderQuestion();
+myQuiz.renderQuiz();
