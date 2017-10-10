@@ -71,7 +71,7 @@ function Quiz( title, description ) {
   this.title = title;
   this.description = description;
   this.questions = [];
-  this.currentQuestion = -1;
+  this.currentQuestion = 0;
 }
 
 Quiz.prototype.addQuestionAndAnswers = function ( questionText, answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
@@ -79,9 +79,17 @@ Quiz.prototype.addQuestionAndAnswers = function ( questionText, answers ) { //an
   this.questions[ this.questions.length - 1 ].addAllAnswers( answers );
 };
 
+Quiz.prototype.renderNext = function () {
+  if( this.currentQuestion < this.questions.length - 1 ) {
+    this.currentQuestion++;
+    this.questions[ this.currentQuestion ].renderQuestion();
+  }
+};
+
 
 
 var myQuiz = new Quiz( 'My First Quiz', 'A quiz to test the functionality of stuff.' );
+
 myQuiz.addQuestionAndAnswers( 'What color is the table?', [
   'Purple',
   'Blue',
@@ -89,12 +97,11 @@ myQuiz.addQuestionAndAnswers( 'What color is the table?', [
   'Green'
 ] );
 
+myQuiz.addQuestionAndAnswers( 'When is it time to go?', [
+  'Never',
+  '12:00',
+  'White', //array indicates correct answer
+  [ 'Whenever you need to' ]
+] );
 
-// var myQuestion = new Question( 'What color is the table?' );
-//
-// myQuestion.addAllAnswers( [
-//   'Purple',
-//   'Blue',
-//   [ 'White' ], //array indicates correct answer
-//   'Green'
-// ] );
+myQuiz.questions[ 0 ].renderQuestion();
