@@ -1,49 +1,66 @@
 'use strict';
 
+QuestionForm.all = [];
+
+//+++++++++++++++++++++++++++++++++++++
+//Question Form Constructor
+//+++++++++++++++++++++++++++++++++++++
+
+function QuestionForm() {
+  this.answers = [];
+  QuestionForm.all.push(this);
+  this.addQuestionForm();
+}
+
 //+++++++++++++++++++++++++++++++++++++
 //Appending New Question Form
 //+++++++++++++++++++++++++++++++++++++
+
 var addQuestionButton = document.getElementById('newQuestion');
 
-
-// newQuestions = [];
-
-function addQuestionForm() {
-  event.preventDefault();
+QuestionForm.prototype.addQuestionForm = function() {
   var entireQuizForm = document.getElementById('entireQuizForm');
-  var newQuestionArticle = document.createElement('article');
+  this.newQuestionArticle = document.createElement('article');
   var newQuestionLabel = document.createElement('label');
   newQuestionLabel.for = 'newQuestion';
   newQuestionLabel.textContent = 'New Question:';
-  newQuestionArticle.appendChild(newQuestionLabel);
+  this.newQuestionArticle.appendChild(newQuestionLabel);
   var newQuestionInput = document.createElement('input');
   newQuestionInput.name = 'newQuestion';
   newQuestionInput.type = 'text';
-  newQuestionArticle.appendChild(newQuestionInput);
+  this.newQuestionArticle.appendChild(newQuestionInput);
 
-  newAnswerForm(newQuestionArticle);
-
-  entireQuizForm.appendChild(newQuestionArticle);
-}
-
-
-addQuestionButton.addEventListener('click', addQuestionForm);
-
-
-function newAnswerForm(newQuestionArticle) {
-  event.preventDefault();
   var newAnswerButton = document.createElement('button');
+  newAnswerButton.type = 'click';
+  newAnswerButton.textContent = 'New Answer';
+  this.newQuestionArticle.appendChild(newAnswerButton);
+
+  newAnswerButton.addEventListener('click', this.newAnswerForm.bind(this));
+
+  this.newAnswerForm();
+
+  entireQuizForm.appendChild(this.newQuestionArticle);
+};
+
+
+QuestionForm.prototype.newAnswerForm = function() {
+  event.preventDefault();
   var newAnswerLabel = document.createElement('label');
   newAnswerLabel.for = 'newAnswer';
   newAnswerLabel.textContent = 'New Answer:';
-  newQuestionArticle.appendChild(newAnswerLabel);
+  this.newQuestionArticle.appendChild(newAnswerLabel);
   var newAnswerInput = document.createElement('input');
   newAnswerInput.name = 'newAnswer';
   newAnswerInput.type = 'text';
-  newQuestionArticle.appendChild(newAnswerInput);
-  newAnswerButton.type = 'click';
-  newAnswerButton.textContent = 'New Answer';
-  newQuestionArticle.appendChild(newAnswerButton);
+  this.newQuestionArticle.appendChild(newAnswerInput);
+};
 
-  newAnswerButton.addEventListener('click', newAnswerForm);
-}
+
+
+QuestionForm.addNewQuestion = function (e) {
+  e.preventDefault();
+  new QuestionForm();
+};
+
+
+addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
