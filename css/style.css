@@ -1,5 +1,9 @@
 @import "reset.css";
 
+.hidden { /*Used to hide the previous button on first go*/
+  display: none;
+}
+
 body {
   margin: 0 auto;
   font-family: helvetica;

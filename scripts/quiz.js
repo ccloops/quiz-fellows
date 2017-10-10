@@ -145,5 +145,12 @@ myQuiz.addQuestionAndAnswers( 'When is it time to go?', [
   [ 'Whenever you need to' ]
 ] );
 
+myQuiz.addQuestionAndAnswers( 'Did Rob eat too much pizza?', [
+  'No, he\'s very reasonable',
+  [ 'Of course he did, he always does' ],
+  'What pizza?',
+  'Rob ate pineapples ya dummy'
+] );
+
 myQuiz.renderButtons();
 // myQuiz.questions[ 0 ].renderQuestion();
