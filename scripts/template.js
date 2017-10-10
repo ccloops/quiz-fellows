@@ -14,7 +14,7 @@ function addQuestionForm() {
   var newQuestionArticle = document.createElement('article');
   var newQuestionLabel = document.createElement('label');
   newQuestionLabel.for = 'newQuestion';
-  newQuestionLabel.textContent = 'New Question';
+  newQuestionLabel.textContent = 'New Question:';
   newQuestionArticle.appendChild(newQuestionLabel);
   var newQuestionInput = document.createElement('input');
   newQuestionInput.name = 'newQuestion';
@@ -42,7 +42,7 @@ function newAnswerForm(newQuestionArticle) {
   newAnswerInput.type = 'text';
   newQuestionArticle.appendChild(newAnswerInput);
   newAnswerButton.type = 'click';
-  newAnswerButton.textContent = 'New Answer:';
+  newAnswerButton.textContent = 'New Answer';
   newQuestionArticle.appendChild(newAnswerButton);
 
   newAnswerButton.addEventListener('click', newAnswerForm);
