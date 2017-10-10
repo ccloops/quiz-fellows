@@ -13,27 +13,54 @@ h1 {
   font-size: 50px;
 }
 
+form {
+  margin: 0 auto;
+}
+
+article {
+  border: 5px solid red;
+  margin: 20px 10px;
+  padding: 10px;
+  width: 70%
+}
+
+
 legend {
   font-size: 30px;
   margin: 20px 5px;
-  border: 10px solid red;
+  padding: 5px;
+  background-color: red;
+  color: white;
   width: 15%;
 }
 
 input[type=text] {
-    width: 100%;
+    width: 60%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    margin-left: 0px;
+    display: block;
+    background-color: pink;
 }
 
 button {
    background-color: red;
-   /*border: none;*/
    color: white;
    padding: 15px 32px;
    text-align: center;
    text-decoration: none;
    display: inline-block;
    font-size: 16px;
+}
+
+#newAnswer {
+  background-color: red;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  float: right;
 }
