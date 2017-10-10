@@ -23,7 +23,7 @@ Question.prototype.addAnswer = function( answerText, isCorrect ) { //add a new a
   this.setCorrectAnswer(); //last correct answer added will be set as the correct answer
 };
 
-Question.prototype.addAllAnswers = function ( answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
+Question.prototype.addAllAnswers = function( answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
   answers.forEach( function( answer ) {
     if ( typeof( answer ) === 'string' ) {
       this.addAnswer( answer );
@@ -74,17 +74,25 @@ function Quiz( title, description ) {
   this.currentQuestion = 0;
 }
 
-Quiz.prototype.addQuestionAndAnswers = function ( questionText, answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
+Quiz.prototype.addQuestionAndAnswers = function( questionText, answers ) { //answers is an array of answer text strings, with the correct answer wrapped in an array as such: [ answerText ]
   this.questions.push( new Question( questionText ) );
   this.questions[ this.questions.length - 1 ].addAllAnswers( answers );
 };
 
-Quiz.prototype.renderNext = function () {
+Quiz.prototype.renderNext = function() {
   if( this.currentQuestion < this.questions.length - 1 ) {
     this.currentQuestion++;
     this.questions[ this.currentQuestion ].renderQuestion();
   }
 };
+
+Quiz.prototype.renderLast = function() {
+  if( this.currentQuestion > 0 ) {
+    this.currentQuestion--;
+    this.questions[ this.currentQuestion ].renderQuestion();
+  }
+};
+
 
 
 
