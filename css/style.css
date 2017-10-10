@@ -44,6 +44,10 @@ input[type=text] {
     background-color: pink;
 }
 
+/*label {
+  float: left;
+}*/
+
 button {
    background-color: red;
    color: white;
@@ -64,6 +68,11 @@ button {
   font-size: 10px;
   float: right;
 }
+
+
+/*#radio {
+  float: left;
+}*/
 
 #jimgs {
   border: 5px solid black;
