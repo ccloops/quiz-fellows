@@ -1,0 +1,44 @@
+'use strict';
+
+/*Objects Quiz*/
+var quiz0 = new Quiz( 'Code 201: Objects', 'Practice your skills with JavaScript objects.' );
+
+quiz0.addQuestionAndAnswers( 'Fill in the blank.<br><br>In an object, a variable is referred to as a(n) _______.', [
+  'object oriented variable',
+  [ 'property' ],
+  'literal',
+  'method'
+] );
+
+quiz0.addQuestionAndAnswers( 'Fill in the blank.<br><br>In an object, a function is referred to as a(n) _______.', [
+  [ 'method' ],
+  'action',
+  'reaction',
+  'literal verb',
+  'object.do()'
+] );
+
+quiz0.addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+  'dog.object.bark();',
+  'bark();',
+  [ 'dog.bark();' ],
+  'dog.bark;'
+] );
+
+quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br><br>Select the <em>best</em> answer.', [
+  'dog.breed;',
+  'dog[ \'breed\' ]',
+  'dog[ breed ]',
+  [ 'Both A and B are valid' ],
+  'A, B, and C are all valid'
+] );
+
+quiz0.addQuestionAndAnswers( 'True or False?<br><br>The following is a valid JavaScript object:<br><br>var car = { make: \'Ford\' };', [
+  [ 'True' ],
+  'False'
+] );
+
+quiz0.addQuestionAndAnswers( 'True or False?<br><br>The following is a valid method declaration:<br><br>bark: function() { console.log( \'Woof!\' ); }', [
+  [ 'True' ],
+  'False'
+] );

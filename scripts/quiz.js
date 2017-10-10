@@ -150,29 +150,8 @@ Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when 
 };
 
 
-
-
-var myQuiz = new Quiz( 'My First Quiz', 'A quiz to test the functionality of stuff.' );
-
-myQuiz.addQuestionAndAnswers( 'What color is the table?', [
-  'Purple',
-  'Blue',
-  [ 'White' ], //array indicates correct answer
-  'Green'
-] );
-
-myQuiz.addQuestionAndAnswers( 'When is it time to go?', [
-  'Never',
-  '12:00',
-  'Sometime',
-  [ 'Whenever you need to' ]
-] );
-
-myQuiz.addQuestionAndAnswers( 'Did Rob eat too much pizza?', [
-  'No, he\'s very reasonable',
-  [ 'Of course he did, he always does' ],
-  'What pizza?',
-  'Rob ate pineapples ya dummy'
-] );
-
-// myQuiz.renderQuiz();
+function fixText( string ) {
+  if( string.contains( '<br>' ) ) {
+    console.log( 'found it' );
+  }
+}
