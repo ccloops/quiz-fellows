@@ -66,9 +66,15 @@ Question.prototype.renderQuestion = function() { //render question to the page
   this.answers.forEach( function( answer, index ) {
     var liEl = document.createElement( 'li' );
     liEl.id = 'answer' + index;
+    if( index % 2 === 0 ) { //add a shade class to even rows
+      liEl.classList.add( 'shade' );
+    }
+    if( index === this.selectedAnswer ) { //add a class of selected to previously selected answer
+      liEl.classList.add( 'selected' );
+    }
     liEl.textContent = answer.answerText;
     olEl.appendChild( liEl );
-  } );
+  }.bind( this ) );
   articleEl.appendChild( olEl );
 };
 
