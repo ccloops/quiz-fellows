@@ -7,9 +7,10 @@ QuestionForm.all = [];
 //+++++++++++++++++++++++++++++++++++++
 
 function QuestionForm() {
+  this.answersText = [];
   this.answers = [];
-  QuestionForm.all.push(this);
   this.addQuestionForm();
+  QuestionForm.all.push(this);
 }
 
 //+++++++++++++++++++++++++++++++++++++
@@ -25,10 +26,10 @@ QuestionForm.prototype.addQuestionForm = function() {
   newQuestionLabel.for = 'newQuestion';
   newQuestionLabel.textContent = 'New Question:';
   this.newQuestionArticle.appendChild(newQuestionLabel);
-  var newQuestionInput = document.createElement('input');
-  newQuestionInput.name = 'newQuestion';
-  newQuestionInput.type = 'text';
-  this.newQuestionArticle.appendChild(newQuestionInput);
+  this.newQuestionInput = document.createElement('input');
+  this.newQuestionInput.name = 'newQuestion';
+  this.newQuestionInput.type = 'text';
+  this.newQuestionArticle.appendChild(this.newQuestionInput);
 
   var newAnswerButton = document.createElement('button');
   newAnswerButton.type = 'click';
@@ -42,6 +43,13 @@ QuestionForm.prototype.addQuestionForm = function() {
   entireQuizForm.appendChild(this.newQuestionArticle);
 };
 
+QuestionForm.prototype.getQuestionAndAnswers = function () {
+  for(var i = 0; i < this.answers.length; i++) {
+    this.answersText.push(this.answers[i].value);
+  }
+  this.questionText = this.newQuestionInput.value;
+};
+
 
 QuestionForm.prototype.newAnswerForm = function() {
   event.preventDefault();
@@ -53,6 +61,7 @@ QuestionForm.prototype.newAnswerForm = function() {
   newAnswerInput.name = 'newAnswer';
   newAnswerInput.type = 'text';
   this.newQuestionArticle.appendChild(newAnswerInput);
+  this.answers.push(newAnswerInput);
 };
 
 
