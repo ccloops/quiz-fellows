@@ -48,7 +48,7 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
 
 Question.prototype.renderQuestion = function() { //render question to the page
   var sectionEl = document.getElementById( 'quiz' );
-  sectionEl.innerHTML = null; //clear out old content
+  sectionEl.lastElementChild.remove();
   var articleEl = document.createElement( 'article' );
   var h2El = document.createElement( 'h2' );
   h2El.textContent = this.questionText;
@@ -79,18 +79,51 @@ Quiz.prototype.addQuestionAndAnswers = function( questionText, answers ) { //ans
   this.questions[ this.questions.length - 1 ].addAllAnswers( answers );
 };
 
-Quiz.prototype.renderNext = function() {
+Quiz.prototype.renderNext = function() { //change to the next question
   if( this.currentQuestion < this.questions.length - 1 ) {
     this.currentQuestion++;
     this.questions[ this.currentQuestion ].renderQuestion();
   }
+  if( this.currentQuestion === this.questions.length - 1 ) {
+    document.getElementById( 'next-button' ).textContent = 'Submit';
+  }
+  if( this.currentQuestion === 1 ) {
+    document.getElementById( 'previous-button' ).removeAttribute( 'class' );
+  }
 };
 
-Quiz.prototype.renderLast = function() {
+Quiz.prototype.renderLast = function() { //change to the last question
   if( this.currentQuestion > 0 ) {
     this.currentQuestion--;
     this.questions[ this.currentQuestion ].renderQuestion();
   }
+  if( this.currentQuestion === 0 ) {
+    document.getElementById( 'previous-button' ).setAttribute( 'class', 'hidden' );
+  }
+  if( this.currentQuestion === this.questions.length - 2 ) {
+    document.getElementById( 'next-button' ).textContent = 'Next';
+  }
+};
+
+Quiz.prototype.renderButtons = function () { //called when a quiz is loaded for the first time to create the back and next buttons
+  var sectionEl = document.getElementById( 'quiz' );
+  sectionEl.innerHTML = null; //clears out main page
+
+  [ 'Previous', 'Next' ].forEach( function ( label, index ) {
+    var buttEl = document.createElement( 'button' );
+    buttEl.textContent = label;
+    if( Number( index ) === 0 ) {
+      buttEl.setAttribute( 'class', 'hidden' ); //used to hide previous button on first page
+      buttEl.id = 'previous-button';
+      buttEl.addEventListener( 'click', this.renderLast.bind( this ) );
+    } else {
+      buttEl.id = 'next-button';
+      buttEl.addEventListener( 'click', this.renderNext.bind( this ) );
+    }
+    sectionEl.appendChild( buttEl );
+  }.bind( this )); //bind added to give context to anonymous function
+  sectionEl.appendChild( document.createElement( 'div' ) );
+  this.questions[ 0 ].renderQuestion();
 };
 
 
@@ -108,8 +141,9 @@ myQuiz.addQuestionAndAnswers( 'What color is the table?', [
 myQuiz.addQuestionAndAnswers( 'When is it time to go?', [
   'Never',
   '12:00',
-  'White', //array indicates correct answer
+  'Sometime',
   [ 'Whenever you need to' ]
 ] );
 
-myQuiz.questions[ 0 ].renderQuestion();
+myQuiz.renderButtons();
+// myQuiz.questions[ 0 ].renderQuestion();
