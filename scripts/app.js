@@ -4,13 +4,9 @@ User.userNameInput = document.getElementById('username');
 User.passWordInput = document.getElementById('password');
 
 var app = {
-  users: []
+  users: [],
 };
-
-if (Boolean(localStorage.app) === true) {
-  console.log(localStorage.app + ' test ');
-  app = JSON.parse(localStorage.app);
-}
+console.log(app);
 
 function User (username, password) {
   this.userName = username;
@@ -22,26 +18,34 @@ User.handleUserLogin = function( event ) {
   event.preventDefault();
   var userName = User.userNameInput.value;
   var passWord = User.passWordInput.value;
-  console.log('made it to handle');
-  if (app.users.length = '0') {
-    console.log('handle if?');
+
+  if (app.users.length === 0) {// if no users are stored then creates a new user
+
+    console.log('app.users.length = 0 true');
     new User(userName, passWord);
-  } else {
+
+  } else { // check to see if user exsists
     for (var i = 0; i < app.users.length; i++) {
-      if (app.users[i].userName === userName && app.users[i].passWord === passWord) {
+      if (userName === app.users[i].userName && passWord === app.users[i].passWord) {
         console.log('returning user');
         alert('welcome back');
+        break;
       } else {
-        console.log('new user created');
-        new User(userName, passWord);
+        alert('new user');
+        var userCounter = 0;
+        for (var j = 0; j < app.users.length; j++) {
+          if (userName !== app.users[j].userName && passWord !== app.users[j].passWord) { //add to counter for each time the the un and pw do not match
+            userCounter += 1;
+          }
+        }
+        console.log('counter: ' + userCounter);
+        if (userCounter === app.users.length) { //if every user was accounted for with counter = every user then create new user.
+          alert('create new user');
+          new User(userName, passWord);
+        }
       }
     }
   }
-  localStorage.app = JSON.stringify(app.users);
-
-  console.log(' userName: ' + userName + ' ' + 'passWord: ' + passWord);
-  console.log('app.users: ' + app.users);
 };
-
 
 User.form.addEventListener('submit', User.handleUserLogin);
