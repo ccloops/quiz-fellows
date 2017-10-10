@@ -175,4 +175,4 @@ myQuiz.addQuestionAndAnswers( 'Did Rob eat too much pizza?', [
   'Rob ate pineapples ya dummy'
 ] );
 
-myQuiz.renderQuiz();
+// myQuiz.renderQuiz();
