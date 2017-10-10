@@ -41,8 +41,18 @@ Question.prototype.setCorrectAnswer = function() { //Set the correct answer, cal
   }
 };
 
-Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the selected answer (called on answer click)
+Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the selected answer and class label
+  if( this.selectedAnswer > -1 ) {
+    var liEl = document.getElementById( 'answer' + this.selectedAnswer );
+    if( liEl.classList.length > 1 ) {
+      liEl.classList.remove( 'selected' );
+    } else {
+      liEl.removeAttribute( 'class' );
+    }
+  }
   this.selectedAnswer = selectedAnswer;
+  liEl = document.getElementById( 'answer' + this.selectedAnswer );
+  liEl.classList.add( 'selected' );
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
@@ -125,11 +135,11 @@ Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the
   this.questions[ 0 ].renderQuestion();
 };
 
-Quiz.prototype.handleSelectAnswer = function ( e ) {
+Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when clicked
   if( e.target.id ) {
     var ansNum = Number( e.target.id.replace( 'answer', '' ) );
     this.questions[ this.currentQuestion ].setSelectedAnswer( ansNum );
-    console.log( this.questions[ this.currentQuestion ] );
+
   }
 };
 
