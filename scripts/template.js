@@ -33,7 +33,7 @@ QuestionForm.prototype.addQuestionForm = function() {
 
   var newAnswerButton = document.createElement('button');
   newAnswerButton.type = 'click';
-  newAnswerButton.textContent = 'New Answer';
+  newAnswerButton.textContent = ' New Answer:';
   newAnswerButton.id = 'newAnswer';
   this.newQuestionArticle.appendChild(newAnswerButton);
 
