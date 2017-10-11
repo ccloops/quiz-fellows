@@ -10,6 +10,7 @@ function QuestionForm() {
   this.answersText = [];
   this.answers = [];
   this.addQuestionForm();
+  this.questionIndex = QuestionForm.all.length;
   QuestionForm.all.push(this);
 }
 
@@ -48,6 +49,10 @@ QuestionForm.prototype.addQuestionForm = function() {
 QuestionForm.prototype.getQuestionAndAnswers = function () {
   for(var i = 0; i < this.answers.length; i++) {
     this.answersText.push(this.answers[i].value);
+    var radioButtonStatus = document.getElementById('q' + this.questionIndex + 'a' + i).checked;
+    if(radioButtonStatus) {
+      this.correctAnswer = i;
+    }
   }
   this.questionText = this.newQuestionInput.value;
 };
@@ -73,17 +78,8 @@ QuestionForm.prototype.newAnswerForm = function() {
   var radioButtonInput = document.createElement('input');
   radioButtonInput.type = 'radio';
   radioButtonInput.name = 'radio';
-  radioButtonInput.setAttribute('value', 'false');
   radioButtonInput.id = 'q' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
   liEl.appendChild(radioButtonInput);
-
-  QuestionForm.isCorrectHandle = function () {
-    for(var i = 0; i < QuestionForm.all.length; i++) {
-      console.log('testing for true');
-      radioButtonInput.setAttribute('value', 'true');
-    }
-  };
-  radioButtonInput.addEventListener('click', QuestionForm.isCorrectHandle);
 
   var radioButtonLabel = document.createElement('label');
   radioButtonLabel.setAttribute('for', 'radio');
