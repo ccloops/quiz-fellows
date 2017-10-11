@@ -77,20 +77,20 @@ Question.prototype.renderQuestion = function() { //render question to the page
   articleEl.appendChild( olEl );
 };
 
-Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns h2 element
-  var h2El = document.createElement( 'h2' );
-  h2El.id = 'question-text';
+Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns h3 element
+  var h3El = document.createElement( 'h3' );
+  h3El.id = 'question-text';
   if( questionText.includes( '<br>' ) ) {
     var pieces = questionText.split( '<br>' );
     pieces.forEach( function( phrase ) {
       var divEl = document.createElement( 'div' );
       divEl.textContent = phrase;
-      h2El.appendChild( divEl );
+      h3El.appendChild( divEl );
     } );
   } else {
-    h2El.textContent = questionText;
+    h3El.textContent = questionText;
   }
-  return h2El;
+  return h3El;
 };
 
 /*Quiz Constructor*/
@@ -164,19 +164,44 @@ Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when 
   }
 };
 
-Quiz.prototype.checkAnswers = function () {
+Quiz.prototype.getPoints = function () {
   var pointsEarned = 0;
+  this.userAnswers = [];
   for( var i = 0; i < this.questions.length; i++ ) {
     if ( this.questions[i].selectedAnswer === this.questions[i].correctAnswer ) {
-      console.log('Question', i, 'is correct');
       pointsEarned++;
+      this.userAnswers.push( true );
     } else {
-      console.log('Question', i, 'is incorrect');
+      this.userAnswers.push( false );
     }
   }
   return pointsEarned;
 };
 
+Quiz.prototype.getPercent = function () {
+  var points = this.getPoints();
+  var percent = points / this.questions.length;
+  percent = Math.floor( percent * 10000 ) / 100;
+  return percent;
+};
+
 Quiz.prototype.renderResults = function() {
+  var percent = this.getPercent();
+  var sectionEl = document.getElementById( 'quiz' );
+  var results = '<h2>User\'s Results</h2><ol>'; // TODO: ADD USER NAME
+  for( var i in this.questions ) {
+    results += '<li class="';
+    if( ! this.userAnswers[ i ] ) {
+      results += 'in';
+    }
+    results += 'correct" id="question' + i + '"><h3>Question ' + ( Number( i ) + 1 ) + '</h3></li>';
+  }
+  sectionEl.innerHTML = results;
+  for( var j in this.questions ) {
+    var liEl = document.getElementById( 'question' + j );
+    liEl.appendChild( this.questions[ j ].questionText );
+  }
+
+  // results = 'You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent();
 
 };

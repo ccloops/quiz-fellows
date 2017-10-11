@@ -8,11 +8,11 @@
   background-color: pink;
 }
 
-h2#question-text div+div { /*Adds some spacing to questions with multi-line answers*/
+h3#question-text div+div { /*Adds some spacing to questions with multi-line answers*/
   margin-top: 15px;
 }
 
-h2#question-text {
+h3#question-text {
   margin-bottom: 15px;
 }
 
