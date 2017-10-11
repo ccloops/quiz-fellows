@@ -208,3 +208,20 @@ Quiz.prototype.renderResults = function() { // TODO: must have all answers selec
     liEl.appendChild( pEl );
   }
 };
+
+Quiz.getUser = function() {
+  Quiz.allUsers = JSON.parse( localStorage.users );
+  Quiz.currentUserIndex = Number( localStorage.currentUser );
+  Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ];
+};
+
+
+//Testing other functioinality
+
+function testAddQuizToUser() {
+  Quiz.getUser(); //fetch user
+  Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
+  Quiz.currentUser.myQuizzes.push( quiz0 ); //adding the quiz0 just to test
+  Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
+  localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
+}
