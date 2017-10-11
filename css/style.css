@@ -4,6 +4,35 @@
   display: none;
 }
 
+.selected {
+  background-color: pink;
+}
+
+p#question-text div+div { /*Adds some spacing to questions with multi-line answers*/
+  margin-top: 15px;
+}
+
+p#question-text {
+  margin-bottom: 15px;
+}
+
+article#quiz-content ol {
+  list-style: upper-alpha;
+  list-style-position: inside;
+}
+
+article#quiz-content ol li+li {
+  margin-top: 7.5px;
+}
+
+article#quiz-content ol li:hover {
+  background-color: pink;
+}
+
+article#quiz-content ol li:active {
+  background-color: red;
+}
+
 body {
   margin: 0 auto;
   font-family: helvetica;

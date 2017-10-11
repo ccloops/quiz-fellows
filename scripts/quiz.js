@@ -8,7 +8,7 @@ function Answer( answerText, isCorrect ) {
 
 /*Question Constructor*/
 function Question( questionText ) {
-  this.questionText = questionText;
+  this.questionText = this.formatQuestionText( questionText );
   this.answers = [];
   this.correctAnswer = -1;
   this.selectedAnswer = -1;
@@ -52,17 +52,16 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
   }
   this.selectedAnswer = selectedAnswer;
   liEl = document.getElementById( 'answer' + this.selectedAnswer );
-  liEl.classList.add( 'selected' );
+  if( liEl !== null ) {
+    liEl.classList.add( 'selected' );
+  }
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
   var articleEl = document.getElementById( 'quiz-content' );
   articleEl.innerHTML = null;
-  var h2El = document.createElement( 'h2' );
-  h2El.textContent = this.questionText;
-  articleEl.appendChild( h2El );
+  articleEl.appendChild( this.questionText );
   var olEl = document.createElement( 'ol' );
-  olEl.id = 'answers-list';
   this.answers.forEach( function( answer, index ) {
     var liEl = document.createElement( 'li' );
     liEl.id = 'answer' + index;
@@ -76,6 +75,22 @@ Question.prototype.renderQuestion = function() { //render question to the page
     olEl.appendChild( liEl );
   }.bind( this ) );
   articleEl.appendChild( olEl );
+};
+
+Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns p element
+  var pEl = document.createElement( 'p' );
+  pEl.id = 'question-text';
+  if( questionText.includes( '<br>' ) ) {
+    var pieces = questionText.split( '<br>' );
+    pieces.forEach( function( phrase ) {
+      var divEl = document.createElement( 'div' );
+      divEl.textContent = phrase;
+      pEl.appendChild( divEl );
+    } );
+  } else {
+    pEl.textContent = questionText;
+  }
+  return pEl;
 };
 
 /*Quiz Constructor*/
@@ -142,37 +157,54 @@ Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the
 };
 
 Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when clicked
-  if( e.target.id ) {
-    var ansNum = Number( e.target.id.replace( 'answer', '' ) );
-    this.questions[ this.currentQuestion ].setSelectedAnswer( ansNum );
-
+  var ansNum = e.target.id.replace( 'answer', '' );
+  var currentQuestion = this.questions[ this.currentQuestion ];
+  if( ansNum.length === 1 && currentQuestion.selectedAnswer !== Number( ansNum ) ) {
+    currentQuestion.setSelectedAnswer( Number( ansNum ) );
   }
 };
 
+Quiz.prototype.getPoints = function () {
+  var pointsEarned = 0;
+  this.userAnswers = [];
+  for( var i = 0; i < this.questions.length; i++ ) {
+    if ( this.questions[i].selectedAnswer === this.questions[i].correctAnswer ) {
+      pointsEarned++;
+      this.userAnswers.push( true );
+    } else {
+      this.userAnswers.push( false );
+    }
+  }
+  return pointsEarned;
+};
 
+Quiz.prototype.getPercent = function () {
+  var points = this.getPoints();
+  var percent = points / this.questions.length;
+  percent = Math.floor( percent * 10000 ) / 100;
+  return percent;
+};
 
-
-var myQuiz = new Quiz( 'My First Quiz', 'A quiz to test the functionality of stuff.' );
-
-myQuiz.addQuestionAndAnswers( 'What color is the table?', [
-  'Purple',
-  'Blue',
-  [ 'White' ], //array indicates correct answer
-  'Green'
-] );
-
-myQuiz.addQuestionAndAnswers( 'When is it time to go?', [
-  'Never',
-  '12:00',
-  'Sometime',
-  [ 'Whenever you need to' ]
-] );
-
-myQuiz.addQuestionAndAnswers( 'Did Rob eat too much pizza?', [
-  'No, he\'s very reasonable',
-  [ 'Of course he did, he always does' ],
-  'What pizza?',
-  'Rob ate pineapples ya dummy'
-] );
-
-// myQuiz.renderQuiz();
+Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
+  var sectionEl = document.getElementById( 'quiz' );
+  var results = '<h2>User\'s Results</h2>'; // TODO: ADD USER NAME
+  results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
+  for( var i in this.questions ) {
+    results += '<li class="';
+    if( ! this.userAnswers[ i ] ) {
+      results += 'in';
+    }
+    results += 'correct" id="question' + i + '"><h3>Question ' + ( Number( i ) + 1 ) + '</h3></li>';
+  }
+  sectionEl.innerHTML = results;
+  for( var j in this.questions ) {
+    var liEl = document.getElementById( 'question' + j );
+    liEl.appendChild( this.questions[ j ].questionText );
+    var h3El = document.createElement( 'h3' );
+    h3El.textContent = 'Your response: ';
+    liEl.appendChild( h3El );
+    var pEl = document.createElement( 'p' );
+    pEl.textContent = this.questions[ j ].answers[ this.questions[ j ].selectedAnswer ].answerText;
+    liEl.appendChild( pEl );
+  }
+};
