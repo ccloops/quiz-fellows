@@ -77,20 +77,20 @@ Question.prototype.renderQuestion = function() { //render question to the page
   articleEl.appendChild( olEl );
 };
 
-Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns h3 element
-  var h3El = document.createElement( 'h3' );
-  h3El.id = 'question-text';
+Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns p element
+  var pEl = document.createElement( 'p' );
+  pEl.id = 'question-text';
   if( questionText.includes( '<br>' ) ) {
     var pieces = questionText.split( '<br>' );
     pieces.forEach( function( phrase ) {
       var divEl = document.createElement( 'div' );
       divEl.textContent = phrase;
-      h3El.appendChild( divEl );
+      pEl.appendChild( divEl );
     } );
   } else {
-    h3El.textContent = questionText;
+    pEl.textContent = questionText;
   }
-  return h3El;
+  return pEl;
 };
 
 /*Quiz Constructor*/
@@ -185,7 +185,7 @@ Quiz.prototype.getPercent = function () {
   return percent;
 };
 
-Quiz.prototype.renderResults = function() {
+Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
   var sectionEl = document.getElementById( 'quiz' );
   var results = '<h2>User\'s Results</h2>'; // TODO: ADD USER NAME
   results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
@@ -201,8 +201,10 @@ Quiz.prototype.renderResults = function() {
     var liEl = document.getElementById( 'question' + j );
     liEl.appendChild( this.questions[ j ].questionText );
     var h3El = document.createElement( 'h3' );
-    h3El.textContent = 'Your response: ' + this.questions[ j ].answers[ this.questions[ j ].selectedAnswer ].answerText;
-    console.log(this.questions[ j ].answers[ this.questions[ j ].selectedAnswer ]);
+    h3El.textContent = 'Your response: ';
     liEl.appendChild( h3El );
+    var pEl = document.createElement( 'p' );
+    pEl.textContent = this.questions[ j ].answers[ this.questions[ j ].selectedAnswer ].answerText;
+    liEl.appendChild( pEl );
   }
 };
