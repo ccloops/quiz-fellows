@@ -14,6 +14,33 @@ function QuestionForm() {
   QuestionForm.all.push(this);
 }
 
+function AnswerForm() {
+  this.liEl = document.createElement('li');
+  this.inputLabelEl = document.createElement('label');
+  this.inputEl = document.createElement('input');
+  this.radioEl = document.createElement('radio');
+  this.radioLabelEl = document.createElement('label');
+  this.removeEl = document.createElement('button');
+
+  this.appendAll();
+}
+
+AnswerForm.prototype.appendAll = function() {
+  this.liEl.appendChild(this.inputLabelEl);
+  this.liEl.appendChild(this.inputEl);
+  this.liEl.appendChild(this.radioEl);
+  this.liEl.appendChild(this.radioLabelEl);
+  this.liEl.appendChild(this.removeEl);
+
+};
+
+QuestionForm.prototype.addNewAnswer = function() {
+  event.preventDefault();
+  var newAnswer = new AnswerForm();
+  this.answers.push(newAnswer);
+  this.ulEl.appendChild(newAnswer.liEl);
+};
+
 //+++++++++++++++++++++++++++++++++++++
 //Appending New Question Form
 //+++++++++++++++++++++++++++++++++++++
@@ -41,7 +68,7 @@ QuestionForm.prototype.addQuestionForm = function() {
   this.ulEl = document.createElement('ul');
   this.newQuestionArticle.appendChild(this.ulEl);
 
-  newAnswerButton.addEventListener('click', this.newAnswerForm.bind(this));
+  newAnswerButton.addEventListener('click', this.addNewAnswer.bind(this));
 
   entireQuizForm.appendChild(this.newQuestionArticle);
 };
@@ -108,11 +135,9 @@ QuestionForm.addNewQuestion = function (e) {
 
 QuestionForm.prototype.removeAnswer = function (e) {
   e.preventDefault();
-  for (var i = 0; i < QuestionForm.all.length; i++) {
-    var remove = document.getElementById('liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1));
-    this.ulEl.removeChild(remove);
-  }
-
+  console.log(e.target.id);
+  // var remove = document.getElementById('liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1));
+  // this.ulEl.removeChild(remove);
 };
 
 addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
