@@ -1,35 +1,43 @@
 @import "reset.css";
 
-.hidden { /*Used to hide the previous button on first go*/
+.hidden { /*QUIZ: Used to hide the previous button on first go*/
   display: none;
 }
 
-.selected {
+.selected { /*QUIZ: changes background color of selected answer*/
   background-color: pink;
 }
 
-p#question-text div+div { /*Adds some spacing to questions with multi-line answers*/
+.correct { /*QUIZ: shades correct answer row on results page*/
+  background-color: green;
+}
+
+.incorrect { /*QUIZ: shades incorrect answer row on results page*/
+  background-color: red;
+}
+
+p#question-text div+div { /*QUIZ: Adds some spacing to questions with multi-line answers*/
   margin-top: 15px;
 }
 
-p#question-text {
+p#question-text { /*QUIZ: spacing between p lines?*/
   margin-bottom: 15px;
 }
 
-article#quiz-content ol {
+article#quiz-content ol { /*QUIZ: Sets A, B, C for answers*/
   list-style: upper-alpha;
   list-style-position: inside;
 }
 
-article#quiz-content ol li+li {
+article#quiz-content ol li+li { /*QUIZ: spaces answers a bit*/
   margin-top: 7.5px;
 }
 
-article#quiz-content ol li:hover {
+article#quiz-content ol li:hover { /*QUIZ: Set color on answer hover*/
   background-color: pink;
 }
 
-article#quiz-content ol li:active {
+article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
   background-color: red;
 }
 
