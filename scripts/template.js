@@ -68,27 +68,29 @@ QuestionForm.prototype.newAnswerForm = function() {
   newAnswerInput.name = 'addAnswer';
   newAnswerInput.type = 'text';
   liEl.appendChild(newAnswerInput);
+  this.answers.push(newAnswerInput);
 
   var radioButtonInput = document.createElement('input');
   radioButtonInput.type = 'radio';
   radioButtonInput.name = 'radio';
-  radioButtonInput.id = 'q' + QuestionForm.all.length + 'a' + this.answers.length;
+  radioButtonInput.id = 'q' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length);
   liEl.appendChild(radioButtonInput);
 
   var radioButtonLabel = document.createElement('label');
   radioButtonLabel.setAttribute('for', 'radio');
   radioButtonLabel.textContent = 'Correct Answer:';
   liEl.appendChild(radioButtonLabel);
-  this.answers.push(newAnswerInput);
 
-
+//button to remove answer
   var removeAnswerButton = document.createElement('button');
   removeAnswerButton.type = 'click';
   removeAnswerButton.textContent = 'Remove Answer';
-  removeAnswerButton.id = 'removeQ' + QuestionForm.all.length + 'a' + this.answers.length;
+  removeAnswerButton.id = 'removeQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
   liEl.appendChild(removeAnswerButton);
+  liEl.id = 'liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
 
-  removeAnswerButton.addEventListener('click', this.removeAnswer);
+//remove answer event listener
+  removeAnswerButton.addEventListener('click', this.removeAnswer.bind(this));
 };
 
 
@@ -110,12 +112,11 @@ QuestionForm.addNewQuestion = function (e) {
 
 QuestionForm.prototype.removeAnswer = function (e) {
   e.preventDefault();
-  for(var i = 0; i < this.answers; i++) {
-    var remove = document.getElementById('removeQ' + QuestionForm.all.length + 'a' + this.answers.length);
-    if(remove === this.answers) {
-      this.answers.length.innerHTML = '';
-    }
+  for (var i = 0; i < this.answers.length; i++) {
+    var remove = document.getElementById('liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1));
+    this.ulEl.removeChild(remove);
   }
+
 };
 
 addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
