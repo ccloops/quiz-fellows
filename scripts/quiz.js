@@ -8,6 +8,7 @@ function Answer( answerText, isCorrect ) {
 
 /*Question Constructor*/
 function Question( questionText ) {
+  this.rawQuestionText = questionText;
   this.questionText = this.formatQuestionText( questionText );
   this.answers = [];
   this.correctAnswer = -1;
@@ -210,11 +211,25 @@ Quiz.prototype.renderResults = function() { // TODO: must have all answers selec
 };
 
 Quiz.getUser = function() {
-  Quiz.allUsers = JSON.parse( localStorage.users );
-  Quiz.currentUserIndex = Number( localStorage.currentUser );
-  Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ];
+  Quiz.allUsers = JSON.parse( localStorage.users ); //Add all user objects to array
+  Quiz.currentUserIndex = Number( localStorage.currentUser ); //load locally the current user
+  Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ]; //local reference to the current user
 };
 
+Quiz.getQuiz = function( index ) {
+  var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
+  Quiz.currentQuiz = tempQuiz;
+};
+
+Quiz.instantiateQuestion = function( questionText, answers ) {
+  var tempQuestion = new Question( questionText );
+  for( var answer in answers ) {
+    tempQuestion.addAnswer( answers[ answer ].answerText, answers[ answer ].isCorrect );
+  }
+  return tempQuestion;
+};
+
+//Quiz.instantiateQuestion( Quiz.currentQuiz.questions[0].rawQuestionText, Quiz.currentQuiz.questions[0].answers )
 
 //Testing other functioinality
 
