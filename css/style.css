@@ -43,11 +43,15 @@ h1 {
 }
 
 form {
+  background-color: white;
   margin: 0 auto;
+  border: 5px solid black;
+  margin: 20px 10px;
+  padding: 10px;
 }
 
 article {
-  border: 5px solid red;
+  border: 5px solid black;
   margin: 20px 10px;
   padding: 10px;
   width: 70%
@@ -73,13 +77,9 @@ input[type=text] {
     background-color: pink;
 }
 
-/*label {
-  float: left;
-}*/
-
 button {
-   background-color: red;
-   color: white;
+   background-color: white;
+   color: red;
    padding: 15px 32px;
    text-align: center;
    text-decoration: none;
@@ -88,8 +88,8 @@ button {
 }
 
 #newAnswer {
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: red;
   padding: 10px 25px;
   text-align: center;
   text-decoration: none;
@@ -98,10 +98,15 @@ button {
   float: right;
 }
 
-
-/*#radio {
-  float: left;
-}*/
+.remove {
+  background-color: white;
+  color: red;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 7px;
+}
 
 #jimgs {
   border: 5px solid black;
