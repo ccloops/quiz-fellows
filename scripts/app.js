@@ -23,10 +23,19 @@ if (localStorage.users) { // adds the localstorage.users to the app.users object
   app.currentUser = retrieveCurrentUser;
 }
 console.log(app.currentUser + 'currentuser after');
+
+if (app.currentUser > -1) {
+  User.form.innerHTML = '';
+  User.header = document.getElementById('header');
+  User.ulEl = document.createElement('ul');
+  User.liEl = document.createElement('li');
+  User.buttEl = document.createElement('button');
+}
+
 User.handleUserLogin = function( event ) {
   event.preventDefault();
   var userName = User.userNameInput.value.toLowerCase();
-  var passWord = User.passWordInput.value;
+  var passWord = User.passWordInput.value.toLowerCase();
 
   if (app.users.length === 0) {// if no users are stored then creates a new user
 
@@ -45,7 +54,6 @@ User.handleUserLogin = function( event ) {
           alert('welcome back!');
           app.currentUser = i;
           localStorage.currentUser = i;
-          User.form.innerHTML = '';
           // localStorage.currentUser = JSON.stringify(app.currentUser);
 
           break;
@@ -74,6 +82,6 @@ User.handleUserLogin = function( event ) {
       alert('Welcome!');
     }
   }
-};
+}; //handles the login process and conditions
 
 User.form.addEventListener('submit', User.handleUserLogin);
