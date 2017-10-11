@@ -186,9 +186,9 @@ Quiz.prototype.getPercent = function () {
 };
 
 Quiz.prototype.renderResults = function() {
-  var percent = this.getPercent();
   var sectionEl = document.getElementById( 'quiz' );
-  var results = '<h2>User\'s Results</h2><ol>'; // TODO: ADD USER NAME
+  var results = '<h2>User\'s Results</h2>'; // TODO: ADD USER NAME
+  results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
   for( var i in this.questions ) {
     results += '<li class="';
     if( ! this.userAnswers[ i ] ) {
@@ -200,8 +200,9 @@ Quiz.prototype.renderResults = function() {
   for( var j in this.questions ) {
     var liEl = document.getElementById( 'question' + j );
     liEl.appendChild( this.questions[ j ].questionText );
+    var h3El = document.createElement( 'h3' );
+    h3El.textContent = 'Your response: ' + this.questions[ j ].answers[ this.questions[ j ].selectedAnswer ].answerText;
+    console.log(this.questions[ j ].answers[ this.questions[ j ].selectedAnswer ]);
+    liEl.appendChild( h3El );
   }
-
-  // results = 'You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent();
-
 };
