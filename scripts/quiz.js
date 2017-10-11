@@ -234,12 +234,10 @@ Quiz.getQuiz = function( index ) {
   }
 };
 
-Quiz.getQuizAndRender = function( index ) {
+Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which should happen on pageLoad
   Quiz.getQuiz( index );
   Quiz.currentQuiz.renderQuiz();
 };
-
-//Quiz.instantiateQuestion( Quiz.currentQuiz.questions[0].rawQuestionText, Quiz.currentQuiz.questions[0].answers )
 
 //Testing other functioinality
 
