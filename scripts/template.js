@@ -73,8 +73,17 @@ QuestionForm.prototype.newAnswerForm = function() {
   var radioButtonInput = document.createElement('input');
   radioButtonInput.type = 'radio';
   radioButtonInput.name = 'radio';
-  radioButtonInput.id = 'q' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length);
+  radioButtonInput.setAttribute('value', 'false');
+  radioButtonInput.id = 'q' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
   liEl.appendChild(radioButtonInput);
+
+  QuestionForm.isCorrectHandle = function () {
+    for(var i = 0; i < QuestionForm.all.length; i++) {
+      console.log('testing for true');
+      radioButtonInput.setAttribute('value', 'true');
+    }
+  };
+  radioButtonInput.addEventListener('click', QuestionForm.isCorrectHandle);
 
   var radioButtonLabel = document.createElement('label');
   radioButtonLabel.setAttribute('for', 'radio');
@@ -99,20 +108,11 @@ QuestionForm.addNewQuestion = function (e) {
   new QuestionForm();
 };
 
-// QuestionForm.isCorrect = function () {
-//   for(var i = 0; i < QuestionForm.all.length; i++) {
-//     var radioButtonChecked = document.getElementsByAttribute('radio');
-//     if (radioButtonChecked.checked) {
-//       QuestionForm.all[i].answer.value = true;
-//       console.log(answer[i].value);
-//     }
-//   }
-// };
 
 
 QuestionForm.prototype.removeAnswer = function (e) {
   e.preventDefault();
-  for (var i = 0; i < this.answers.length; i++) {
+  for (var i = 0; i < QuestionForm.all.length; i++) {
     var remove = document.getElementById('liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1));
     this.ulEl.removeChild(remove);
   }
