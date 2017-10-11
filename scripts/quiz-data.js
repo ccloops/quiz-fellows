@@ -42,3 +42,22 @@ quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method 
   [ 'True' ],
   'False'
 ] );
+
+
+
+
+var quiz1 = new Quiz( 'Code 201: Objects', 'Practice your skills with JavaScript objects.' );
+
+quiz1.addQuestionAndAnswers( 'Hi Joel', [
+  'wrong',
+  [ 'correct' ],
+  'asdsad',
+  'asdasd'
+] );
+
+quiz1.addQuestionAndAnswers( 'Question 2', [
+  [ 'correct' ],
+  'nope',
+  'floop',
+  'smosdfohj'
+] );

@@ -216,34 +216,39 @@ Quiz.getUser = function() {
   Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ]; //local reference to the current user
 };
 
-Quiz.getQuiz = function( index ) {
-  var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
-  Quiz.currentQuiz = tempQuiz;
-};
-
-Quiz.instantiateQuestion = function( questionObject ) {
+Quiz.instantiateQuestion = function( questionObject ) { //reinstantiates a question from a returned JSON "questionObject"
   var questionText = questionObject.rawQuestionText;
   var answers = questionObject.answers;
-  var tempQuestion = new Question( questionText );
+  var newQuestion = new Question( questionText );
   for( var answer in answers ) {
-    tempQuestion.addAnswer( answers[ answer ].answerText, answers[ answer ].isCorrect );
+    newQuestion.addAnswer( answers[ answer ].answerText, answers[ answer ].isCorrect );
   }
-  return tempQuestion;
+  return newQuestion;
+};
+
+Quiz.getQuiz = function( index ) {
+  var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
+  Quiz.currentQuiz = new Quiz( tempQuiz.title, tempQuiz.description );
+  for( var question in tempQuiz.questions ) { //reinstantiate each question and add it to the reinstantiated quiz
+    Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
+  }
+};
+
+Quiz.getQuizAndRender = function( index ) {
+  Quiz.getQuiz( index );
+  Quiz.currentQuiz.renderQuiz();
 };
 
 //Quiz.instantiateQuestion( Quiz.currentQuiz.questions[0].rawQuestionText, Quiz.currentQuiz.questions[0].answers )
 
 //Testing other functioinality
 
-function testAddQuizToUser() {
+function testAddQuizToUser( quiz ) {
   Quiz.getUser(); //fetch user
-  Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
-  Quiz.currentUser.myQuizzes.push( quiz0 ); //adding the quiz0 just to test
+  if( ! Quiz.currentUser.myQuizzes ) {
+    Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
+  }
+  Quiz.currentUser.myQuizzes.push( quiz ); //adding the quiz0 just to test
   Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
   localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
 }
-
-Quiz.getUser();
-Quiz.getQuiz( 0 );
-var testTest = Quiz.instantiateQuestion( Quiz.currentQuiz.questions[ 0 ] );
-console.log( testTest );
