@@ -24,13 +24,6 @@ if (localStorage.users) { // adds the localstorage.users to the app.users object
 }
 console.log(app.currentUser + 'currentuser after');
 
-if (app.currentUser > -1) {
-  User.form.innerHTML = '';
-  User.header = document.getElementById('header');
-  User.ulEl = document.createElement('ul');
-  User.liEl = document.createElement('li');
-  User.buttEl = document.createElement('button');
-}
 
 User.handleUserLogin = function( event ) {
   event.preventDefault();
