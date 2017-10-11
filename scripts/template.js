@@ -23,11 +23,12 @@ QuestionForm.prototype.addQuestionForm = function() {
   var entireQuizForm = document.getElementById('entireQuizForm');
   this.newQuestionArticle = document.createElement('article');
   var newQuestionLabel = document.createElement('label');
-  newQuestionLabel.setAttribute('for', 'newQuestion');
-  newQuestionLabel.textContent = 'New Question:';
+  newQuestionLabel.setAttribute('for', 'addQuestion');
+  console.log(this.questionIndex);
+  newQuestionLabel.textContent = 'Question ' + (QuestionForm.all.length + 1) + ':';
   this.newQuestionArticle.appendChild(newQuestionLabel);
   this.newQuestionInput = document.createElement('input');
-  this.newQuestionInput.name = 'newQuestion';
+  this.newQuestionInput.name = 'addQuestion';
   this.newQuestionInput.type = 'text';
   this.newQuestionArticle.appendChild(this.newQuestionInput);
 
@@ -61,11 +62,11 @@ QuestionForm.prototype.newAnswerForm = function() {
   this.ulEl.appendChild(liEl);
 
   var newAnswerLabel = document.createElement('label');
-  newAnswerLabel.setAttribute('for', 'newAnswer');
-  newAnswerLabel.textContent = 'New Answer:';
+  newAnswerLabel.setAttribute('for', 'addAnswer');
+  newAnswerLabel.textContent = 'Answer ' + (this.answers.length + 1) + ':';
   liEl.appendChild(newAnswerLabel);
   var newAnswerInput = document.createElement('input');
-  newAnswerInput.name = 'newAnswer';
+  newAnswerInput.name = 'addAnswer';
   newAnswerInput.type = 'text';
   liEl.appendChild(newAnswerInput);
   var radioButtonInput = document.createElement('input');
@@ -81,11 +82,10 @@ QuestionForm.prototype.newAnswerForm = function() {
 };
 
 
-
 QuestionForm.addNewQuestion = function (e) {
   e.preventDefault();
   new QuestionForm();
 };
 
-
+console.log(addQuestionButton);
 addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
