@@ -32,7 +32,7 @@ User.logoutButtRender = function() { //clears login form and adds logout button.
   User.liEl.appendChild(User.buttEl);
 };
 
-User.splashPageRender = function() {
+User.splashPageRender = function() {//renders splash page
   User.divEl = document.createElement('div');
 
   User.h2El1 = document.createElement('h2');
@@ -95,8 +95,11 @@ User.splashPageRender = function() {
 
   User.liEl4.appendChild(User.aEl3);
   User.aEl3.appendChild(User.imgEl3);
+};//renders after login
+
+User.loginConditions = function() {
+
 };
-User.splashPageRender();
 
 if (localStorage.users) { // adds the localstorage.users to the app.users object.
   alert('testing retrieveApp');
@@ -108,6 +111,7 @@ if (localStorage.users) { // adds the localstorage.users to the app.users object
 
 if (app.currentUser > -1) {//if currentUser exsists then remove login form.
   User.logoutButtRender();
+  User.splashPageRender();
 }
 console.log(app.currentUser + 'currentuser after');
 
@@ -116,7 +120,6 @@ User.handleUserLogin = function( event ) {
   event.preventDefault();
   var userName = User.userNameInput.value.toLowerCase();
   var passWord = User.passWordInput.value.toLowerCase();
-
   if (app.users.length === 0) {// if no users are stored then creates a new user.
 
     console.log('app.users.length = 0 true');
@@ -125,6 +128,7 @@ User.handleUserLogin = function( event ) {
     localStorage.users = JSON.stringify(app.users);
     localStorage.currentUser = 0;
     User.logoutButtRender();
+    User.splashPageRender();
 
   } else {
     for (var i = 0; i < app.users.length; i++) {
@@ -135,12 +139,16 @@ User.handleUserLogin = function( event ) {
           alert('welcome back!');
           app.currentUser = i;
           localStorage.currentUser = i;
+          User.userNameInput.value = '';
+          User.passWordInput.value = '';
           User.logoutButtRender();
+          User.splashPageRender();
 
           break;
         } else {//inncorrect password verify
           console.log('password wrong');
           alert('Password does not match');
+          User.passWordInput.value = '';
         }
 
       } else {//goes through all the users with what the user entered to determine if it exsists
@@ -161,7 +169,10 @@ User.handleUserLogin = function( event ) {
       localStorage.currentUser = userCounter;
       localStorage.users = JSON.stringify(app.users);
       alert('Welcome!');
+      User.userNameInput.value = '';
+      User.passWordInput.value = '';
       User.logoutButtRender();
+      User.splashPageRender();
     }
   }
 }; //handles the login process and conditions
@@ -169,6 +180,7 @@ User.handleUserLogin = function( event ) {
 User.handleUserLogout = function() {
   localStorage.currentUser = -1;
   User.header.removeChild(User.ulEl);
+  User.main.removeChild(User.divEl);
   User.main.appendChild(User.form);
 };
 
