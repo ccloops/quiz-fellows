@@ -221,7 +221,9 @@ Quiz.getQuiz = function( index ) {
   Quiz.currentQuiz = tempQuiz;
 };
 
-Quiz.instantiateQuestion = function( questionText, answers ) {
+Quiz.instantiateQuestion = function( questionObject ) {
+  var questionText = questionObject.rawQuestionText;
+  var answers = questionObject.answers;
   var tempQuestion = new Question( questionText );
   for( var answer in answers ) {
     tempQuestion.addAnswer( answers[ answer ].answerText, answers[ answer ].isCorrect );
@@ -240,3 +242,8 @@ function testAddQuizToUser() {
   Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
   localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
 }
+
+Quiz.getUser();
+Quiz.getQuiz( 0 );
+var testTest = Quiz.instantiateQuestion( Quiz.currentQuiz.questions[ 0 ] );
+console.log( testTest );
