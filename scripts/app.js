@@ -1,4 +1,5 @@
 'use strict';
+User.main = document.getElementById('main');
 User.form = document.getElementById('form');
 User.userNameInput = document.getElementById('username');
 User.passWordInput = document.getElementById('password');
@@ -15,7 +16,27 @@ function User (username, password) {
   // localStorage.currentUser = app.users.length - 1;
 }
 
-if (localStorage.users) { // adds the localstorage.users to the app.users object
+
+User.header = document.getElementById('header');
+User.ulEl = document.createElement('ul');
+User.liEl = document.createElement('li');
+User.buttEl = document.createElement('button');
+User.buttEl.type = 'click';
+User.buttEl.id = 'logout';
+User.buttEl.textContent = 'Logout';
+
+User.logoutButtRender = function() { //clears login form and adds logout button.
+  User.main.removeChild(User.form);
+  User.header.appendChild(User.ulEl);
+  User.ulEl.appendChild(User.liEl);
+  User.liEl.appendChild(User.buttEl);
+};
+
+if (app.currentUser > -1) {//if currentUser exsists then remove login form.
+  logoutButtRender();
+}
+
+if (localStorage.users) { // adds the localstorage.users to the app.users object.
   alert('testing retrieveApp');
   var retrieveApp = JSON.parse(localStorage.users);
   app.users = retrieveApp;
@@ -30,13 +51,14 @@ User.handleUserLogin = function( event ) {
   var userName = User.userNameInput.value.toLowerCase();
   var passWord = User.passWordInput.value.toLowerCase();
 
-  if (app.users.length === 0) {// if no users are stored then creates a new user
+  if (app.users.length === 0) {// if no users are stored then creates a new user.
 
     console.log('app.users.length = 0 true');
     confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord);
     new User(userName, passWord);
     localStorage.users = JSON.stringify(app.users);
     localStorage.currentUser = 0;
+    User.logoutButtRender();
 
   } else {
     for (var i = 0; i < app.users.length; i++) {
@@ -47,7 +69,7 @@ User.handleUserLogin = function( event ) {
           alert('welcome back!');
           app.currentUser = i;
           localStorage.currentUser = i;
-          // localStorage.currentUser = JSON.stringify(app.currentUser);
+          User.logoutButtRender();
 
           break;
         } else {//inncorrect password verify
@@ -67,14 +89,24 @@ User.handleUserLogin = function( event ) {
     }
     console.log('counter: ' + userCounter);
     if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
-      confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord);
+      confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord);
       new User(userName, passWord);
       app.currentUser = userCounter;
       localStorage.currentUser = userCounter;
       localStorage.users = JSON.stringify(app.users);
       alert('Welcome!');
+      User.logoutButtRender();
     }
   }
 }; //handles the login process and conditions
 
+User.handleUserLogout = function( event ) {
+  event.preventDefault();
+  User.header.removeChild(User.ulEl);
+  User.main.appendChild(User.form);
+};
+
+User.buttEl.addEventListener('click', User.handleUserLogout);
 User.form.addEventListener('submit', User.handleUserLogin);
+console.log(app.currentUser);
+console.log(localStorage.currentUser);
