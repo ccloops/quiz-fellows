@@ -25,7 +25,7 @@ quiz0.addQuestionAndAnswers( 'Given an object called "dog", which of the followi
   'dog.bark;'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the <em>best</em> answer.', [
+quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
   'dog.breed;',
   'dog[ \'breed\' ]',
   'dog[ breed ]',

@@ -81,6 +81,7 @@ Question.prototype.renderQuestion = function() { //render question to the page
 
 Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns h2 element
   var h2El = document.createElement( 'h2' );
+  h2El.id = 'question-text';
   if( questionText.includes( '<br>' ) ) {
     var pieces = questionText.split( '<br>' );
     pieces.forEach( function( phrase ) {
