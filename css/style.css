@@ -4,6 +4,10 @@
   display: none;
 }
 
+.selected {
+  background-color: pink;
+}
+
 h2#question-text div+div { /*Adds some spacing to questions with multi-line answers*/
   margin-top: 15px;
 }
@@ -12,12 +16,12 @@ h2#question-text {
   margin-bottom: 15px;
 }
 
-ol#answers-list {
+article#quiz-content ol {
   list-style: upper-alpha;
   list-style-position: inside;
 }
 
-ol#answers-list li+li {
+article#quiz-content ol li+li {
   margin-top: 7.5px;
 }
 

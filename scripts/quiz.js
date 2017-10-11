@@ -52,18 +52,16 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
   }
   this.selectedAnswer = selectedAnswer;
   liEl = document.getElementById( 'answer' + this.selectedAnswer );
-  liEl.classList.add( 'selected' );
+  if( liEl !== null ) {
+    liEl.classList.add( 'selected' );
+  }
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
   var articleEl = document.getElementById( 'quiz-content' );
   articleEl.innerHTML = null;
-  // var h2El = document.createElement( 'h2' );
-  // h2El.textContent = this.questionText;
-  // articleEl.appendChild( h2El );
   articleEl.appendChild( this.questionText );
   var olEl = document.createElement( 'ol' );
-  olEl.id = 'answers-list';
   this.answers.forEach( function( answer, index ) {
     var liEl = document.createElement( 'li' );
     liEl.id = 'answer' + index;
@@ -159,9 +157,9 @@ Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the
 };
 
 Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when clicked
-  if( e.target.id ) {
-    var ansNum = Number( e.target.id.replace( 'answer', '' ) );
-    this.questions[ this.currentQuestion ].setSelectedAnswer( ansNum );
-
+  var ansNum = e.target.id.replace( 'answer', '' );
+  var currentQuestion = this.questions[ this.currentQuestion ];
+  if( ansNum.length === 1 && currentQuestion.selectedAnswer !== Number( ansNum ) ) {
+    currentQuestion.setSelectedAnswer( Number( ansNum ) );
   }
 };
