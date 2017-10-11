@@ -21,10 +21,8 @@ var addQuestionButton = document.getElementById('newQuestion');
 
 QuestionForm.prototype.addQuestionForm = function() {
   var entireQuizForm = document.getElementById('entireQuizForm');
-  this.newQuestionArticle = document.createElement('article');
+  this.newQuestionArticle = document.createElement('form');
   var newQuestionLabel = document.createElement('label');
-  newQuestionLabel.setAttribute('for', 'addQuestion');
-  console.log(this.questionIndex);
   newQuestionLabel.textContent = 'Question ' + (QuestionForm.all.length + 1) + ':';
   this.newQuestionArticle.appendChild(newQuestionLabel);
   this.newQuestionInput = document.createElement('input');
@@ -65,20 +63,32 @@ QuestionForm.prototype.newAnswerForm = function() {
   newAnswerLabel.setAttribute('for', 'addAnswer');
   newAnswerLabel.textContent = 'Answer ' + (this.answers.length + 1) + ':';
   liEl.appendChild(newAnswerLabel);
+
   var newAnswerInput = document.createElement('input');
   newAnswerInput.name = 'addAnswer';
   newAnswerInput.type = 'text';
   liEl.appendChild(newAnswerInput);
+
   var radioButtonInput = document.createElement('input');
   radioButtonInput.type = 'radio';
   radioButtonInput.name = 'radio';
-  radioButtonInput.id = 'radio';
+  radioButtonInput.id = 'q' + QuestionForm.all.length + 'a' + this.answers.length;
   liEl.appendChild(radioButtonInput);
+
   var radioButtonLabel = document.createElement('label');
   radioButtonLabel.setAttribute('for', 'radio');
   radioButtonLabel.textContent = 'Correct Answer:';
   liEl.appendChild(radioButtonLabel);
   this.answers.push(newAnswerInput);
+
+
+  var removeAnswerButton = document.createElement('button');
+  removeAnswerButton.type = 'click';
+  removeAnswerButton.textContent = 'Remove Answer';
+  removeAnswerButton.id = 'removeQ' + QuestionForm.all.length + 'a' + this.answers.length;
+  liEl.appendChild(removeAnswerButton);
+
+  removeAnswerButton.addEventListener('click', this.removeAnswer);
 };
 
 
@@ -87,5 +97,32 @@ QuestionForm.addNewQuestion = function (e) {
   new QuestionForm();
 };
 
-console.log(addQuestionButton);
+// QuestionForm.isCorrect = function () {
+//   for(var i = 0; i < QuestionForm.all.length; i++) {
+//     var radioButtonChecked = document.getElementsByAttribute('radio');
+//     if (radioButtonChecked.checked) {
+//       QuestionForm.all[i].answer.value = true;
+//       console.log(answer[i].value);
+//     }
+//   }
+// };
+
+
+QuestionForm.prototype.removeAnswer = function (e) {
+  e.preventDefault();
+  for(var i = 0; i < this.answers; i++) {
+    var remove = document.getElementById('removeQ' + QuestionForm.all.length + 'a' + this.answers.length);
+    if(remove === this.answers) {
+      this.answers.length.innerHTML = '';
+    }
+  }
+};
+
 addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
+
+
+QuestionForm.submitQuiz = function() {
+  for(var i = 0; i < QuestionForm.all.length; i++) {
+
+  }
+};
