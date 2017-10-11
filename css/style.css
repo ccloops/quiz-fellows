@@ -128,5 +128,8 @@ button {
   margin-top: 30px;
   margin-left: 20.125%;
   margin-bottom: 30px;
+}
 
+#logout {
+  float: right;
 }
