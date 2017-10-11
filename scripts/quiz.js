@@ -8,7 +8,7 @@ function Answer( answerText, isCorrect ) {
 
 /*Question Constructor*/
 function Question( questionText ) {
-  this.questionText = questionText;
+  this.questionText = this.formatQuestionText( questionText );
   this.answers = [];
   this.correctAnswer = -1;
   this.selectedAnswer = -1;
@@ -58,9 +58,10 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
 Question.prototype.renderQuestion = function() { //render question to the page
   var articleEl = document.getElementById( 'quiz-content' );
   articleEl.innerHTML = null;
-  var h2El = document.createElement( 'h2' );
-  h2El.textContent = this.questionText;
-  articleEl.appendChild( h2El );
+  // var h2El = document.createElement( 'h2' );
+  // h2El.textContent = this.questionText;
+  // articleEl.appendChild( h2El );
+  articleEl.appendChild( this.questionText );
   var olEl = document.createElement( 'ol' );
   olEl.id = 'answers-list';
   this.answers.forEach( function( answer, index ) {
@@ -76,6 +77,21 @@ Question.prototype.renderQuestion = function() { //render question to the page
     olEl.appendChild( liEl );
   }.bind( this ) );
   articleEl.appendChild( olEl );
+};
+
+Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns h2 element
+  var h2El = document.createElement( 'h2' );
+  if( questionText.includes( '<br>' ) ) {
+    var pieces = questionText.split( '<br>' );
+    pieces.forEach( function( phrase ) {
+      var divEl = document.createElement( 'div' );
+      divEl.textContent = phrase;
+      h2El.appendChild( divEl );
+    } );
+  } else {
+    h2El.textContent = questionText;
+  }
+  return h2El;
 };
 
 /*Quiz Constructor*/
@@ -148,10 +164,3 @@ Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when 
 
   }
 };
-
-
-function fixText( string ) {
-  if( string.contains( '<br>' ) ) {
-    console.log( 'found it' );
-  }
-}
