@@ -100,8 +100,8 @@ User.handleUserLogin = function( event ) {
   }
 }; //handles the login process and conditions
 
-User.handleUserLogout = function( event ) {
-  event.preventDefault();
+User.handleUserLogout = function() {
+  localStorage.currentUser = -1;
   User.header.removeChild(User.ulEl);
   User.main.appendChild(User.form);
 };
