@@ -25,6 +25,14 @@ article#quiz-content ol li+li {
   margin-top: 7.5px;
 }
 
+article#quiz-content ol li:hover {
+  background-color: pink;
+}
+
+article#quiz-content ol li:active {
+  background-color: red;
+}
+
 body {
   margin: 0 auto;
   font-family: helvetica;

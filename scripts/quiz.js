@@ -163,3 +163,20 @@ Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when 
     currentQuestion.setSelectedAnswer( Number( ansNum ) );
   }
 };
+
+Quiz.prototype.checkAnswers = function () {
+  var pointsEarned = 0;
+  for( var i = 0; i < this.questions.length; i++ ) {
+    if ( this.questions[i].selectedAnswer === this.questions[i].correctAnswer ) {
+      console.log('Question', i, 'is correct');
+      pointsEarned++;
+    } else {
+      console.log('Question', i, 'is incorrect');
+    }
+  }
+  return pointsEarned;
+};
+
+Quiz.prototype.renderResults = function() {
+
+};

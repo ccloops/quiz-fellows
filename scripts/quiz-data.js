@@ -38,7 +38,7 @@ quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScr
   'False'
 ] );
 
-quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration:<br>bark: function() { console.log( \'Woof!\' ); }', [
+quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
   [ 'True' ],
   'False'
 ] );
