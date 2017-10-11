@@ -27,9 +27,12 @@ User.buttEl.textContent = 'Logout';
 
 User.logoutButtRender = function() { //clears login form and adds logout button.
   User.main.removeChild(User.form);
+  User.aEl4 = document.createElement('a');
+  User.aEl4.href = 'index.html';
   User.header.appendChild(User.ulEl);
   User.ulEl.appendChild(User.liEl);
-  User.liEl.appendChild(User.buttEl);
+  User.liEl.appendChild(User.aEl4);
+  User.aEl4.appendChild(User.buttEl);
 };
 
 User.splashPageRender = function() {//renders splash page
@@ -97,9 +100,6 @@ User.splashPageRender = function() {//renders splash page
   User.aEl3.appendChild(User.imgEl3);
 };//renders after login
 
-User.loginConditions = function() {
-
-};
 
 if (localStorage.users) { // adds the localstorage.users to the app.users object.
   alert('testing retrieveApp');
@@ -118,61 +118,73 @@ console.log(app.currentUser + 'currentuser after');
 
 User.handleUserLogin = function( event ) {
   event.preventDefault();
-  var userName = User.userNameInput.value.toLowerCase();
-  var passWord = User.passWordInput.value.toLowerCase();
-  if (app.users.length === 0) {// if no users are stored then creates a new user.
+  var userName = User.userNameInput.value.toLowerCase().replace(/ /g, '');
+  var passWord = User.passWordInput.value.toLowerCase().replace(/ /g, '');
 
-    console.log('app.users.length = 0 true');
-    confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord);
-    new User(userName, passWord);
-    localStorage.users = JSON.stringify(app.users);
-    localStorage.currentUser = 0;
-    User.logoutButtRender();
-    User.splashPageRender();
-
+  if (userName == '' || passWord == '') {
+    alert('Input fields cannot be blank');
   } else {
-    for (var i = 0; i < app.users.length; i++) {
-      if (userName === app.users[i].userName) { // check to see if user exsists
-        console.log('returning user');
-        if (passWord === app.users[i].passWord) {// compare the password to the username
-          console.log('password correct');
-          alert('welcome back!');
-          app.currentUser = i;
-          localStorage.currentUser = i;
-          User.userNameInput.value = '';
-          User.passWordInput.value = '';
-          User.logoutButtRender();
-          User.splashPageRender();
 
-          break;
-        } else {//inncorrect password verify
-          console.log('password wrong');
-          alert('Password does not match');
-          User.passWordInput.value = '';
-        }
+    if (app.users.length === 0) {// if no users are stored then creates a new user.
 
-      } else {//goes through all the users with what the user entered to determine if it exsists
-        console.log('validating user');
-        var userCounter = 0;
-        for (var j = 0; j < app.users.length; j++) {
-          if (userName !== app.users[j].userName && passWord !== app.users[j].passWord) { //add to counter for each time the the un and pw do not match
-            userCounter += 1;
-          }
-        }
-      }
-    }
-    console.log('counter: ' + userCounter);
-    if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
-      confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord);
+      console.log('app.users.length = 0 true');
+      confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord);
       new User(userName, passWord);
-      app.currentUser = userCounter;
-      localStorage.currentUser = userCounter;
       localStorage.users = JSON.stringify(app.users);
-      alert('Welcome!');
+      localStorage.currentUser = 0;
       User.userNameInput.value = '';
       User.passWordInput.value = '';
       User.logoutButtRender();
       User.splashPageRender();
+
+    } else {
+      for (var i = 0; i < app.users.length; i++) {
+        if (userName === app.users[i].userName) { // check to see if user exsists
+          console.log('returning user');
+          if (passWord === app.users[i].passWord) {// compare the password to the username
+            console.log('password correct');
+            alert('welcome back!');
+            app.currentUser = i;
+            localStorage.currentUser = i;
+            User.userNameInput.value = '';
+            User.passWordInput.value = '';
+            User.logoutButtRender();
+            User.splashPageRender();
+
+            break;
+          } else {//inncorrect password verify
+            console.log('password wrong');
+            alert('Password does not match');
+            User.passWordInput.value = '';
+          }
+
+        } else {//goes through all the users with what the user entered to determine if it exsists
+          console.log('validating user');
+          var userCounter = 0;
+          for (var j = 0; j < app.users.length; j++) {
+            if (userName !== app.users[j].userName) { //add to counter for each time the the un and pw do not match
+              userCounter += 1;
+            }
+          }
+        }
+      }
+      console.log('counter: ' + userCounter);
+      if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
+        var userConfirm = confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord);
+        if (userConfirm === true) {
+          new User(userName, passWord);
+          app.currentUser = userCounter;
+          localStorage.currentUser = userCounter;
+          localStorage.users = JSON.stringify(app.users);
+          alert('Welcome!');
+          User.userNameInput.value = '';
+          User.passWordInput.value = '';
+          User.logoutButtRender();
+          User.splashPageRender();
+        } else {
+          alert('sending back to login');
+        }
+      }
     }
   }
 }; //handles the login process and conditions
