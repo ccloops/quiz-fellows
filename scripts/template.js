@@ -158,7 +158,7 @@ QuestionForm.getAllData = function() {
     if(currentQuestion.correctAnswer === -1) {
       return alert('Please select a correct answer for Question ' + (i + 1));
     }
-    questionsAndAnswers.push({answers: currentQuestion.answersText, correctAnswer: currentQuestion.correctAnswer});
+    questionsAndAnswers.push({questionText: currentQuestion.questionText, answers: currentQuestion.answersText, correctAnswer: currentQuestion.correctAnswer});
 
   }
   return {title: quizTitle, description: quizDescription, questions: questionsAndAnswers};
@@ -168,6 +168,14 @@ QuestionForm.submitQuiz = function() {
   event.preventDefault();
   var quizData = QuestionForm.getAllData();
   var myQuiz = new Quiz(quizData.title, quizData.description);
+  for(var i = 0; i < quizData.questions.length; i++) {
+    var questionText = quizData.questions[i].questionText;
+    var answers = quizData.questions[i].answers;
+    var correctAnswer = quizData.questions[i].correctAnswer;
+    answers[correctAnswer] = [answers[correctAnswer]];
+    myQuiz.addQuestionAndAnswers(questionText, answers);
+
+  }
   console.log(myQuiz);
 };
 
