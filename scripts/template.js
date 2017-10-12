@@ -176,6 +176,17 @@ QuestionForm.submitQuiz = function() {
     myQuiz.addQuestionAndAnswers(questionText, answers);
   }
   QuestionForm.saveQuiz( myQuiz );
+
+  var areYouSure = confirm ('Are you sure you want to submit your quiz?');
+  if(areYouSure === true) {
+    var goToQuizzes = confirm ('Would you like to go to your quizzes?');
+    if(goToQuizzes === true) {
+      window.location.href = '../html/quiz.html';
+    } else {
+      window.location.href = '../index.html';
+    }
+  }
+
 };
 
 QuestionForm.saveQuiz = function( newQuiz ) {
