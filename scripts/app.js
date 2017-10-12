@@ -18,8 +18,8 @@ function User (username, password) {
 
 User.navBar = document.getElementById('navbar');
 User.header = document.getElementById('header');
-User.ulEl = document.createElement('ul');
-User.liEl = document.createElement('li');
+
+User.liEl = document.getElementById('logoutbutt');
 User.buttEl = document.createElement('button');
 User.buttEl.type = 'click';
 User.buttEl.id = 'logout';
@@ -29,8 +29,6 @@ User.logoutButtRender = function() { //clears login form and adds logout button.
   User.main.removeChild(User.form);
   User.aEl4 = document.createElement('a');
   User.aEl4.href = 'index.html';
-  User.header.appendChild(User.ulEl);
-  User.ulEl.appendChild(User.liEl);
   User.liEl.appendChild(User.aEl4);
   User.aEl4.appendChild(User.buttEl);
 };
@@ -197,7 +195,7 @@ User.handleUserLogin = function( event ) {
       }
       console.log('counter: ' + userCounter);
       if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
-        var userConfirm = confirm('Creating new user. \n\nIs this correct? \nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
+        var userConfirm = confirm('Creating new user. \n\nIs this correct? \n\nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
         if (userConfirm === true) {
           new User(userName, passWord);
           app.currentUser = userCounter;
