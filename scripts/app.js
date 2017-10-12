@@ -155,7 +155,7 @@ User.handleUserLogin = function( event ) {
     if (app.users.length === 0) {// if no users are stored then creates a new user.
 
       console.log('app.users.length = 0 true');
-      confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord.replace(/./g,'*'));
+      confirm('Created New User \n\nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
       new User(userName, passWord);
       localStorage.users = JSON.stringify(app.users);
       localStorage.currentUser = 0;
@@ -197,7 +197,7 @@ User.handleUserLogin = function( event ) {
       }
       console.log('counter: ' + userCounter);
       if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
-        var userConfirm = confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord.replace(/./g,'*'));
+        var userConfirm = confirm('Creating new user. \n\nIs this correct? \nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
         if (userConfirm === true) {
           new User(userName, passWord);
           app.currentUser = userCounter;
