@@ -1,12 +1,18 @@
 'use strict';
 
-/*Answer Constructor*/
+//////////////////////
+//Answer Constructor//
+//////////////////////
 function Answer( answerText, isCorrect ) {
   this.answerText = answerText;
   this.isCorrect = isCorrect;
 }
 
-/*Question Constructor*/
+
+////////////////////////
+//Question Constructor//
+////////////////////////
+
 function Question( questionText ) {
   this.rawQuestionText = questionText;
   this.questionText = this.formatQuestionText( questionText );
@@ -59,9 +65,9 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
-  var articleEl = document.getElementById( 'quiz-content' );
-  articleEl.innerHTML = null;
-  articleEl.appendChild( this.questionText );
+  this.articleEl = document.getElementById( 'quiz-content' );
+  this.articleEl.innerHTML = null;
+  this.articleEl.appendChild( this.questionText );
   var olEl = document.createElement( 'ol' );
   this.answers.forEach( function( answer, index ) {
     var liEl = document.createElement( 'li' );
@@ -75,7 +81,7 @@ Question.prototype.renderQuestion = function() { //render question to the page
     liEl.textContent = answer.answerText;
     olEl.appendChild( liEl );
   }.bind( this ) );
-  articleEl.appendChild( olEl );
+  this.articleEl.appendChild( olEl );
 };
 
 Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns p element
@@ -94,7 +100,11 @@ Question.prototype.formatQuestionText = function( questionText ) { //adds line b
   return pEl;
 };
 
-/*Quiz Constructor*/
+
+////////////////////
+//Quiz Constructor//
+////////////////////
+
 function Quiz( title, description ) {
   this.title = title;
   this.description = description;
@@ -108,9 +118,17 @@ Quiz.prototype.addQuestionAndAnswers = function( questionText, answers ) { //ans
 };
 
 Quiz.prototype.renderNext = function() { //change to the next question
+  if( this.currentQuestion === this.questions.length - 1 ) {
+    if( this.checkAnswers() ) {
+      return Quiz.currentQuiz.renderResults();
+    } else {
+      return alert( 'Please answer the following question(s) before continuing:\n\n' + this.unansweredQuestions.join( ', ' ) );
+    }
+  }
   if( this.currentQuestion < this.questions.length - 1 ) {
     this.currentQuestion++;
     this.questions[ this.currentQuestion ].renderQuestion();
+    this.renderQuestionHeader();
   }
   if( this.currentQuestion === this.questions.length - 1 ) {
     document.getElementById( 'next-button' ).textContent = 'Submit';
@@ -124,6 +142,7 @@ Quiz.prototype.renderPrevious = function() { //change to the last question
   if( this.currentQuestion > 0 ) {
     this.currentQuestion--;
     this.questions[ this.currentQuestion ].renderQuestion();
+    this.renderQuestionHeader();
   }
   if( this.currentQuestion === 0 ) {
     document.getElementById( 'previous-button' ).setAttribute( 'class', 'hidden' );
@@ -155,6 +174,14 @@ Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the
   articleEl.addEventListener( 'click', this.handleSelectAnswer.bind( this ) );
   sectionEl.appendChild( articleEl );
   this.questions[ 0 ].renderQuestion();
+  this.renderQuestionHeader();
+};
+
+Quiz.prototype.renderQuestionHeader = function () {
+  var h3El = document.createElement( 'h3' );
+  h3El.textContent = 'Question ' + ( this.currentQuestion + 1 );
+  var articleEl = Quiz.currentQuiz.questions[ Quiz.currentQuiz.currentQuestion ].articleEl;
+  articleEl.insertBefore( h3El, articleEl.childNodes[ 0 ] );
 };
 
 Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when clicked
@@ -184,6 +211,20 @@ Quiz.prototype.getPercent = function () {
   var percent = points / this.questions.length;
   percent = Math.floor( percent * 10000 ) / 100;
   return percent;
+};
+
+Quiz.prototype.checkAnswers = function () { //determine if there are any unansweredQuestions
+  this.unansweredQuestions = [];
+  Quiz.currentQuiz.questions.forEach( function( question, index ) {
+    if( question.selectedAnswer === -1 ) {
+      this.unansweredQuestions.push( index + 1 );
+    }
+  }.bind( this ) );
+  if( this.unansweredQuestions.length === 0 ) { //return true if all answered
+    return true;
+  } else { //return false if any unanswered
+    return false;
+  }
 };
 
 Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
@@ -216,6 +257,38 @@ Quiz.getUser = function() {
   Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ]; //local reference to the current user
 };
 
+Quiz.loadSplash = function() { //setup the splash page on page load
+  var user = Quiz.currentUser.userName;
+  user = user[ 0 ].toUpperCase() + user.slice( 1 );
+  document.getElementById( 'user-name' ).textContent = user + '\'s Quizzes';
+  Quiz.buildQuizList( 'default-quizzes', default201Quizzes );
+  if( Quiz.currentUser.myQuizzes ) {
+    Quiz.buildQuizList( 'user-quizzes', Quiz.currentUser.myQuizzes );
+  } else {
+    var liEl = document.createElement( 'li' );
+    liEl.textContent = 'You have no quizzes. Go make one!';
+    liEl.id = 'go-make-quiz';
+    document.getElementById( 'user-quizzes' ).appendChild( liEl );
+  }
+};
+
+Quiz.buildQuizList = function ( ulId, quizList ) { //build the list of default and custom quizzes on the quiz splash page
+  var quizListEl = document.getElementById( ulId );
+  if( ulId === 'default-quizzes' ) {
+    var prefix = 'd';
+  } else {
+    prefix = 'u';
+  }
+  quizList.forEach( function( quiz, index ) {
+    var liEl = document.createElement( 'li' );
+    var aEl = document.createElement( 'a' );
+    aEl.id = prefix + index;
+    aEl.textContent = quiz.title;
+    liEl.appendChild( aEl );
+    quizListEl.appendChild( liEl );
+  } );
+};
+
 Quiz.instantiateQuestion = function( questionObject ) { //reinstantiates a question from a returned JSON "questionObject"
   var questionText = questionObject.rawQuestionText;
   var answers = questionObject.answers;
@@ -226,29 +299,124 @@ Quiz.instantiateQuestion = function( questionObject ) { //reinstantiates a quest
   return newQuestion;
 };
 
-Quiz.getQuiz = function( index ) {
-  var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
-  Quiz.currentQuiz = new Quiz( tempQuiz.title, tempQuiz.description );
-  for( var question in tempQuiz.questions ) { //reinstantiate each question and add it to the reinstantiated quiz
-    Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
+Quiz.getQuiz = function( source, index ) { //load the selected quiz into the Quiz.currentQuiz slot
+  if( source === 'u' ) {
+    var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
+    Quiz.currentQuiz = new Quiz( tempQuiz.title, tempQuiz.description );
+    for( var question in tempQuiz.questions ) { //reinstantiate each question and add it to the reinstantiated quiz
+      Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
+    }
+  } else {
+    Quiz.currentQuiz = default201Quizzes[ index ];
   }
 };
 
-Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which should happen on pageLoad
-  Quiz.getQuiz( index );
+Quiz.getQuizAndRender = function( source, index ) {
+  Quiz.getQuiz( source, index );
   Quiz.currentQuiz.renderQuiz();
 };
 
-Quiz.getUser();
+Quiz.handleListClick = function( e ) {
+  if( e.target.id ) {
+    var firstLetter = String( e.target.id[ 0 ] );
+    var quizNum = Number( e.target.id.slice( 1 ) );
+    if( firstLetter !== 'g' ) { //if a quiz is clicked on
+      Quiz.getQuizAndRender( firstLetter, Number( quizNum ) );
+    } else {
+      window.location.href = 'template.html';
+    }
+  }
+};
 
-//Testing other functioinality
+Quiz.setupQuizPage = function() {
+  Quiz.getUser();
+  Quiz.loadSplash();
+  document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+  document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+};
 
-// function testAddQuizToUser( quiz ) {
-//   Quiz.getUser(); //fetch user
-//   if( ! Quiz.currentUser.myQuizzes ) {
-//     Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
-//   }
-//   Quiz.currentUser.myQuizzes.push( quiz ); //adding the quiz0 just to test
-//   Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
-//   localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
-// }
+////////////////////
+//Built in quizzes//
+////////////////////
+
+/*Objects Quiz*/
+var quiz0 = new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' );
+
+quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
+  'object oriented variable',
+  [ 'property' ],
+  'literal',
+  'method'
+] );
+
+quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
+  [ 'method' ],
+  'action',
+  'reaction',
+  'literal verb',
+  'object.do()'
+] );
+
+quiz0.addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+  'dog.object.bark();',
+  'bark();',
+  [ 'dog.bark();' ],
+  'dog.bark;'
+] );
+
+quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
+  'dog.breed;',
+  'dog[ \'breed\' ]',
+  'dog[ breed ]',
+  [ 'Both A and B are valid' ],
+  'A, B, and C are all valid'
+] );
+
+quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
+  [ 'True' ],
+  'False'
+] );
+
+quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
+  [ 'True' ],
+  'False'
+] );
+
+/*Test Quiz*/
+var quiz1 = new Quiz( 'Code 201: Quiz 2 test', 'Practice your skills with JavaScript objects.' );
+
+quiz1.addQuestionAndAnswers( 'Hi Joel', [
+  'wrong',
+  [ 'correct' ],
+  'asdsad',
+  'asdasd'
+] );
+
+quiz1.addQuestionAndAnswers( 'Question 2', [
+  [ 'correct' ],
+  'nope',
+  'floop',
+  'smosdfohj'
+] );
+
+
+//////////////////
+//PageLoad Setup//
+//////////////////
+
+if( document.getElementById( 'quiz' ) ) {
+  var default201Quizzes = [
+    quiz0,
+    quiz1
+  ];
+
+  Quiz.getUser();
+  Quiz.loadSplash();
+  document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+  document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+}
+
+
+///////
+//FIN//
+///////
