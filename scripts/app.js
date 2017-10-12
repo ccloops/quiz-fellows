@@ -39,6 +39,13 @@ User.navBarUnRender = function() {
   User.header.removeChild(User.navBar);
 };
 
+if (localStorage.users) { // adds the localstorage.users to the app.users object.
+  var retrieveApp = JSON.parse(localStorage.users);
+  app.users = retrieveApp;
+  var retrieveCurrentUser = JSON.parse(localStorage.currentUser);
+  app.currentUser = retrieveCurrentUser;
+}
+
 User.splashPageRender = function() {//renders splash page
   User.divEl = document.createElement('div');
 
@@ -86,7 +93,19 @@ User.splashPageRender = function() {//renders splash page
   User.aEl3 = document.createElement('a');
   User.aEl3.href = 'html/about.html';
 
+  //========================================================================
+  //Current User in Nav bar
+  //========================================================================
   User.header.appendChild(User.navBar);
+  User.navUlEl = document.getElementById('navul');
+  User.navLi = document.createElement('li');
+  User.navUlEl.appendChild(User.navLi);
+  User.navH2El = document.createElement('h2');
+  User.navH2El.id = 'userdisplay';
+  User.navH2El.textContent = 'User: ' + app.users[app.currentUser].userName;
+  User.navLi.appendChild(User.navH2El);
+  //=========================================================================
+
   User.main.appendChild(User.divEl);
 
   User.divEl.appendChild(User.h2El1);
@@ -112,12 +131,6 @@ User.splashPageRender = function() {//renders splash page
 };//renders after login
 
 
-if (localStorage.users) { // adds the localstorage.users to the app.users object.
-  var retrieveApp = JSON.parse(localStorage.users);
-  app.users = retrieveApp;
-  var retrieveCurrentUser = JSON.parse(localStorage.currentUser);
-  app.currentUser = retrieveCurrentUser;
-}
 
 if (app.currentUser > -1) {//if currentUser exsists then remove login form.
   User.logoutButtRender();
