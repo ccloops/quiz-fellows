@@ -85,11 +85,14 @@ User.splashPageRender = function() {//renders splash page
 
   User.aEl3 = document.createElement('a');
   User.aEl3.href = 'html/about.html';
+
   User.header.appendChild(User.navBar);
   User.main.appendChild(User.divEl);
+
   User.divEl.appendChild(User.h2El1);
   User.divEl.appendChild(User.h2El2);
   User.divEl.appendChild(User.h2El3);
+
   User.divEl.appendChild(User.ul2El);
 
   User.ul2El.appendChild(User.liEl2);
@@ -110,7 +113,6 @@ User.splashPageRender = function() {//renders splash page
 
 
 if (localStorage.users) { // adds the localstorage.users to the app.users object.
-  alert('testing retrieveApp');
   var retrieveApp = JSON.parse(localStorage.users);
   app.users = retrieveApp;
   var retrieveCurrentUser = JSON.parse(localStorage.currentUser);
@@ -133,7 +135,9 @@ User.handleUserLogin = function( event ) {
 
   if (userName == '' || passWord == '') {
     alert('Input fields cannot be blank');
-  } else {
+  } else if (passWord.length < 7) {
+    alert('password must be 8 characters or more');
+  }else {
 
     if (app.users.length === 0) {// if no users are stored then creates a new user.
 
