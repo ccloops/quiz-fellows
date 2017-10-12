@@ -33,9 +33,7 @@ AnswerForm.prototype.removeAnswer = function(e) {
   var index = Number(e.target.id.replace('a', ''));
   this.questionForm.ulEl.removeChild(this.liEl);
   var tempAnswers = this.questionForm.answers.slice(0, index);
-  console.log(this.questionForm.answers);
   this.questionForm.answers = tempAnswers.concat(this.questionForm.answers.slice(index + 1));
-  console.log(this.questionForm.answers);
   this.questionForm.updateAnswerForm();
 };
 
@@ -119,9 +117,7 @@ QuestionForm.prototype.removeQuestion = function() {
   event.preventDefault();
   this.newQuestionArticle.remove();
   var tempQuestions = QuestionForm.all.slice(0, this.questionIndex);
-  console.log(QuestionForm.all);
   QuestionForm.all = tempQuestions.concat(QuestionForm.all.slice(this.questionIndex + 1));
-  console.log(QuestionForm.all);
   QuestionForm.updateQuestionAndAnswers();
 };
 
@@ -149,7 +145,8 @@ QuestionForm.getAllData = function() {
   var quizTitle = document.getElementById('quizTitle').value;
   var quizDescription = document.getElementById('quizDescription').value;
   if(!quizTitle || !quizDescription) {
-    return alert('Please make sure to enter a valid quiz title and description!');
+    alert('Please make sure to enter a valid quiz title and description!');
+    return false;
   }
   var questionsAndAnswers = [];
   for(var i = 0; i < QuestionForm.all.length; i++) {
@@ -167,15 +164,27 @@ QuestionForm.getAllData = function() {
 QuestionForm.submitQuiz = function() {
   event.preventDefault();
   var quizData = QuestionForm.getAllData();
-  var myQuiz = new Quiz(quizData.title, quizData.description);
-  for(var i = 0; i < quizData.questions.length; i++) {
-    var questionText = quizData.questions[i].questionText;
-    var answers = quizData.questions[i].answers;
-    var correctAnswer = quizData.questions[i].correctAnswer;
-    answers[correctAnswer] = [answers[correctAnswer]];
-    myQuiz.addQuestionAndAnswers(questionText, answers);
+  if(quizData) {
+    var myQuiz = new Quiz(quizData.title, quizData.description);
+    for(var i = 0; i < quizData.questions.length; i++) {
+      var questionText = quizData.questions[i].questionText;
+      var answers = quizData.questions[i].answers;
+      var correctAnswer = quizData.questions[i].correctAnswer;
+      answers[correctAnswer] = [answers[correctAnswer]];
+      myQuiz.addQuestionAndAnswers(questionText, answers);
+    }
+    QuestionForm.saveQuiz( myQuiz );
+    if(confirm ('Are you sure you want to submit your quiz?')) {
+
+      if(confirm ('Would you like to go to your quizzes?')) {
+        document.getElementById('quizTitle').value = null;
+        document.getElementById('quizDescription').value = null;
+        window.location.href = '../html/quiz.html';
+      } else {
+        window.location.href = '../index.html';
+      }
+    }
   }
-  QuestionForm.saveQuiz( myQuiz );
 };
 
 QuestionForm.saveQuiz = function( newQuiz ) {
