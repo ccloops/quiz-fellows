@@ -16,7 +16,7 @@ function User (username, password) {
   // localStorage.currentUser = app.users.length - 1;
 }
 
-
+User.navBar = document.getElementById('navbar');
 User.header = document.getElementById('header');
 User.ulEl = document.createElement('ul');
 User.liEl = document.createElement('li');
@@ -34,6 +34,17 @@ User.logoutButtRender = function() { //clears login form and adds logout button.
   User.liEl.appendChild(User.aEl4);
   User.aEl4.appendChild(User.buttEl);
 };
+
+User.navBarUnRender = function() {
+  User.header.removeChild(User.navBar);
+};
+
+if (localStorage.users) { // adds the localstorage.users to the app.users object.
+  var retrieveApp = JSON.parse(localStorage.users);
+  app.users = retrieveApp;
+  var retrieveCurrentUser = JSON.parse(localStorage.currentUser);
+  app.currentUser = retrieveCurrentUser;
+}
 
 User.splashPageRender = function() {//renders splash page
   User.divEl = document.createElement('div');
@@ -82,14 +93,33 @@ User.splashPageRender = function() {//renders splash page
   User.aEl3 = document.createElement('a');
   User.aEl3.href = 'html/about.html';
 
+  //========================================================================
+  //Current User in Nav bar
+  //========================================================================
+  User.header.appendChild(User.navBar);
+  User.navUlEl = document.getElementById('navul');
+  User.navLi = document.createElement('li');
+  User.navUlEl.appendChild(User.navLi);
+  User.navH2El = document.createElement('h2');
+  User.navH2El.id = 'userdisplay';
+  User.navH2El.textContent = 'User: ' + app.users[app.currentUser].userName;
+  User.navLi.appendChild(User.navH2El);
+  //=========================================================================
+
   User.main.appendChild(User.divEl);
+
   User.divEl.appendChild(User.h2El1);
   User.divEl.appendChild(User.h2El2);
   User.divEl.appendChild(User.h2El3);
+
   User.divEl.appendChild(User.ul2El);
+
   User.ul2El.appendChild(User.liEl2);
+
   User.ul2El.appendChild(User.liEl3);
+
   User.ul2El.appendChild(User.liEl4);
+
   User.liEl2.appendChild(User.aEl1);
   User.aEl1.appendChild(User.imgEl1);
 
@@ -101,17 +131,12 @@ User.splashPageRender = function() {//renders splash page
 };//renders after login
 
 
-if (localStorage.users) { // adds the localstorage.users to the app.users object.
-  alert('testing retrieveApp');
-  var retrieveApp = JSON.parse(localStorage.users);
-  app.users = retrieveApp;
-  var retrieveCurrentUser = JSON.parse(localStorage.currentUser);
-  app.currentUser = retrieveCurrentUser;
-}
 
 if (app.currentUser > -1) {//if currentUser exsists then remove login form.
   User.logoutButtRender();
   User.splashPageRender();
+} else {
+  User.navBarUnRender();
 }
 console.log(app.currentUser + 'currentuser after');
 
@@ -123,12 +148,14 @@ User.handleUserLogin = function( event ) {
 
   if (userName == '' || passWord == '') {
     alert('Input fields cannot be blank');
-  } else {
+  } else if (passWord.length < 7 || passWord.length > 20) {
+    alert('password must be btween 8-20 characters');
+  }else {
 
     if (app.users.length === 0) {// if no users are stored then creates a new user.
 
       console.log('app.users.length = 0 true');
-      confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord);
+      confirm('Created New User \n\nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
       new User(userName, passWord);
       localStorage.users = JSON.stringify(app.users);
       localStorage.currentUser = 0;
@@ -170,7 +197,7 @@ User.handleUserLogin = function( event ) {
       }
       console.log('counter: ' + userCounter);
       if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
-        var userConfirm = confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord);
+        var userConfirm = confirm('Creating new user. \n\nIs this correct? \nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
         if (userConfirm === true) {
           new User(userName, passWord);
           app.currentUser = userCounter;
