@@ -417,7 +417,6 @@ if( document.getElementById( 'quiz' ) ) {
 }
 
 
-
 ///////
 //FIN//
 ///////
