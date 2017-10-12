@@ -16,7 +16,7 @@ function User (username, password) {
   // localStorage.currentUser = app.users.length - 1;
 }
 
-
+User.navBar = document.getElementById('navbar');
 User.header = document.getElementById('header');
 User.ulEl = document.createElement('ul');
 User.liEl = document.createElement('li');
@@ -33,6 +33,10 @@ User.logoutButtRender = function() { //clears login form and adds logout button.
   User.ulEl.appendChild(User.liEl);
   User.liEl.appendChild(User.aEl4);
   User.aEl4.appendChild(User.buttEl);
+};
+
+User.navBarUnRender = function() {
+  User.header.removeChild(User.navBar);
 };
 
 User.splashPageRender = function() {//renders splash page
@@ -81,15 +85,19 @@ User.splashPageRender = function() {//renders splash page
 
   User.aEl3 = document.createElement('a');
   User.aEl3.href = 'html/about.html';
-
+  User.header.appendChild(User.navBar);
   User.main.appendChild(User.divEl);
   User.divEl.appendChild(User.h2El1);
   User.divEl.appendChild(User.h2El2);
   User.divEl.appendChild(User.h2El3);
   User.divEl.appendChild(User.ul2El);
+
   User.ul2El.appendChild(User.liEl2);
+
   User.ul2El.appendChild(User.liEl3);
+
   User.ul2El.appendChild(User.liEl4);
+
   User.liEl2.appendChild(User.aEl1);
   User.aEl1.appendChild(User.imgEl1);
 
@@ -112,6 +120,8 @@ if (localStorage.users) { // adds the localstorage.users to the app.users object
 if (app.currentUser > -1) {//if currentUser exsists then remove login form.
   User.logoutButtRender();
   User.splashPageRender();
+} else {
+  User.navBarUnRender();
 }
 console.log(app.currentUser + 'currentuser after');
 
