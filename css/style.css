@@ -173,7 +173,7 @@ button {
   background-color: black;
 }
 
-#navitem , #navitem a{
+.navitem , .navitem a{
   color: white;
   text-decoration: none;
   float: right;
