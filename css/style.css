@@ -95,7 +95,7 @@ button {
    font-size: 16px;
 }
 
-#newAnswer {
+ .form-button {
   background-color: white;
   color: red;
   padding: 10px 25px;
@@ -103,17 +103,6 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 10px;
-  float: right;
-}
-
-.remove {
-  background-color: white;
-  color: red;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 7px;
 }
 
 #jimgs {
