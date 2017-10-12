@@ -41,41 +41,41 @@ article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
   background-color: red;
 }
 
-body {
+/*body {
   margin: 0 auto;
   font-family: helvetica;
-}
+}*/
 
-h1 {
+/*h1 {
   font-size: 50px;
-}
+}*/
 
-form {
+/*form {
   background-color: white;
   margin: 0 auto;
   border: 5px solid black;
   margin: 20px 10px;
   padding: 10px;
-}
+}*/
 
-article {
+/*article {
   border: 5px solid black;
   margin: 20px 10px;
   padding: 10px;
   width: 70%
-}
+}*/
 
 
-legend {
+/*legend {
   font-size: 30px;
   margin: 20px 5px;
   padding: 5px;
   background-color: red;
   color: white;
   width: 15%;
-}
+}*/
 
-input[type=text] {
+/*input[type=text] {
     width: 60%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -83,9 +83,9 @@ input[type=text] {
     margin-left: 0px;
     display: block;
     background-color: pink;
-}
+}*/
 
-button {
+/*button {
    background-color: white;
    color: red;
    padding: 15px 32px;
@@ -93,9 +93,9 @@ button {
    text-decoration: none;
    display: inline-block;
    font-size: 16px;
-}
+}*/
 
- .form-button {
+/*.form-button {
   background-color: white;
   color: red;
   padding: 10px 25px;
@@ -103,20 +103,13 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 10px;
-}
+}*/
 
-#jimgs {
-  border: 5px solid black;
-  margin-left: 16.5%;
-  height: 200px;
-  width: 200px;
-}
-
-#jli {
+/*#jli {
   display: inline;
-}
+}*/
 
-#jh2 {
+/*#jh2 {
   float: left;
   display: inline;
   width: 10%;
@@ -125,17 +118,18 @@ button {
   margin-top: 30px;
   margin-left: 20.125%;
   margin-bottom: 30px;
-}
+}*/
 
-#logout {
+/*#logout {
   float: right;
-}
+}*/
 
-#loginbutt{
+/*#loginbutt{
   margin-left: 45%;
   margin-right: 45%;
-}
-#password {
+}*/
+
+/*#password {
   width: 60%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -144,9 +138,9 @@ button {
   margin-right: 20%;
   display: block;
   background-color: pink;
-}
+}*/
 
-#username {
+/*#username {
   width: 60%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -156,31 +150,118 @@ button {
   display: block;
   background-color: pink;
   align-self: center;
-}
+}*/
 
-#userlabel {
+/*#userlabel {
   margin-left: 20%;
-}
+}*/
 
-#passlabel {
+/*#passlabel {
   margin-left: 20%;
-}
+}*/
 
-#navbar {
+/*#navbar {
   border: 2px solid blue;
   padding: 40px;
   margin:auto;
   background-color: black;
-}
+}*/
 
-.navitem , .navitem a{
+/*.navitem , .navitem a, #logoutbutt{
   color: white;
   text-decoration: none;
   float: right;
   margin-left: 4%;
   width: 80px;
+}*/
+
+/*#userdisplay {
+  color: white;
+}*/
+
+body {
+  font-family: 'Montserrat';
 }
 
-#userdisplay {
+header#header {
+  height: 75px;
+  background-color: black;
+  font-family: 'Montserrat';
+  font-size: 95%;
+  font-weight: bold;
+  position: fixed;
+  width: 100%;
+}
+
+nav#navbar {
+  width: 960px;
+  margin: 0 auto;
+}
+
+header img {
+  height: 50px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+header h1 {
   color: white;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 255px;
+}
+
+nav ul {
+  display: inline-block;
+  height: 50px;
+}
+
+nav ul li {
+  display: inline-block;
+  color: white;
+  padding-top: 15px;
+  margin-left: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button#logout {
+  font-family: 'Montserrat';
+  background:none;
+  border:none;
+  color: white;
+  font-size: 100%;
+  background-color: #c52e20;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+button#logout:hover {
+  background-color: #b0261a;
+  cursor: pointer;
+}
+
+main {
+  padding-top: 75px;
+}
+
+div#index div {
+  background-color: rgb(70, 70, 70);
+  color: white;
+}
+
+div#index article {
+  width: 960px;
+  margin: 0 auto;
+  height: 200px;
+}
+
+div#index article h1 {
+  text-align: center;
+  font-size: 72px;
+  padding-top: 60px;;
 }
