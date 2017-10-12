@@ -12,6 +12,7 @@ function QuestionForm() {
   this.addQuestionForm();
   this.questionIndex = QuestionForm.all.length;
   QuestionForm.all.push(this);
+  this.correctAnswer = -1;
 }
 
 function AnswerForm(question) {
@@ -102,8 +103,9 @@ QuestionForm.prototype.addQuestionForm = function() {
 
 QuestionForm.prototype.getQuestionAndAnswers = function () {
   for(var i = 0; i < this.answers.length; i++) {
-    this.answersText.push(this.answers[i].value);
-    var radioButtonStatus = document.getElementById('q' + this.questionIndex + 'a' + i).checked;
+    this.answersText.push(this.answers[i].inputEl.value);
+    console.log(this.answers[i]);
+    var radioButtonStatus = this.answers[i].radioEl.checked;
     if(radioButtonStatus) {
       this.correctAnswer = i;
     }
@@ -112,60 +114,11 @@ QuestionForm.prototype.getQuestionAndAnswers = function () {
 };
 
 
-QuestionForm.prototype.newAnswerForm = function() {
-  event.preventDefault();
-
-  var liEl = document.createElement('li');
-  this.ulEl.appendChild(liEl);
-
-  var newAnswerLabel = document.createElement('label');
-  newAnswerLabel.setAttribute('for', 'addAnswer');
-  newAnswerLabel.textContent = 'Answer ' + (this.answers.length + 1) + ':';
-  liEl.appendChild(newAnswerLabel);
-
-  var newAnswerInput = document.createElement('input');
-  newAnswerInput.name = 'addAnswer';
-  newAnswerInput.type = 'text';
-  liEl.appendChild(newAnswerInput);
-  this.answers.push(newAnswerInput);
-
-  var radioButtonInput = document.createElement('input');
-  radioButtonInput.type = 'radio';
-  radioButtonInput.name = 'radio';
-  radioButtonInput.id = 'q' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
-  liEl.appendChild(radioButtonInput);
-
-  var radioButtonLabel = document.createElement('label');
-  radioButtonLabel.setAttribute('for', 'radio');
-  radioButtonLabel.textContent = 'Correct Answer:';
-  liEl.appendChild(radioButtonLabel);
-
-//button to remove answer
-  var removeAnswerButton = document.createElement('button');
-  removeAnswerButton.type = 'click';
-  removeAnswerButton.textContent = 'Remove Answer';
-  removeAnswerButton.id = 'removeQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
-  liEl.appendChild(removeAnswerButton);
-  liEl.id = 'liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1);
-
-//remove answer event listener
-  removeAnswerButton.addEventListener('click', this.removeAnswer.bind(this));
-};
-
-
 QuestionForm.addNewQuestion = function (e) {
   e.preventDefault();
   new QuestionForm();
 };
 
-
-
-QuestionForm.prototype.removeAnswer = function (e) {
-  e.preventDefault();
-  console.log(e.target.id);
-  // var remove = document.getElementById('liQ' + (QuestionForm.all.length - 1) + 'a' + (this.answers.length - 1));
-  // this.ulEl.removeChild(remove);
-};
 
 addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
 
