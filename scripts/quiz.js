@@ -211,8 +211,8 @@ Quiz.prototype.renderResults = function() { // TODO: must have all answers selec
 };
 
 Quiz.getUser = function() {
-  Quiz.allUsers = JSON.parse( localStorage.users ); //Add all user objects to array
-  Quiz.currentUserIndex = Number( localStorage.currentUser ); //load locally the current user
+  Quiz.allUsers = JSON.parse( localStorage.users ); //Add all user objects from localStorage to array
+  Quiz.currentUserIndex = Number( localStorage.currentUser ); //load locally the current user Index
   Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ]; //local reference to the current user
 };
 
@@ -239,14 +239,16 @@ Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which 
   Quiz.currentQuiz.renderQuiz();
 };
 
+Quiz.getUser();
+
 //Testing other functioinality
 
-function testAddQuizToUser( quiz ) {
-  Quiz.getUser(); //fetch user
-  if( ! Quiz.currentUser.myQuizzes ) {
-    Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
-  }
-  Quiz.currentUser.myQuizzes.push( quiz ); //adding the quiz0 just to test
-  Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
-  localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
-}
+// function testAddQuizToUser( quiz ) {
+//   Quiz.getUser(); //fetch user
+//   if( ! Quiz.currentUser.myQuizzes ) {
+//     Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
+//   }
+//   Quiz.currentUser.myQuizzes.push( quiz ); //adding the quiz0 just to test
+//   Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
+//   localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
+// }
