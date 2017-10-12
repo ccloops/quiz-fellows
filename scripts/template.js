@@ -128,9 +128,9 @@ QuestionForm.prototype.removeQuestion = function() {
 
 
 QuestionForm.prototype.getQuestionAndAnswers = function () {
+  this.answersText = [];
   for(var i = 0; i < this.answers.length; i++) {
     this.answersText.push(this.answers[i].inputEl.value);
-    console.log(this.answers[i]);
     var radioButtonStatus = this.answers[i].radioEl.checked;
     if(radioButtonStatus) {
       this.correctAnswer = i;
@@ -144,6 +144,27 @@ QuestionForm.addNewQuestion = function (e) {
   e.preventDefault();
   new QuestionForm();
 };
+
+
+QuestionForm.getAllData = function() {
+  var quizTitle = document.getElementById('quizTitle').value;
+  var quizDescription = document.getElementById('quizDescription').value;
+  if(!quizTitle || !quizDescription) {
+    return alert('Please make sure to enter a valid quiz title and description!');
+  }
+  var questionsAndAnswers = [];
+  for(var i = 0; i < QuestionForm.all.length; i++) {
+    var currentQuestion = QuestionForm.all[i];
+    currentQuestion.getQuestionAndAnswers();
+    if(currentQuestion.correctAnswer === -1) {
+      return alert('Please select a correct answer for Question ' + (i + 1));
+    }
+    questionsAndAnswers.push({answers: currentQuestion.answersText, correctAnswer: currentQuestion.correctAnswer});
+
+  }
+  return {title: quizTitle, description: quizDescription, questions: questionsAndAnswers};
+};
+
 
 
 addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
