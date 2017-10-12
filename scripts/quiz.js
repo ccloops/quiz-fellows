@@ -1,12 +1,18 @@
 'use strict';
 
-/*Answer Constructor*/
+//////////////////////
+//Answer Constructor//
+//////////////////////
 function Answer( answerText, isCorrect ) {
   this.answerText = answerText;
   this.isCorrect = isCorrect;
 }
 
-/*Question Constructor*/
+
+////////////////////////
+//Question Constructor//
+////////////////////////
+
 function Question( questionText ) {
   this.rawQuestionText = questionText;
   this.questionText = this.formatQuestionText( questionText );
@@ -94,7 +100,11 @@ Question.prototype.formatQuestionText = function( questionText ) { //adds line b
   return pEl;
 };
 
-/*Quiz Constructor*/
+
+////////////////////
+//Quiz Constructor//
+////////////////////
+
 function Quiz( title, description ) {
   this.title = title;
   this.description = description;
@@ -247,17 +257,28 @@ Quiz.getUser = function() {
   Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ]; //local reference to the current user
 };
 
-Quiz.loadSplash = function() {
+Quiz.loadSplash = function() { //setup the splash page on page load
   var user = Quiz.currentUser.userName;
   user = user[ 0 ].toUpperCase() + user.slice( 1 );
   document.getElementById( 'user-name' ).textContent = user + '\'s Quizzes';
-  var defaultQuizzes = document.getElementById( 'default-quizzes' );
-  default201Quizzes.forEach( function( quiz ) {
+  Quiz.buildQuizList( 'default-quizzes', default201Quizzes );
+  if( Quiz.currentUser.myQuizzes ) {
+    Quiz.buildQuizList( 'user-quizzes', Quiz.currentUser.myQuizzes );
+  } else {
+    var liEl = document.createElement( 'li' );
+    liEl.textContent = 'You have no quizzes. Go make one!';
+    document.getElementById( 'user-quizzes' ).appendChild( liEl );
+  }
+};
+
+Quiz.buildQuizList = function ( ulId, quizList ) { //build the list of default and custom quizzes on the quiz splash page
+  var quizListEl = document.getElementById( ulId );
+  quizList.forEach( function( quiz ) {
     var liEl = document.createElement( 'li' );
     var aEl = document.createElement( 'a' );
     aEl.textContent = quiz.title;
     liEl.appendChild( aEl );
-    defaultQuizzes.appendChild( liEl );
+    quizListEl.appendChild( liEl );
   } );
 };
 
@@ -285,7 +306,9 @@ Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which 
 };
 
 
-
+////////////////////
+//Built in quizzes//
+////////////////////
 
 /*Objects Quiz*/
 var quiz0 = new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' );
@@ -330,9 +353,7 @@ quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method 
   'False'
 ] );
 
-
-
-
+/*Test Quiz*/
 var quiz1 = new Quiz( 'Code 201: Quiz 2 test', 'Practice your skills with JavaScript objects.' );
 
 quiz1.addQuestionAndAnswers( 'Hi Joel', [
@@ -350,11 +371,19 @@ quiz1.addQuestionAndAnswers( 'Question 2', [
 ] );
 
 
+//////////////////
+//PageLoad Setup//
+//////////////////
+
 var default201Quizzes = [
   quiz0,
   quiz1
 ];
 
-
 Quiz.getUser();
 Quiz.loadSplash();
+
+
+///////
+//FIN//
+///////
