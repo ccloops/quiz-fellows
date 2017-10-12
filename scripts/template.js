@@ -74,7 +74,6 @@ QuestionForm.prototype.updateAnswerForm = function() {
 //Appending New Question Form
 //+++++++++++++++++++++++++++++++++++++
 
-var addQuestionButton = document.getElementById('newQuestion');
 
 QuestionForm.prototype.addQuestionForm = function() {
   var entireQuizForm = document.getElementById('entireQuizForm');
@@ -165,13 +164,14 @@ QuestionForm.getAllData = function() {
   return {title: quizTitle, description: quizDescription, questions: questionsAndAnswers};
 };
 
-
-
-addQuestionButton.addEventListener('click', QuestionForm.addNewQuestion);
-
-
 QuestionForm.submitQuiz = function() {
-  for(var i = 0; i < QuestionForm.all.length; i++) {
-
-  }
+  event.preventDefault();
+  var quizData = QuestionForm.getAllData();
+  var myQuiz = new Quiz(quizData.title, quizData.description);
+  console.log(myQuiz);
 };
+
+
+document.getElementById('newQuestion').addEventListener('click', QuestionForm.addNewQuestion);
+
+document.getElementById('submit').addEventListener('click', QuestionForm.submitQuiz);
