@@ -116,13 +116,17 @@ QuestionForm.updateQuestionAndAnswers = function() {
 };
 
 QuestionForm.prototype.removeQuestion = function() {
-  event.preventDefault();
-  this.newQuestionArticle.remove();
-  var tempQuestions = QuestionForm.all.slice(0, this.questionIndex);
-  console.log(QuestionForm.all);
-  QuestionForm.all = tempQuestions.concat(QuestionForm.all.slice(this.questionIndex + 1));
-  console.log(QuestionForm.all);
-  QuestionForm.updateQuestionAndAnswers();
+  if(confirm('Are you sure you want to remove the question?')) {
+    event.preventDefault();
+    this.newQuestionArticle.remove();
+    var tempQuestions = QuestionForm.all.slice(0, this.questionIndex);
+    console.log(QuestionForm.all);
+    QuestionForm.all = tempQuestions.concat(QuestionForm.all.slice(this.questionIndex + 1));
+    console.log(QuestionForm.all);
+    QuestionForm.updateQuestionAndAnswers();
+  } else {
+    event.preventDefault();
+  }
 };
 
 
@@ -177,10 +181,12 @@ QuestionForm.submitQuiz = function() {
   }
   QuestionForm.saveQuiz( myQuiz );
 
-  var areYouSure = confirm ('Are you sure you want to submit your quiz?');
-  if(areYouSure === true) {
-    var goToQuizzes = confirm ('Would you like to go to your quizzes?');
-    if(goToQuizzes === true) {
+
+  if(confirm ('Are you sure you want to submit your quiz?')) {
+
+    if(confirm ('Would you like to go to your quizzes?')) {
+      document.getElementById('quizTitle').value = null;
+      document.getElementById('quizDescription').value = null;
       window.location.href = '../html/quiz.html';
     } else {
       window.location.href = '../index.html';
