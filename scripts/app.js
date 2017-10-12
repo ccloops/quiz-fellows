@@ -135,14 +135,14 @@ User.handleUserLogin = function( event ) {
 
   if (userName == '' || passWord == '') {
     alert('Input fields cannot be blank');
-  } else if (passWord.length < 7) {
-    alert('password must be 8 characters or more');
+  } else if (passWord.length < 7 || passWord.length > 20) {
+    alert('password must be btween 8-20 characters');
   }else {
 
     if (app.users.length === 0) {// if no users are stored then creates a new user.
 
       console.log('app.users.length = 0 true');
-      confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord);
+      confirm('Created New User \nUsername: ' + userName + '\n Password: ' + passWord.replace(/./g,'*'));
       new User(userName, passWord);
       localStorage.users = JSON.stringify(app.users);
       localStorage.currentUser = 0;
@@ -184,7 +184,7 @@ User.handleUserLogin = function( event ) {
       }
       console.log('counter: ' + userCounter);
       if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
-        var userConfirm = confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord);
+        var userConfirm = confirm('Creating new user. \n Is this correct? \nUsername: ' + userName + '\n Password: ' + passWord.replace(/./g,'*'));
         if (userConfirm === true) {
           new User(userName, passWord);
           app.currentUser = userCounter;
