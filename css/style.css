@@ -179,6 +179,13 @@ article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
   color: white;
 }*/
 
+a.anchor {
+  display: block;
+  position: relative;
+  top: -190px;
+  visibility: hidden;
+}
+
 body {
   font-family: 'Montserrat';
 }
@@ -238,6 +245,7 @@ button#logout {
   background-color: #c52e20;
   border-radius: 20px;
   padding: 10px 20px;
+  outline: none;
 }
 
 button#logout:hover {
@@ -290,7 +298,8 @@ div#index article h2 {
 /*end main button sections*/
 
 div#index a+a+div {
-  height: 800px;
+  height: auto;
+  padding-bottom: 75px;
 }
 
 div#index a+div article {
@@ -302,6 +311,15 @@ div#index article ul li {
   width: 300px;
   margin-right: 25px;
   text-align: center;
+  font-style: italic;
+  font-weight: normal;
+  letter-spacing: .125em;
+  line-height: 1.4em;
+  vertical-align: top;
+}
+
+div#index article ul li p {
+  padding-bottom: 25px;
 }
 
 div#index article ul li:last-child {
@@ -316,7 +334,6 @@ div#index article ul img {
 
 h3 {
   font-size: 24px;
-  margin-top: 12.5px;
 }
 
 footer {
