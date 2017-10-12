@@ -59,9 +59,9 @@ Question.prototype.setSelectedAnswer = function( selectedAnswer ) { //update the
 };
 
 Question.prototype.renderQuestion = function() { //render question to the page
-  var articleEl = document.getElementById( 'quiz-content' );
-  articleEl.innerHTML = null;
-  articleEl.appendChild( this.questionText );
+  this.articleEl = document.getElementById( 'quiz-content' );
+  this.articleEl.innerHTML = null;
+  this.articleEl.appendChild( this.questionText );
   var olEl = document.createElement( 'ol' );
   this.answers.forEach( function( answer, index ) {
     var liEl = document.createElement( 'li' );
@@ -75,7 +75,7 @@ Question.prototype.renderQuestion = function() { //render question to the page
     liEl.textContent = answer.answerText;
     olEl.appendChild( liEl );
   }.bind( this ) );
-  articleEl.appendChild( olEl );
+  this.articleEl.appendChild( olEl );
 };
 
 Question.prototype.formatQuestionText = function( questionText ) { //adds line breaks if <br> found, returns p element
@@ -118,6 +118,7 @@ Quiz.prototype.renderNext = function() { //change to the next question
   if( this.currentQuestion < this.questions.length - 1 ) {
     this.currentQuestion++;
     this.questions[ this.currentQuestion ].renderQuestion();
+    this.renderQuestionHeader();
   }
   if( this.currentQuestion === this.questions.length - 1 ) {
     document.getElementById( 'next-button' ).textContent = 'Submit';
@@ -131,6 +132,7 @@ Quiz.prototype.renderPrevious = function() { //change to the last question
   if( this.currentQuestion > 0 ) {
     this.currentQuestion--;
     this.questions[ this.currentQuestion ].renderQuestion();
+    this.renderQuestionHeader();
   }
   if( this.currentQuestion === 0 ) {
     document.getElementById( 'previous-button' ).setAttribute( 'class', 'hidden' );
@@ -162,6 +164,14 @@ Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the
   articleEl.addEventListener( 'click', this.handleSelectAnswer.bind( this ) );
   sectionEl.appendChild( articleEl );
   this.questions[ 0 ].renderQuestion();
+  this.renderQuestionHeader();
+};
+
+Quiz.prototype.renderQuestionHeader = function () {
+  var h3El = document.createElement( 'h3' );
+  h3El.textContent = 'Question ' + ( this.currentQuestion + 1 );
+  var articleEl = Quiz.currentQuiz.questions[ Quiz.currentQuiz.currentQuestion ].articleEl;
+  articleEl.insertBefore( h3El, articleEl.childNodes[ 0 ] );
 };
 
 Quiz.prototype.handleSelectAnswer = function ( e ) { //set selected answer when clicked
