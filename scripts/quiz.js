@@ -247,6 +247,12 @@ Quiz.getUser = function() {
   Quiz.currentUser = Quiz.allUsers[ Quiz.currentUserIndex ]; //local reference to the current user
 };
 
+Quiz.loadSplash = function() {
+  var user = Quiz.currentUser.userName;
+  user = user[ 0 ].toUpperCase() + user.slice( 1 );
+  document.getElementById( 'user-name' ).textContent = user + '\'s Quizzes';
+};
+
 Quiz.instantiateQuestion = function( questionObject ) { //reinstantiates a question from a returned JSON "questionObject"
   var questionText = questionObject.rawQuestionText;
   var answers = questionObject.answers;
@@ -271,3 +277,4 @@ Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which 
 };
 
 Quiz.getUser();
+Quiz.loadSplash();

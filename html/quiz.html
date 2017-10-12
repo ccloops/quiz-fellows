@@ -7,11 +7,13 @@
   </head>
   <body>
     <section id="quiz">
-      <article id="201-quizzes"> <!-- TODO: Inject pre-loaded quizzes here on page load- use UL -->
-        <h2>201 Quizzes Section</h2>
+      <article>
+        <h2>CodeFellows 201 Quizzes</h2>
+        <ul id="default-quizzes"></ul>
       </article>
-      <article id="user-quizzes"><!-- TODO: Inject user quizzes here on page load- use UL -->
-        <h2>myQuizzes section</h2>
+      <article><!-- TODO: Inject user quizzes here on page load- use UL -->
+        <h2 id="user-name">myQuizzes</h2>
+        <ul id="user-quizzes"></ul>
       </article>
     </section>
     <script type="text/javascript" src="../scripts/quiz.js"></script>
