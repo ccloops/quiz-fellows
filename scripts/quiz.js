@@ -109,7 +109,11 @@ Quiz.prototype.addQuestionAndAnswers = function( questionText, answers ) { //ans
 
 Quiz.prototype.renderNext = function() { //change to the next question
   if( this.currentQuestion === this.questions.length - 1 ) {
-    return Quiz.currentQuiz.renderResults();
+    if( this.checkAnswers() ) {
+      return Quiz.currentQuiz.renderResults();
+    } else {
+      return alert( 'Please answer the following question(s) before continuing:\n\n' + this.unansweredQuestions.join( ', ' ) );
+    }
   }
   if( this.currentQuestion < this.questions.length - 1 ) {
     this.currentQuestion++;
@@ -187,6 +191,20 @@ Quiz.prototype.getPercent = function () {
   var percent = points / this.questions.length;
   percent = Math.floor( percent * 10000 ) / 100;
   return percent;
+};
+
+Quiz.prototype.checkAnswers = function () { //determine if there are any unansweredQuestions
+  this.unansweredQuestions = [];
+  Quiz.currentQuiz.questions.forEach( function( question, index ) {
+    if( question.selectedAnswer === -1 ) {
+      this.unansweredQuestions.push( index + 1 );
+    }
+  }.bind( this ) );
+  if( this.unansweredQuestions.length === 0 ) { //return true if all answered
+    return true;
+  } else { //return false if any unanswered
+    return false;
+  }
 };
 
 Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
