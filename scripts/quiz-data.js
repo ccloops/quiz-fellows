@@ -61,3 +61,11 @@ quiz1.addQuestionAndAnswers( 'Question 2', [
   'floop',
   'smosdfohj'
 ] );
+
+
+var default201Quizzes = [
+  quiz0,
+  quiz1
+];
+
+default201Quizzes; //garbage code to appease the linter, variable called in Quiz.js

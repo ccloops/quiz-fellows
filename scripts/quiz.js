@@ -251,6 +251,14 @@ Quiz.loadSplash = function() {
   var user = Quiz.currentUser.userName;
   user = user[ 0 ].toUpperCase() + user.slice( 1 );
   document.getElementById( 'user-name' ).textContent = user + '\'s Quizzes';
+  var defaultQuizzes = document.getElementById( 'default-quizzes' );
+  default201Quizzes.forEach( function( quiz ) {
+    var liEl = document.createElement( 'li' );
+    var aEl = document.createElement( 'a' );
+    aEl.textContent = quiz.title;
+    liEl.appendChild( aEl );
+    defaultQuizzes.appendChild( liEl );
+  } );
 };
 
 Quiz.instantiateQuestion = function( questionObject ) { //reinstantiates a question from a returned JSON "questionObject"
@@ -275,6 +283,78 @@ Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which 
   Quiz.getQuiz( index );
   Quiz.currentQuiz.renderQuiz();
 };
+
+
+
+
+/*Objects Quiz*/
+var quiz0 = new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' );
+
+quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
+  'object oriented variable',
+  [ 'property' ],
+  'literal',
+  'method'
+] );
+
+quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
+  [ 'method' ],
+  'action',
+  'reaction',
+  'literal verb',
+  'object.do()'
+] );
+
+quiz0.addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+  'dog.object.bark();',
+  'bark();',
+  [ 'dog.bark();' ],
+  'dog.bark;'
+] );
+
+quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
+  'dog.breed;',
+  'dog[ \'breed\' ]',
+  'dog[ breed ]',
+  [ 'Both A and B are valid' ],
+  'A, B, and C are all valid'
+] );
+
+quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
+  [ 'True' ],
+  'False'
+] );
+
+quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
+  [ 'True' ],
+  'False'
+] );
+
+
+
+
+var quiz1 = new Quiz( 'Code 201: Quiz 2 test', 'Practice your skills with JavaScript objects.' );
+
+quiz1.addQuestionAndAnswers( 'Hi Joel', [
+  'wrong',
+  [ 'correct' ],
+  'asdsad',
+  'asdasd'
+] );
+
+quiz1.addQuestionAndAnswers( 'Question 2', [
+  [ 'correct' ],
+  'nope',
+  'floop',
+  'smosdfohj'
+] );
+
+
+var default201Quizzes = [
+  quiz0,
+  quiz1
+];
+
 
 Quiz.getUser();
 Quiz.loadSplash();
