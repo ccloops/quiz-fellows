@@ -65,6 +65,13 @@ article {
   width: 70%
 }
 
+#quizHeader {
+  border: none;
+  margin: 20px 10px;
+  padding: 10px;
+  width: 70%
+}
+
 
 legend {
   font-size: 30px;
@@ -173,10 +180,20 @@ button {
   background-color: black;
 }
 
-#navitem , #navitem a{
+.navitem , .navitem a{
   color: white;
   text-decoration: none;
   float: right;
   margin-left: 4%;
   width: 80px;
+}
+
+#aside {
+  width: 500px;
+  /*margin: 0 auto;*/
+  background-color: pink;
+  padding: 5px;
+  border: 2px solid black;
+  margin-top: 15px;
+  margin-left: 10px;
 }

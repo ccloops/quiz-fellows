@@ -107,6 +107,23 @@ QuestionForm.prototype.addQuestionForm = function() {
 
 };
 
+
+// QuestionForm.prototype.createSubmitButton = function() {
+//   var submitQuizButton = document.createElement('button');
+//   submitQuizButton.setAttribute('type', 'click');
+//   submitQuizButton.textContent = 'Submit Quiz';
+//   submitQuizButton.setAttribute.id = 'submit';
+//   this.newQuestionArticle.appendChild(submitQuizButton);
+// };
+//
+// QuestionForm.prototype.renderSubmitButton = function() {
+//   if(QuestionForm.all.length >= 0 && this.answers.length >= 1) {
+//     QuestionForm.createSubmitButton();
+//   }
+// };
+// renderSubmitButton();
+//
+//
 QuestionForm.updateQuestionAndAnswers = function() {
   for(var i = 0; i < QuestionForm.all.length; i++) {
     QuestionForm.all[i].questionIndex = i;
@@ -120,9 +137,7 @@ QuestionForm.prototype.removeQuestion = function() {
     event.preventDefault();
     this.newQuestionArticle.remove();
     var tempQuestions = QuestionForm.all.slice(0, this.questionIndex);
-    console.log(QuestionForm.all);
     QuestionForm.all = tempQuestions.concat(QuestionForm.all.slice(this.questionIndex + 1));
-    console.log(QuestionForm.all);
     QuestionForm.updateQuestionAndAnswers();
   } else {
     event.preventDefault();
@@ -181,6 +196,12 @@ QuestionForm.submitQuiz = function() {
   }
   QuestionForm.saveQuiz( myQuiz );
 
+  if(questionText === '') {
+    return alert('Warning: Question ' + i + ' is blank.');
+  }
+  if(answers == '') {
+    return alert('Warning: Do not leave any answers blank. If you have too many answers, please remove the empty one.');
+  }
 
   if(confirm ('Are you sure you want to submit your quiz?')) {
 
