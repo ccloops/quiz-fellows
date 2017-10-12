@@ -183,7 +183,7 @@ body {
   font-family: 'Montserrat';
 }
 
-header#header {
+header#header, footer {
   height: 75px;
   background-color: black;
   font-family: 'Montserrat';
@@ -198,7 +198,7 @@ nav#navbar {
   margin: 0 auto;
 }
 
-header img {
+header img, footer img {
   height: 50px;
   vertical-align: middle;
   display: inline-block;
@@ -245,13 +245,28 @@ button#logout:hover {
   cursor: pointer;
 }
 
-main {
+/*end header*/
+
+main { /*fix fixed header gap*/
   padding-top: 75px;
 }
 
-div#index div {
+div#index a div, div#index a+a+div {
   background-color: rgb(70, 70, 70);
   color: white;
+}
+
+div#index a div:hover {
+  background-color: rgb(107, 107, 107);
+}
+
+div#index a+a div {
+  background-color: white;
+  color: black;
+}
+
+div#index a+a div:hover {
+  background-color: rgb(200, 200, 200);
 }
 
 div#index article {
@@ -264,4 +279,56 @@ div#index article h1 {
   text-align: center;
   font-size: 72px;
   padding-top: 60px;;
+}
+
+div#index article h2 {
+  text-align: center;
+  font-size: 48px;
+  padding-top: 75px;;
+}
+
+/*end main button sections*/
+
+div#index a+a+div {
+  height: 800px;
+}
+
+div#index a+div article {
+  height: auto;
+}
+
+div#index article ul li {
+  display: inline-block;
+  width: 300px;
+  margin-right: 25px;
+  text-align: center;
+}
+
+div#index article ul li:last-child {
+  margin-right: 0px;
+}
+
+div#index article ul img {
+  margin-top: 75px;
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+
+h3 {
+  font-size: 24px;
+  margin-top: 12.5px;
+}
+
+footer {
+  position: inherit;
+  text-align: center;
+  color: white;
+  padding-bottom: 15px;
+  height: auto;
+  letter-spacing: .25em;
+  font-weight: normal;
+}
+
+footer img {
+  padding: 15px 0;
 }
