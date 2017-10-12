@@ -174,11 +174,19 @@ QuestionForm.submitQuiz = function() {
     var correctAnswer = quizData.questions[i].correctAnswer;
     answers[correctAnswer] = [answers[correctAnswer]];
     myQuiz.addQuestionAndAnswers(questionText, answers);
-
   }
-  console.log(myQuiz);
+  QuestionForm.saveQuiz( myQuiz );
 };
 
+QuestionForm.saveQuiz = function( newQuiz ) {
+  Quiz.getUser(); //Store logged in user as Quiz.currentUser
+  if( ! Quiz.currentUser.myQuizzes ) { //if no user quizzes yet
+    Quiz.currentUser.myQuizzes = [];
+  }
+  Quiz.currentUser.myQuizzes.push( newQuiz );
+  Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
+  localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
+};
 
 document.getElementById('newQuestion').addEventListener('click', QuestionForm.addNewQuestion);
 
