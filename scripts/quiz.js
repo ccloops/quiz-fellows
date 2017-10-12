@@ -267,15 +267,22 @@ Quiz.loadSplash = function() { //setup the splash page on page load
   } else {
     var liEl = document.createElement( 'li' );
     liEl.textContent = 'You have no quizzes. Go make one!';
+    liEl.id = 'go-make-quiz';
     document.getElementById( 'user-quizzes' ).appendChild( liEl );
   }
 };
 
 Quiz.buildQuizList = function ( ulId, quizList ) { //build the list of default and custom quizzes on the quiz splash page
   var quizListEl = document.getElementById( ulId );
-  quizList.forEach( function( quiz ) {
+  if( ulId === 'default-quizzes' ) {
+    var prefix = 'd';
+  } else {
+    prefix = 'u';
+  }
+  quizList.forEach( function( quiz, index ) {
     var liEl = document.createElement( 'li' );
     var aEl = document.createElement( 'a' );
+    aEl.id = prefix + index;
     aEl.textContent = quiz.title;
     liEl.appendChild( aEl );
     quizListEl.appendChild( liEl );
@@ -292,19 +299,41 @@ Quiz.instantiateQuestion = function( questionObject ) { //reinstantiates a quest
   return newQuestion;
 };
 
-Quiz.getQuiz = function( index ) {
-  var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
-  Quiz.currentQuiz = new Quiz( tempQuiz.title, tempQuiz.description );
-  for( var question in tempQuiz.questions ) { //reinstantiate each question and add it to the reinstantiated quiz
-    Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
+Quiz.getQuiz = function( source, index ) { //load the selected quiz into the Quiz.currentQuiz slot
+  if( source === 'u' ) {
+    var tempQuiz = Quiz.currentUser.myQuizzes[ index ]; //grab the quiz at index (referenced from click on first quiz page)
+    Quiz.currentQuiz = new Quiz( tempQuiz.title, tempQuiz.description );
+    for( var question in tempQuiz.questions ) { //reinstantiate each question and add it to the reinstantiated quiz
+      Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
+    }
+  } else {
+    Quiz.currentQuiz = default201Quizzes[ index ];
   }
 };
 
-Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which should happen on pageLoad
-  Quiz.getQuiz( index );
+Quiz.getQuizAndRender = function( source, index ) {
+  Quiz.getQuiz( source, index );
   Quiz.currentQuiz.renderQuiz();
 };
 
+Quiz.handleListClick = function( e ) {
+  if( e.target.id ) {
+    var firstLetter = String( e.target.id[ 0 ] );
+    var quizNum = Number( e.target.id.slice( 1 ) );
+    if( firstLetter !== 'g' ) { //if a quiz is clicked on
+      Quiz.getQuizAndRender( firstLetter, Number( quizNum ) );
+    } else {
+      window.location.href = 'template.html';
+    }
+  }
+};
+
+Quiz.setupQuizPage = function() {
+  Quiz.getUser();
+  Quiz.loadSplash();
+  document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+  document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+};
 
 ////////////////////
 //Built in quizzes//
@@ -375,13 +404,18 @@ quiz1.addQuestionAndAnswers( 'Question 2', [
 //PageLoad Setup//
 //////////////////
 
-var default201Quizzes = [
-  quiz0,
-  quiz1
-];
+if( document.getElementById( 'quiz' ) ) {
+  var default201Quizzes = [
+    quiz0,
+    quiz1
+  ];
 
-Quiz.getUser();
-Quiz.loadSplash();
+  Quiz.getUser();
+  Quiz.loadSplash();
+  document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+  document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+}
+
 
 
 ///////
