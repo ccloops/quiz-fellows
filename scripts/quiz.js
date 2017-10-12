@@ -108,6 +108,9 @@ Quiz.prototype.addQuestionAndAnswers = function( questionText, answers ) { //ans
 };
 
 Quiz.prototype.renderNext = function() { //change to the next question
+  if( this.currentQuestion === this.questions.length - 1 ) {
+    return Quiz.currentQuiz.renderResults();
+  }
   if( this.currentQuestion < this.questions.length - 1 ) {
     this.currentQuestion++;
     this.questions[ this.currentQuestion ].renderQuestion();
@@ -240,15 +243,3 @@ Quiz.getQuizAndRender = function( index ) { //needs Quiz.getUser() first, which 
 };
 
 Quiz.getUser();
-
-//Testing other functioinality
-
-// function testAddQuizToUser( quiz ) {
-//   Quiz.getUser(); //fetch user
-//   if( ! Quiz.currentUser.myQuizzes ) {
-//     Quiz.currentUser.myQuizzes = []; //blank array of user quizzes, will be part of Cat's thing down the road
-//   }
-//   Quiz.currentUser.myQuizzes.push( quiz ); //adding the quiz0 just to test
-//   Quiz.allUsers[ Quiz.currentUserIndex ] = Quiz.currentUser; //add updated user back to the list of local users
-//   localStorage.users = JSON.stringify( Quiz.allUsers ); //add the updated array of users back to localStorage
-// }
