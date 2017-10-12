@@ -130,3 +130,53 @@ button {
 #logout {
   float: right;
 }
+
+#loginbutt{
+  margin-left: 45%;
+  margin-right: 45%;
+}
+#password {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  margin-left: 20%;
+  margin-right: 20%;
+  display: block;
+  background-color: pink;
+}
+
+#username {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  margin-left: 20%;
+  margin-right: 20%;
+  display: block;
+  background-color: pink;
+  align-self: center;
+}
+
+#userlabel {
+  margin-left: 20%;
+}
+
+#passlabel {
+  margin-left: 20%;
+}
+
+#navbar {
+  border: 2px solid blue;
+  padding: 40px;
+  margin:auto;
+  background-color: black;
+}
+
+#navitem , #navitem a{
+  color: white;
+  text-decoration: none;
+  float: right;
+  margin-left: 4%;
+  width: 80px;
+}
