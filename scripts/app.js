@@ -142,15 +142,16 @@ User.handleUserLogin = function( event ) {
   var passWord = User.passWordInput.value.toLowerCase().replace(/ /g, '');
 
   if (userName == '' || passWord == '') {
-    alert('Input fields cannot be blank');
+    alert('Input fields cannot be blank.');
   } else if (passWord.length < 7 || passWord.length > 20) {
-    alert('password must be btween 8-20 characters');
+    alert('Password must be between 8-20 characters.');
   }else {
 
     if (app.users.length === 0) {// if no users are stored then creates a new user.
 
       confirm('Created New User \n\nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
       new User(userName, passWord);
+      alert('Welcome!');
       localStorage.users = JSON.stringify(app.users);
       localStorage.currentUser = 0;
       User.userNameInput.value = '';
@@ -163,7 +164,7 @@ User.handleUserLogin = function( event ) {
       for (var i = 0; i < app.users.length; i++) {
         if (userName === app.users[i].userName) { // check to see if user exsists
           if (passWord === app.users[i].passWord) {// compare the password to the username
-            alert('welcome back!');
+            alert('Welcome back!');
             app.currentUser = i;
             localStorage.currentUser = i;
             User.userNameInput.value = '';
@@ -174,7 +175,7 @@ User.handleUserLogin = function( event ) {
 
             break;
           } else {//inncorrect password verify
-            alert('Password does not match');
+            alert('Password does not match.');
             User.passWordInput.value = '';
           }
 
@@ -201,7 +202,7 @@ User.handleUserLogin = function( event ) {
           // User.logoutButtRender();
           // User.splashPageRender();
         } else {
-          alert('sending back to login');
+          alert('Sending back to login.');
         }
       }
     }
