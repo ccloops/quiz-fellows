@@ -350,21 +350,57 @@ Quiz.setupQuizPage = function() {
 ////////////////////
 
 
-
-/*Objects Quiz*/
-
 Quiz.default201Quizzes = [
-  new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' ),
+  new Quiz( 'Code 201: Basic HTML', 'Test your knowledge of basic HTML concepts.' ),
+
+  new Quiz( 'Code 201: Object Literals', 'Practice your skills with JavaScript object literals.' ),
 ];
 
-Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'What does HTML stand for?', [
+  [ 'Hypertext Markup Language' ],
+  'Hyperterminal Markup Language',
+  'Hypertext Markdown Language',
+  'Hyperterminal Markdown Language'
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Where in the HTML file should the link to a CSS stylesheet be placed?', [
+  'The <body>',
+  'The <header>',
+  [ 'The <head>' ],
+  'The <Footer>'
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'How should you begin every HTML file?', [
+  '<html>',
+  [ '<!DOCTYPE html>' ],
+  '<title>',
+  '<DOCTYPE! html>'
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Which of the following is not a block element?', [
+  '<p>',
+  '<h1>',
+  [ '<span>' ],
+  '<article>',
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>HTML files cannot contain CSS.', [
+  'True',
+  [ 'False' ]
+] );
+
+
+
+
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
   'object oriented variable',
   [ 'property' ],
   'literal',
   'method'
 ] );
 
-Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
   [ 'method' ],
   'action',
   'reaction',
@@ -372,14 +408,14 @@ Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an 
   'object.do()'
 ] );
 
-Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
   'dog.object.bark();',
   'bark();',
   [ 'dog.bark();' ],
   'dog.bark;'
 ] );
 
-Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
   'dog.breed;',
   'dog[ \'breed\' ]',
   'dog[ breed ]',
@@ -387,12 +423,12 @@ Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Which of the following is a 
   'A, B, and C are all valid'
 ] );
 
-Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
   [ 'True' ],
   'False'
 ] );
 
-Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
   [ 'True' ],
   'False'
 ] );
