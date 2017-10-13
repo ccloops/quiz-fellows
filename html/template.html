@@ -4,25 +4,31 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
     <title>Make Your Own Quiz</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   </head>
   <body>
     <header id="header">
       <nav id="navbar">
+        <a href="#">
+          <img src="../stockimgs/code-fellows-logo.png" /><h1>Quiz Fellows</h1>
+        </a>
         <ul id="navul">
+          <li class="navitem"><a href="#">Home </a></li>
           <li class="navitem"><a href="quiz.html">Take Quiz </a></li>
           <li class="navitem"><a href="template.html">Make Quiz </a></li>
-          <li class="navitem"><a href="about.html">About Us </a></li>
-          <li class="navitem"><a href="../index.html">Home </a></li>
+          <li class="navitem"><a href="#about-us">About Us </a></li>
+          <li class="navitem" id="logoutbutt"><button id="logout">Logout</button></li>
         </ul>
       </nav>
     </header>
     <main>
-      <h1>Make Your Own Quiz</h1>
+      <div id="template-header">
+        <h1>Make Your Own Quiz</h1>
+      </div>
 
       <form id="new-quiz">
         <fieldset>
           <section id="entireQuizForm">
-            <legend>New Quiz Input:</legend>
             <article id="quizHeader">
 
               <label for="quizTitle">Quiz Title:</label>
@@ -32,6 +38,7 @@
               <input id="quizDescription" name="quizDescription" type="text" />
 
             </article>
+            <hr />
           </section>
 
           <button id="newQuestion" type="click">Add New Question</button>
@@ -40,8 +47,13 @@
         </fieldset>
       </form>
     </main>
+    <footer>
+      <a href="#">
+        <img src="../stockimgs/code-fellows-logo.png" alt="code fellows" />
+      </a>
+      <p>&copy;2017 Quiz Fellows, LLC</p>
+    </footer>
     <script src="../scripts/quiz.js"></script>
     <script src="../scripts/template.js"></script>
-
   </body>
 </html>

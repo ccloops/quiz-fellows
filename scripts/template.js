@@ -101,6 +101,9 @@ QuestionForm.prototype.addQuestionForm = function() {
   removeQuestionButton.addEventListener('click', this.removeQuestion.bind(this));
   this.newQuestionArticle.appendChild(removeQuestionButton);
 
+  var hrEl = document.createElement( 'hr' );
+  this.newQuestionArticle.appendChild( hrEl );
+
   entireQuizForm.appendChild(this.newQuestionArticle);
 
 };

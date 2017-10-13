@@ -190,7 +190,7 @@ a.anchor {
   visibility: hidden;
 }
 
-body {
+body, form {
   font-family: 'Montserrat';
 }
 
@@ -210,7 +210,7 @@ nav#navbar {
 }
 
 header img, footer img {
-  height: 50px;
+  width: 35px;
   vertical-align: middle;
   display: inline-block;
 }
@@ -363,6 +363,8 @@ footer img {
 #main {
   background-color: white;
 }
+
+
 /*login page*/
 #login-main {
   background-color: rgb(70, 70, 70);
@@ -370,7 +372,7 @@ footer img {
 }
 
 #header-login img {
-  padding-top: 11px;
+  padding-top: 18px;
 }
 
 #header-login h1 {
@@ -412,12 +414,100 @@ footer img {
   margin: 0 auto;
 }
 
-#username, #password {
-  width: 187px;
+input[type=text], #password {
+  width: 185px;
   height: 30px;
   font-size: 112.5%;
+  padding-left: 2px;
 }
 
 #password {
   margin-left: 6px;
+}
+
+/*Make*/
+#template-header {
+  color: black;
+  background-color: white;
+  font-size: 72px;
+  text-align: center;
+  padding: 60px 0;
+}
+
+form#new-quiz {
+  color: white;
+  padding-top: 32px;
+  background-color: rgb(70, 70, 70);
+}
+
+#new-quiz fieldset {
+  width: 960px;
+  margin: 0 auto;
+}
+
+#quizTitle {
+  width: 250px;
+  margin-right: 25px;
+}
+
+#quizDescription {
+  width: 445px;
+}
+
+#new-quiz input {
+  margin-bottom: 25px;
+}
+
+#entireQuizForm form label {
+  margin-right: 5px;
+}
+
+hr+form {
+  margin-top: 25px;
+}
+
+#entireQuizForm form input[type=text] {
+  width: 450px;
+}
+
+#entireQuizForm form input[type=radio] {
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+#entireQuizForm form label+button {
+  margin-left: 10px;
+}
+
+button[id*=a] {
+  background-color: white;
+  color: red;
+  border: 2px solid red;
+  font-size: 90%;
+  padding: 5px 10px;
+  border-radius: 0px;
+}
+
+button[id*=a]:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+button+hr {
+  margin: 25px 0;
+}
+
+.form-button+.form-button {
+  float: right;
+  border-radius: 0px;
+  border: 2px solid white;
+}
+
+#submit {
+  float: right;
+  color: red;
+  background-color: white;
+}
+
+#newAnswer, #submit {
+  margin-bottom: 25px;
 }
