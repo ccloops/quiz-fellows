@@ -2,6 +2,10 @@
 
 /*Global*/
 
+* {
+  user-select: none;
+}
+
 body {
   background-color: black;
 }
