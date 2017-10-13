@@ -271,7 +271,7 @@ Quiz.loadSplash = function() { //setup the splash page on page load
   var user = Quiz.currentUser.userName;
   user = user[ 0 ].toUpperCase() + user.slice( 1 );
   document.getElementById( 'user-name' ).textContent = user + '\'s Quizzes';
-  Quiz.buildQuizList( 'default-quizzes', default201Quizzes );
+  Quiz.buildQuizList( 'default-quizzes', Quiz.default201Quizzes );
   if( Quiz.currentUser.myQuizzes ) {
     Quiz.buildQuizList( 'user-quizzes', Quiz.currentUser.myQuizzes );
   } else {
@@ -317,7 +317,7 @@ Quiz.getQuiz = function( source, index ) { //load the selected quiz into the Qui
       Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
     }
   } else {
-    Quiz.currentQuiz = default201Quizzes[ index ];
+    Quiz.currentQuiz = Quiz.default201Quizzes[ index ];
   }
 };
 
@@ -352,16 +352,19 @@ Quiz.setupQuizPage = function() {
 
 
 /*Objects Quiz*/
-var quiz0 = new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' );
 
-quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
+Quiz.default201Quizzes = [
+  new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' ),
+];
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
   'object oriented variable',
   [ 'property' ],
   'literal',
   'method'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
   [ 'method' ],
   'action',
   'reaction',
@@ -369,14 +372,14 @@ quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is 
   'object.do()'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
   'dog.object.bark();',
   'bark();',
   [ 'dog.bark();' ],
   'dog.bark;'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
   'dog.breed;',
   'dog[ \'breed\' ]',
   'dog[ breed ]',
@@ -384,33 +387,15 @@ quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access th
   'A, B, and C are all valid'
 ] );
 
-quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
   [ 'True' ],
   'False'
 ] );
 
-quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
   [ 'True' ],
   'False'
 ] );
-
-/*Test Quiz*/
-var quiz1 = new Quiz( 'Code 201: Quiz 2 test', 'Practice your skills with JavaScript objects.' );
-
-quiz1.addQuestionAndAnswers( 'Hi Joel', [
-  'wrong',
-  [ 'correct' ],
-  'asdsad',
-  'asdasd'
-] );
-
-quiz1.addQuestionAndAnswers( 'Question 2', [
-  [ 'correct' ],
-  'nope',
-  'floop',
-  'smosdfohj'
-] );
-
 
 //////////////////
 //PageLoad Setup//
@@ -435,11 +420,6 @@ Quiz.notLoggedIn = ! localStorage.users || ! localStorage.currentUser || localSt
 
 //Quiz page only
 if( document.getElementById( 'quiz' ) && ! Quiz.notLoggedIn ) {
-  var default201Quizzes = [
-    quiz0,
-    quiz1
-  ];
-
   Quiz.getUser();
   Quiz.loadSplash();
   document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
