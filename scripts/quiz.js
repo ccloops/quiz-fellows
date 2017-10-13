@@ -230,7 +230,8 @@ Quiz.prototype.checkAnswers = function () { //determine if there are any unanswe
 
 Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
   var sectionEl = document.getElementById( 'rendered-quiz' );
-  var results = '<h2>User\'s Results</h2>'; // TODO: ADD USER NAME
+  sectionEl.setAttribute( 'id', 'quiz-results' );
+  var results = '<h2>Results</h2>'; // TODO: ADD USER NAME
   results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
   for( var i in this.questions ) {
     results += '<li class="';

@@ -370,11 +370,11 @@ button+hr {
 }
 
 .correct { /*QUIZ: shades correct answer row on results page*/
-  background-color: green;
+  color: black;
 }
 
 .incorrect { /*QUIZ: shades incorrect answer row on results page*/
-  background-color: red;
+  color: red;
 }
 
 p#question-text div+div { /*QUIZ: Adds some spacing to questions with multi-line answers*/
@@ -441,7 +441,7 @@ section#quiz {
   text-align: center;
 }
 
-#rendered-quiz {
+#rendered-quiz, #quiz-results {
   width: 960px;
   margin: 25px auto 0;
   padding-bottom: 25px;
@@ -473,4 +473,28 @@ h3 {
   margin-bottom: 0;
   padding-bottom: 25px;
   display: inline-block;
+}
+
+#quiz-results li h3+p, #quiz-results li h3 {
+  display: block;
+  border: none;
+}
+
+#quiz-results li {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid black;
+}
+
+#quiz-results li:last-of-type {
+  border-bottom: none;
+}
+
+#quiz-results h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+#quiz-results h3:first-of-type {
+  margin-bottom: none;
 }
