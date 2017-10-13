@@ -75,7 +75,7 @@ a {
   color: inherit;
 }
 
-button {
+button, div#index input {
   font-family: 'Montserrat';
   background:none;
   border:none;
@@ -87,7 +87,7 @@ button {
   outline: none;
 }
 
-button:hover {
+button:hover, div#index input:hover {
   background-color: #b0261a;
   cursor: pointer;
 }
@@ -159,6 +159,14 @@ div#index article ul li {
 
 div#index article ul li p {
   padding-bottom: 25px;
+}
+
+div#index article ul li a {
+  color: black;
+}
+
+div#index article ul li a:hover {
+  color: white;
 }
 
 div#index article ul li p:first-child {
