@@ -236,7 +236,7 @@ a {
   color: inherit;
 }
 
-button#logout {
+button {
   font-family: 'Montserrat';
   background:none;
   border:none;
@@ -248,7 +248,7 @@ button#logout {
   outline: none;
 }
 
-button#logout:hover {
+button:hover {
   background-color: #b0261a;
   cursor: pointer;
 }
@@ -354,4 +354,9 @@ footer {
 
 footer img {
   padding: 15px 0;
+}
+
+/*login page*/
+#main {
+  background-color: rgb(70, 70, 70);
 }
