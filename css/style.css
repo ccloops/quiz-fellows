@@ -179,6 +179,10 @@ article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
   color: white;
 }*/
 
+body {
+  background-color: black;
+}
+
 a.anchor {
   display: block;
   position: relative;
@@ -190,7 +194,7 @@ body {
   font-family: 'Montserrat';
 }
 
-header#header, footer {
+header, footer {
   height: 75px;
   background-color: black;
   font-family: 'Montserrat';
@@ -356,7 +360,64 @@ footer img {
   padding: 15px 0;
 }
 
-/*login page*/
 #main {
+  background-color: white;
+}
+/*login page*/
+#login-main {
   background-color: rgb(70, 70, 70);
+  height: 300px;
+}
+
+#header-login img {
+  padding-top: 11px;
+}
+
+#header-login h1 {
+  position: absolute;
+  top: 23px;
+}
+
+#login-main form {
+  width: 960px;
+  margin: 0 auto;
+  /*text-align: center;*/
+}
+
+#login-main label {
+  color: white;
+  letter-spacing: .125em;
+  font-weight: normal;
+}
+
+#username-row {
+  margin-top: 45px;
+}
+
+#pw-row {
+  margin-top: 45px;
+}
+
+#pw-row {
+  margin-bottom: 45px;
+}
+
+#loginbutt {
+  padding: 10px 123px;
+  letter-spacing: .125em;
+}
+
+#login-main fieldset {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#username, #password {
+  width: 187px;
+  height: 30px;
+  font-size: 112.5%;
+}
+
+#password {
+  margin-left: 6px;
 }

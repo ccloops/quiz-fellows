@@ -4,19 +4,35 @@
     <meta charset="utf-8">
     <title>Quiz Fellows - Login</title>
     <link rel="stylesheet" href="css\style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   </head>
   <body>
-    <main id="main">
+    <header id="header-login">
+      <nav id="navbar">
+          <img src="stockimgs/code-fellows-logo.png" /><h1>Quiz Fellows</h1>
+      </nav>
+    </header>
+    <main id="login-main">
       <form id="form">
         <fieldset>
-          <label id="userlabel" for="username">Username:</label>
-          <input id="username" type="text" name="username"/>
-          <label id="passlabel" for="password">Password:</label>
-          <input id="password" type="password" name="password"/>
-          <button id="loginbutt" type="submit" name="login">Login</button>
+          <div id="username-row">
+            <label id="userlabel" for="username">Username:</label>
+            <input id="username" type="text" name="username"/>
+          </div>
+          <div id="pw-row">
+            <label id="passlabel" for="password">Password:</label>
+            <input id="password" type="password" name="password"/>
+          </div>
+          <button id="loginbutt" type="submit" name="login"> Login</button>
         </fieldset>
       </form>
     </main>
-    <script type="text/javascript" src="scripts\app.js"></script>
+    <footer>
+      <a href="#">
+        <img src="stockimgs/code-fellows-logo.png" alt="quiz fellows" />
+      </a>
+      <p>&copy;2017 Quiz Fellows, LLC</p>
+    </footer>
+    <!-- <script type="text/javascript" src="scripts\app.js"></script> -->
   </body>
 </html>
