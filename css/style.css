@@ -437,7 +437,7 @@ input[type=text], #password {
 form#new-quiz {
   color: white;
   padding-top: 32px;
-
+  background-color: rgb(70, 70, 70);
 }
 
 #new-quiz fieldset {
@@ -456,10 +456,6 @@ form#new-quiz {
 
 #new-quiz input {
   margin-bottom: 25px;
-}
-
-#newQuestion, #submit {
-  margin: 15px auto;
 }
 
 #entireQuizForm form label {
@@ -481,4 +477,37 @@ hr+form {
 
 #entireQuizForm form label+button {
   margin-left: 10px;
+}
+
+button[id*=a] {
+  background-color: white;
+  color: red;
+  border: 2px solid red;
+  font-size: 90%;
+  padding: 5px 10px;
+  border-radius: 0px;
+}
+
+button[id*=a]:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+button+hr {
+  margin: 25px 0;
+}
+
+.form-button+.form-button {
+  float: right;
+  border-radius: 0px;
+  border: 2px solid white;
+}
+
+#submit {
+  float: right;
+  color: red;
+  background-color: white;
+}
+
+#newAnswer, #submit {
+  margin-bottom: 25px;
 }
