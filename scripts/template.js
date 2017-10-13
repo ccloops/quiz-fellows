@@ -89,7 +89,7 @@ QuestionForm.prototype.addQuestionForm = function() {
 
   var newAnswerButton = document.createElement('button');
   newAnswerButton.type = 'click';
-  newAnswerButton.textContent = 'New Answer';
+  newAnswerButton.textContent = 'Add New Answer';
   newAnswerButton.setAttribute('class', 'form-button');
   this.newQuestionArticle.appendChild(newAnswerButton);
   newAnswerButton.addEventListener('click', this.addNewAnswer.bind(this));
@@ -118,10 +118,12 @@ QuestionForm.updateQuestionAndAnswers = function() {
 
 QuestionForm.prototype.removeQuestion = function() {
   event.preventDefault();
-  this.newQuestionArticle.remove();
-  var tempQuestions = QuestionForm.all.slice(0, this.questionIndex);
-  QuestionForm.all = tempQuestions.concat(QuestionForm.all.slice(this.questionIndex + 1));
-  QuestionForm.updateQuestionAndAnswers();
+  if( confirm( 'Are you sure you want to remove this question?' ) ) {
+    this.newQuestionArticle.remove();
+    var tempQuestions = QuestionForm.all.slice(0, this.questionIndex);
+    QuestionForm.all = tempQuestions.concat(QuestionForm.all.slice(this.questionIndex + 1));
+    QuestionForm.updateQuestionAndAnswers();
+  }
 };
 
 
@@ -159,8 +161,18 @@ QuestionForm.getAllData = function() {
       return alert('Please select a correct answer for Question ' + (i + 1));
     }
     questionsAndAnswers.push({questionText: currentQuestion.questionText, answers: currentQuestion.answersText, correctAnswer: currentQuestion.correctAnswer});
-
   }
+  if( questionsAndAnswers.length < 1 ) {
+    return alert( 'You must enter at least one question.' );
+  }
+
+  for( var k = 0; k < questionsAndAnswers.length; k++ ) {
+    var tempAnswers = questionsAndAnswers[ k ].answers;
+    if( tempAnswers.length < 2 ) {
+      return alert( 'You must enter at least two answers per question.' );
+    }
+  }
+
   return {title: quizTitle, description: quizDescription, questions: questionsAndAnswers};
 };
 
@@ -176,9 +188,8 @@ QuestionForm.submitQuiz = function() {
       answers[correctAnswer] = [answers[correctAnswer]];
       myQuiz.addQuestionAndAnswers(questionText, answers);
     }
-    QuestionForm.saveQuiz( myQuiz );
     if(confirm ('Are you sure you want to submit your quiz?')) {
-
+      QuestionForm.saveQuiz( myQuiz );
       if(confirm ('Would you like to go to your quizzes?')) {
         document.getElementById('quizTitle').value = null;
         document.getElementById('quizDescription').value = null;
