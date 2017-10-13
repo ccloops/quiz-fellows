@@ -414,8 +414,25 @@ quiz1.addQuestionAndAnswers( 'Question 2', [
 //PageLoad Setup//
 //////////////////
 
+//Quiz page and template page//
+Quiz.notLoggedIn = ! localStorage.users || ! localStorage.currentUser || localStorage.currentUser === '-1';
+
+(function() {
+  if( Quiz.notLoggedIn ) {
+    alert( 'You must first sign in to access this page.' );
+    return window.location.href = '../index.html';
+  }
+  var buttEl = document.getElementById('logout');
+  function handleUserLogout() {
+    localStorage.currentUser = -1;
+    window.location.href = '../index.html';
+  }
+  buttEl.addEventListener('click', handleUserLogout);
+})();
+
+
 //Quiz page only
-if( document.getElementById( 'quiz' ) ) {
+if( document.getElementById( 'quiz' ) && ! Quiz.notLoggedIn ) {
   var default201Quizzes = [
     quiz0,
     quiz1
@@ -427,15 +444,7 @@ if( document.getElementById( 'quiz' ) ) {
   document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
 }
 
-//Quiz page and template page
-(function() {
-  var buttEl = document.getElementById('logout');
-  function handleUserLogout() {
-    localStorage.currentUser = -1;
-    window.location.href = '../index.html';
-  }
-  buttEl.addEventListener('click', handleUserLogout);
-})();
+
 
 
 ///////
