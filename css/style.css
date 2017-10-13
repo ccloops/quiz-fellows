@@ -1,183 +1,6 @@
 @import "reset.css";
 
-.hidden { /*QUIZ: Used to hide the previous button on first go*/
-  display: none;
-}
-
-.selected { /*QUIZ: changes background color of selected answer*/
-  background-color: pink;
-}
-
-.correct { /*QUIZ: shades correct answer row on results page*/
-  background-color: green;
-}
-
-.incorrect { /*QUIZ: shades incorrect answer row on results page*/
-  background-color: red;
-}
-
-p#question-text div+div { /*QUIZ: Adds some spacing to questions with multi-line answers*/
-  margin-top: 15px;
-}
-
-p#question-text { /*QUIZ: spacing between p lines?*/
-  margin-bottom: 15px;
-}
-
-article#quiz-content ol { /*QUIZ: Sets A, B, C for answers*/
-  list-style: upper-alpha;
-  list-style-position: inside;
-}
-
-article#quiz-content ol li+li { /*QUIZ: spaces answers a bit*/
-  margin-top: 7.5px;
-}
-
-article#quiz-content ol li:hover { /*QUIZ: Set color on answer hover*/
-  background-color: pink;
-}
-
-article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
-  background-color: red;
-}
-
-/*body {
-  margin: 0 auto;
-  font-family: helvetica;
-}*/
-
-/*h1 {
-  font-size: 50px;
-}*/
-
-/*form {
-  background-color: white;
-  margin: 0 auto;
-  border: 5px solid black;
-  margin: 20px 10px;
-  padding: 10px;
-}*/
-
-/*article {
-  border: 5px solid black;
-  margin: 20px 10px;
-  padding: 10px;
-  width: 70%
-}*/
-
-
-/*legend {
-  font-size: 30px;
-  margin: 20px 5px;
-  padding: 5px;
-  background-color: red;
-  color: white;
-  width: 15%;
-}*/
-
-/*input[type=text] {
-    width: 60%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    margin-left: 0px;
-    display: block;
-    background-color: pink;
-}*/
-
-/*button {
-   background-color: white;
-   color: red;
-   padding: 15px 32px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-}*/
-
-/*.form-button {
-  background-color: white;
-  color: red;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}*/
-
-/*#jli {
-  display: inline;
-}*/
-
-/*#jh2 {
-  float: left;
-  display: inline;
-  width: 10%;
-  margin: 0;
-  padding: 0;
-  margin-top: 30px;
-  margin-left: 20.125%;
-  margin-bottom: 30px;
-}*/
-
-/*#logout {
-  float: right;
-}*/
-
-/*#loginbutt{
-  margin-left: 45%;
-  margin-right: 45%;
-}*/
-
-/*#password {
-  width: 60%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  margin-left: 20%;
-  margin-right: 20%;
-  display: block;
-  background-color: pink;
-}*/
-
-/*#username {
-  width: 60%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  margin-left: 20%;
-  margin-right: 20%;
-  display: block;
-  background-color: pink;
-  align-self: center;
-}*/
-
-/*#userlabel {
-  margin-left: 20%;
-}*/
-
-/*#passlabel {
-  margin-left: 20%;
-}*/
-
-/*#navbar {
-  border: 2px solid blue;
-  padding: 40px;
-  margin:auto;
-  background-color: black;
-}*/
-
-/*.navitem , .navitem a, #logoutbutt{
-  color: white;
-  text-decoration: none;
-  float: right;
-  margin-left: 4%;
-  width: 80px;
-}*/
-
-/*#userdisplay {
-  color: white;
-}*/
+/*Global*/
 
 body {
   background-color: black;
@@ -366,6 +189,7 @@ footer img {
 
 
 /*login page*/
+
 #login-main {
   background-color: rgb(70, 70, 70);
   height: 300px;
@@ -425,7 +249,9 @@ input[type=text], #password {
   margin-left: 6px;
 }
 
-/*Make*/
+
+/*Template*/
+
 #template-header {
   color: black;
   background-color: white;
@@ -510,4 +336,51 @@ button+hr {
 
 #newAnswer, #submit {
   margin-bottom: 25px;
+}
+
+/*Quiz*/
+
+.quiz-main {
+  color: white;
+}
+
+.hidden { /*QUIZ: Used to hide the previous button on first go*/
+  display: none;
+}
+
+.selected { /*QUIZ: changes background color of selected answer*/
+  background-color: pink;
+}
+
+.correct { /*QUIZ: shades correct answer row on results page*/
+  background-color: green;
+}
+
+.incorrect { /*QUIZ: shades incorrect answer row on results page*/
+  background-color: red;
+}
+
+p#question-text div+div { /*QUIZ: Adds some spacing to questions with multi-line answers*/
+  margin-top: 15px;
+}
+
+p#question-text { /*QUIZ: spacing between p lines?*/
+  margin-bottom: 15px;
+}
+
+article#quiz-content ol { /*QUIZ: Sets A, B, C for answers*/
+  list-style: upper-alpha;
+  list-style-position: inside;
+}
+
+article#quiz-content ol li+li { /*QUIZ: spaces answers a bit*/
+  margin-top: 7.5px;
+}
+
+article#quiz-content ol li:hover { /*QUIZ: Set color on answer hover*/
+  background-color: pink;
+}
+
+article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
+  background-color: red;
 }

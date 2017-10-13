@@ -404,6 +404,7 @@ quiz1.addQuestionAndAnswers( 'Question 2', [
 //PageLoad Setup//
 //////////////////
 
+//Quiz page only
 if( document.getElementById( 'quiz' ) ) {
   var default201Quizzes = [
     quiz0,
@@ -415,6 +416,16 @@ if( document.getElementById( 'quiz' ) ) {
   document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
   document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
 }
+
+//Quiz page and template page
+(function() {
+  var buttEl = document.getElementById('logout');
+  function handleUserLogout() {
+    localStorage.currentUser = -1;
+    window.location.href = '../index.html';
+  }
+  buttEl.addEventListener('click', handleUserLogout);
+})();
 
 
 ///////
