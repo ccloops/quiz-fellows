@@ -154,6 +154,7 @@ Quiz.prototype.renderPrevious = function() { //change to the last question
 
 Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the first time to create the back and next buttons
   var sectionEl = document.getElementById( 'quiz' );
+  sectionEl.setAttribute( 'id', 'rendered-quiz' );
   sectionEl.innerHTML = null; //clears out main page
 
   [ 'Previous', 'Next' ].forEach( function ( label, index ) {
@@ -228,15 +229,24 @@ Quiz.prototype.checkAnswers = function () { //determine if there are any unanswe
 };
 
 Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
-  var sectionEl = document.getElementById( 'quiz' );
-  var results = '<h2>User\'s Results</h2>'; // TODO: ADD USER NAME
+  var sectionEl = document.getElementById( 'rendered-quiz' );
+  sectionEl.setAttribute( 'id', 'quiz-results' );
+  var results = '<h2>Results</h2>'; // TODO: ADD USER NAME
   results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
   for( var i in this.questions ) {
     results += '<li class="';
     if( ! this.userAnswers[ i ] ) {
       results += 'in';
     }
-    results += 'correct" id="question' + i + '"><h3>Question ' + ( Number( i ) + 1 ) + '</h3></li>';
+    results += 'correct" id="question' + i + '"><h3>Question ' + ( Number( i ) + 1 ) + ': ';
+
+    if( ! this.userAnswers[ i ] ) {
+      results += '<span class="wrong">Incorrect</span>';
+    } else {
+      results += '<span class="right">Correct</span>';
+    }
+
+    results += '</h3></li>';
   }
   sectionEl.innerHTML = results;
   for( var j in this.questions ) {
@@ -404,6 +414,7 @@ quiz1.addQuestionAndAnswers( 'Question 2', [
 //PageLoad Setup//
 //////////////////
 
+//Quiz page only
 if( document.getElementById( 'quiz' ) ) {
   var default201Quizzes = [
     quiz0,
@@ -415,6 +426,16 @@ if( document.getElementById( 'quiz' ) ) {
   document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
   document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
 }
+
+//Quiz page and template page
+(function() {
+  var buttEl = document.getElementById('logout');
+  function handleUserLogout() {
+    localStorage.currentUser = -1;
+    window.location.href = '../index.html';
+  }
+  buttEl.addEventListener('click', handleUserLogout);
+})();
 
 
 ///////
