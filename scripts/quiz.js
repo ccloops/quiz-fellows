@@ -402,7 +402,7 @@ Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'What does the \'a\' in RGBa 
   'The aura',
   [ 'The opacity' ],
   'The attribute',
-  'It Doesn’t style anything, it is a just a part of the naming convention'
+  'It doesn’t style anything, it is just a part of the naming convention'
 ] );
 
 Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'How would you select an element with an id value of \'home\'?', [
@@ -562,8 +562,6 @@ if( document.getElementById( 'quiz' ) && ! Quiz.notLoggedIn ) {
   document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
   document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
 }
-
-
 
 
 ///////
