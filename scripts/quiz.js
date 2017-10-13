@@ -351,11 +351,18 @@ Quiz.setupQuizPage = function() {
 
 
 Quiz.default201Quizzes = [
-  new Quiz( 'Code 201: Basic HTML', 'Test your knowledge of basic HTML concepts.' ),
+  new Quiz( 'Basic HTML', 'Test your knowledge of basic HTML concepts.' ),
 
-  new Quiz( 'Code 201: Object Literals', 'Practice your skills with JavaScript object literals.' ),
+  new Quiz( 'Basic CSS', 'Test your knowledge of basic CSS concepts.' ),
+
+  new Quiz( 'JavaScript Loops', 'Try your skills on some elementary JS Loops.' ),
+
+  new Quiz( 'DOM Manipulation', 'See how much you know about all things DOM.' ),
+
+  new Quiz( 'Object Literals', 'Practice your skills with JavaScript object literals.' ),
 ];
 
+//HTML Quiz
 Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'What does HTML stand for?', [
   [ 'Hypertext Markup Language' ],
   'Hyperterminal Markup Language',
@@ -390,17 +397,111 @@ Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>HTML files
 ] );
 
 
+//CSS Quiz
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'What does the \'a\' in RGBa control?', [
+  'The aura',
+  [ 'The opacity' ],
+  'The attribute',
+  'It Doesn’t style anything, it is a just a part of the naming convention'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'How would you select an element with an id value of \'home\'?', [
+  'home { /*styles*/ }',
+  '.home { /*styles*/ }',
+  [ '#home { /*styles*/ }' ],
+  'home.id { /*styles*/ }'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'What does CSS stand for?', [
+  [ 'Cascading Style Sheet' ],
+  'Color Style Sheet',
+  'Creative Style Sheet',
+  'Code Style Sheet',
+  'Croutons, Salads, and Sides'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which of the following is not a block element?', [
+  '<p>',
+  '<h1>',
+  [ '<span>' ],
+  '<article>'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which symbol can be used to select all elements on the page for styling?', [
+  '#',
+  '+',
+  '^',
+  [ '*' ]
+] );
 
 
+//For Loops Quiz
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'What are the two main types of loops?', [
+  'If & Else',
+  [ 'For & While' ],
+  'Return & Break',
+  'Try & Catch'
+] );
 
-Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'Which of the following is the correct structure of a for loop?', [
+  'for ( i < array.length; i = 0; i++ ) { doStuff(); }',
+  'for ( i++; i < array.length; var i = i ) { doStuff(); }',
+  [ 'for ( var i = 0; i < array.length; i++ ) { doStuff(); }' ]
+] );
+
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'True or False?<br>You can have a for loop inside of a for loop.', [
+  [ 'True' ],
+  'False'
+] );
+
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'Assume the following:<br>var joel = \'cool\';<br>var rob = \'also cool\';<br>var cat = \'the coolest\';<br>Which of the following loops will execute the code block?', [
+  [ 'while ( joel = \'cool\' ) { console.log(  \'Hello!\' ) }' ],
+  'while ( rob === \'lame\' && rob !== \'lame\' ) { console.log(  \'Hello!\' ) }',
+  'while ( ! cat === \'notcool\' ) { console.log(  \'Hello!\' ) }',
+] );
+
+
+//DOM Quiz
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How can you create an h2 element using JavaScript?', [
+  [ 'var h2El = document.createElement( \'h2\' ); '],
+  'var h2El = document.getElementById( \'h2\' );',
+  'var h2El = document.getElementsByTagName( \'h2\' );',
+  'var h2El = document.appendChild( \'h2\' );',
+  'var h2El = document.newChild( \'h2\' );'
+] );
+
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How might you add textual content to h2el?', [
+  'h2El.appendChild( \'content\' );',
+  'h2El.removeChild( \'content\' );',
+  [ 'h2El.textContent = \'content\';' ],
+  'h2El.createElement = \'content\';',
+  'h2El.textContent( \'content\' );'
+] );
+
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How could you add a <main> element inside of bodyEl?', [
+  'bodyEl.appendChild( \'main\' );',
+  'bodyEl.document.add( main );',
+  [ 'bodyEl.innerHTML = \'<main></main>\' );' ],
+  'bodyEl.outerHTML.set( document.main() );'
+] );
+
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How would you add h2El to your mainEl?', [
+  'mainEl.getElementById( \'h2El\' );',
+  [ 'mainEl.appendChild( h2El );' ],
+  'mainEl.createElement( h2El );',
+  'mainEl.textContent( h2El );'
+] );
+
+
+//Object Literals Quiz
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
   'object oriented variable',
   [ 'property' ],
   'literal',
   'method'
 ] );
 
-Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
   [ 'method' ],
   'action',
   'reaction',
@@ -408,14 +509,14 @@ Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an 
   'object.do()'
 ] );
 
-Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
   'dog.object.bark();',
   'bark();',
   [ 'dog.bark();' ],
   'dog.bark;'
 ] );
 
-Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
   'dog.breed;',
   'dog[ \'breed\' ]',
   'dog[ breed ]',
@@ -423,12 +524,12 @@ Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which of the following is a 
   'A, B, and C are all valid'
 ] );
 
-Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
   [ 'True' ],
   'False'
 ] );
 
-Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
   [ 'True' ],
   'False'
 ] );
