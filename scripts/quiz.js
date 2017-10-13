@@ -238,7 +238,15 @@ Quiz.prototype.renderResults = function() { // TODO: must have all answers selec
     if( ! this.userAnswers[ i ] ) {
       results += 'in';
     }
-    results += 'correct" id="question' + i + '"><h3>Question ' + ( Number( i ) + 1 ) + '</h3></li>';
+    results += 'correct" id="question' + i + '"><h3>Question ' + ( Number( i ) + 1 ) + ': ';
+
+    if( ! this.userAnswers[ i ] ) {
+      results += '<span class="wrong">Incorrect</span>';
+    } else {
+      results += '<span class="right">Correct</span>';
+    }
+
+    results += '</h3></li>';
   }
   sectionEl.innerHTML = results;
   for( var j in this.questions ) {

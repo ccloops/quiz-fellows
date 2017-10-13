@@ -369,11 +369,11 @@ button+hr {
   color: red;
 }
 
-.correct { /*QUIZ: shades correct answer row on results page*/
-  color: black;
+.right { /*QUIZ: shades correct answer row on results page*/
+  color: green;
 }
 
-.incorrect { /*QUIZ: shades incorrect answer row on results page*/
+.wrong { /*QUIZ: shades incorrect answer row on results page*/
   color: red;
 }
 
@@ -497,4 +497,8 @@ h3 {
 
 #quiz-results h3:first-of-type {
   margin-bottom: none;
+}
+
+#quiz-results p {
+  font-size: 18px;
 }
