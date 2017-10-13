@@ -46,6 +46,14 @@ header h1 {
   margin-right: 255px;
 }
 
+header h1:hover {
+  color: red;
+}
+
+header#header-login h1:hover {
+  color: white;
+}
+
 nav ul {
   display: inline-block;
   height: 50px;
@@ -56,6 +64,10 @@ nav ul li {
   color: white;
   padding-top: 15px;
   margin-left: 30px;
+}
+
+nav ul li:hover {
+  color: red;
 }
 
 a {
@@ -334,14 +346,19 @@ button+hr {
   background-color: white;
 }
 
+#submit:hover {
+  background-color: rgb(200, 200, 200);
+}
+
 #newAnswer, #submit {
   margin-bottom: 25px;
 }
 
 /*Quiz*/
 
-.quiz-main {
-  color: white;
+#quiz-main {
+  color: black;
+  background-color: white;
 }
 
 .hidden { /*QUIZ: Used to hide the previous button on first go*/
@@ -349,7 +366,7 @@ button+hr {
 }
 
 .selected { /*QUIZ: changes background color of selected answer*/
-  background-color: pink;
+  color: red;
 }
 
 .correct { /*QUIZ: shades correct answer row on results page*/
@@ -368,6 +385,10 @@ p#question-text { /*QUIZ: spacing between p lines?*/
   margin-bottom: 15px;
 }
 
+p#question-text:last-of-type {
+  margin-bottom: 0;
+}
+
 article#quiz-content ol { /*QUIZ: Sets A, B, C for answers*/
   list-style: upper-alpha;
   list-style-position: inside;
@@ -378,9 +399,78 @@ article#quiz-content ol li+li { /*QUIZ: spaces answers a bit*/
 }
 
 article#quiz-content ol li:hover { /*QUIZ: Set color on answer hover*/
-  background-color: pink;
+  color: red;
+  cursor: pointer;
 }
 
 article#quiz-content ol li:active { /*QUIZ: Set color on answer click*/
-  background-color: red;
+  color: red;
+}
+
+section#quiz ul li, section#quiz h2 {
+  color: black;
+}
+
+section#quiz ul li {
+  margin-bottom: 6.25px;
+  font-size: 18px;
+}
+
+section#quiz ul li:hover {
+  color: red;
+  cursor: pointer;
+}
+
+section#quiz h2 {
+  font-size: 24px;
+  margin-bottom: 12.5px;
+}
+
+#quiz {
+  background-color: white;
+}
+
+section#quiz article {
+  width: 480px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 25px 0;
+}
+
+section#quiz {
+  text-align: center;
+}
+
+#rendered-quiz {
+  width: 960px;
+  margin: 25px auto 0;
+  padding-bottom: 25px;
+}
+
+#next-button {
+  margin-bottom: 25px;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+#quiz-content p, #quiz-content li {
+  font-size: 18px;
+}
+
+#quiz-content ol {
+  margin-top: 25px;
+}
+
+#previous-button {
+  margin-right: 25px;
+}
+
+#question-text {
+  border-bottom: 2px solid black;
+  margin-bottom: 0;
+  padding-bottom: 25px;
+  display: inline-block;
 }

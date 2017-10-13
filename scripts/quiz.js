@@ -154,6 +154,7 @@ Quiz.prototype.renderPrevious = function() { //change to the last question
 
 Quiz.prototype.renderQuiz = function () { //called when a quiz is loaded for the first time to create the back and next buttons
   var sectionEl = document.getElementById( 'quiz' );
+  sectionEl.setAttribute( 'id', 'rendered-quiz' );
   sectionEl.innerHTML = null; //clears out main page
 
   [ 'Previous', 'Next' ].forEach( function ( label, index ) {
@@ -228,7 +229,7 @@ Quiz.prototype.checkAnswers = function () { //determine if there are any unanswe
 };
 
 Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
-  var sectionEl = document.getElementById( 'quiz' );
+  var sectionEl = document.getElementById( 'rendered-quiz' );
   var results = '<h2>User\'s Results</h2>'; // TODO: ADD USER NAME
   results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
   for( var i in this.questions ) {
