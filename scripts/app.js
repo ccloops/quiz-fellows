@@ -7,7 +7,6 @@ var app = {
   users: [],
   currentUser: -1
 };
-console.log( app.currentUser + 'currentuser before');
 
 function User (username, password) {
   this.userName = username;
@@ -135,7 +134,6 @@ if (app.currentUser < 0) {
 if (app.currentUser > -1 && document.getElementById('loginpage')) {//if currentUser exsists then go to home page
   // window.location.href = 'html/home.html';
 }
-console.log(app.currentUser + 'currentuser after');
 
 
 User.handleUserLogin = function( event ) {
@@ -151,7 +149,6 @@ User.handleUserLogin = function( event ) {
 
     if (app.users.length === 0) {// if no users are stored then creates a new user.
 
-      console.log('app.users.length = 0 true');
       confirm('Created New User \n\nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
       new User(userName, passWord);
       localStorage.users = JSON.stringify(app.users);
@@ -165,9 +162,7 @@ User.handleUserLogin = function( event ) {
     } else {
       for (var i = 0; i < app.users.length; i++) {
         if (userName === app.users[i].userName) { // check to see if user exsists
-          console.log('returning user');
           if (passWord === app.users[i].passWord) {// compare the password to the username
-            console.log('password correct');
             alert('welcome back!');
             app.currentUser = i;
             localStorage.currentUser = i;
@@ -179,13 +174,11 @@ User.handleUserLogin = function( event ) {
 
             break;
           } else {//inncorrect password verify
-            console.log('password wrong');
             alert('Password does not match');
             User.passWordInput.value = '';
           }
 
         } else {//goes through all the users with what the user entered to determine if it exsists
-          console.log('validating user');
           var userCounter = 0;
           for (var j = 0; j < app.users.length; j++) {
             if (userName !== app.users[j].userName) { //add to counter for each time the the un and pw do not match
@@ -194,7 +187,6 @@ User.handleUserLogin = function( event ) {
           }
         }
       }
-      console.log('counter: ' + userCounter);
       if (userCounter === app.users.length) { //creates a new user if validating user doesn't find a username
         var userConfirm = confirm('Creating new user. \n\nIs this correct? \n\nUsername: ' + userName + '\nPassword: ' + passWord.replace(/./g,'*'));
         if (userConfirm === true) {
@@ -227,5 +219,3 @@ User.handleUserLogout = function() {
 
 User.buttEl.addEventListener('click', User.handleUserLogout);
 User.form.addEventListener('submit', User.handleUserLogin);
-console.log(app.currentUser);
-console.log(localStorage.currentUser);
