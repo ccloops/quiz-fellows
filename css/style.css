@@ -502,3 +502,17 @@ h3 {
 #quiz-results p {
   font-size: 18px;
 }
+
+#instructions ol {
+  list-style: decimal;
+  list-style-position: inside;
+  width: 960px;
+  margin: 25px auto;
+  color: white;
+  text-align: center;
+  font-size: 125%;
+}
+
+#instructions ol li {
+  margin-bottom: 12.5px;
+}
