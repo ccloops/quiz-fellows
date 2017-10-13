@@ -229,6 +229,9 @@ Quiz.prototype.checkAnswers = function () { //determine if there are any unanswe
 };
 
 Quiz.prototype.renderResults = function() {
+  if( ! confirm( 'Are you ready to submit?' ) ) {
+    return null;
+  }
   var sectionEl = document.getElementById( 'rendered-quiz' );
   sectionEl.setAttribute( 'id', 'quiz-results' );
   var results = '<h2>Results</h2>';
