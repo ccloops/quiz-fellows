@@ -101,6 +101,9 @@ QuestionForm.prototype.addQuestionForm = function() {
   removeQuestionButton.addEventListener('click', this.removeQuestion.bind(this));
   this.newQuestionArticle.appendChild(removeQuestionButton);
 
+  var hrEl = document.createElement( 'hr' );
+  this.newQuestionArticle.appendChild( hrEl );
+
   entireQuizForm.appendChild(this.newQuestionArticle);
 
 };
@@ -179,9 +182,9 @@ QuestionForm.submitQuiz = function() {
       if(confirm ('Would you like to go to your quizzes?')) {
         document.getElementById('quizTitle').value = null;
         document.getElementById('quizDescription').value = null;
-        window.location.href = '../html/quiz.html';
+        window.location.href = 'quiz.html';
       } else {
-        window.location.href = '../index.html';
+        window.location.href = 'home.html';
       }
     }
   }

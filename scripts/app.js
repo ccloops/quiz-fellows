@@ -16,26 +16,23 @@ function User (username, password) {
   // localStorage.currentUser = app.users.length - 1;
 }
 
-User.navBar = document.getElementById('navbar');
-User.header = document.getElementById('header');
+// User.navBar = document.getElementById('navbar');
+// User.header = document.getElementById('header');
+//
 
-User.liEl = document.getElementById('logoutbutt');
-User.buttEl = document.createElement('button');
-User.buttEl.type = 'click';
-User.buttEl.id = 'logout';
-User.buttEl.textContent = 'Logout';
 
-User.logoutButtRender = function() { //clears login form and adds logout button.
-  User.main.removeChild(User.form);
-  User.aEl4 = document.createElement('a');
-  User.aEl4.href = 'index.html';
-  User.liEl.appendChild(User.aEl4);
-  User.aEl4.appendChild(User.buttEl);
-};
 
-User.navBarUnRender = function() {
-  User.header.removeChild(User.navBar);
-};
+// User.logoutButtRender = function() { //clears login form and adds logout button.
+//   User.main.removeChild(User.form);
+//   User.aEl4 = document.createElement('a');
+//   User.aEl4.href = 'index.html';
+//   User.liEl.appendChild(User.aEl4);
+//   User.aEl4.appendChild(User.buttEl);
+// };
+
+// User.navBarUnRender = function() {
+//   User.header.removeChild(User.navBar);
+// };
 
 if (localStorage.users) { // adds the localstorage.users to the app.users object.
   var retrieveApp = JSON.parse(localStorage.users);
@@ -44,97 +41,99 @@ if (localStorage.users) { // adds the localstorage.users to the app.users object
   app.currentUser = retrieveCurrentUser;
 }
 
-User.splashPageRender = function() {//renders splash page
-  User.divEl = document.createElement('div');
+// User.splashPageRender = function() {//renders splash page
+//   User.divEl = document.createElement('div');
+//
+//   User.h2El1 = document.createElement('h2');
+//   User.h2El1.id = 'jh2';
+//   User.h2El1.textContent = 'Take a Quiz';
+//
+//   User.h2El2 = document.createElement('h2');
+//   User.h2El2.id = 'jh2';
+//   User.h2El2.textContent = 'Make a Quiz';
+//
+//   User.h2El3 = document.createElement('h2');
+//   User.h2El3.id = 'jh2';
+//   User.h2El3.textContent = 'About us';
+//
+//   User.ul2El = document.createElement('ul');
+//
+//   User.liEl2 = document.createElement('li');
+//   User.liEl2.id = 'jli';
+//
+//   User.liEl3 = document.createElement('li');
+//   User.liEl3.id = 'jli';
+//
+//   User.liEl4 = document.createElement('li');
+//   User.liEl4.id = 'jli';
+//
+//   User.imgEl1 = document.createElement('img');
+//   User.imgEl1.id = 'jimgs';
+//   User.imgEl1.src = 'stockimgs/red-quiz-button.jpg';
+//
+//   User.imgEl2 = document.createElement('img');
+//   User.imgEl2.id = 'jimgs';
+//   User.imgEl2.src = 'stockimgs/bigstock-Quill-pen-and-ink-well-resting-89718662.jpg';
+//
+//   User.imgEl3 = document.createElement('img');
+//   User.imgEl3.id = 'jimgs';
+//   User.imgEl3.src = 'stockimgs/about-us.png';
+//
+//   User.aEl1 = document.createElement('a');
+//   User.aEl1.href = 'html/quiz.html';
+//
+//   User.aEl2 = document.createElement('a');
+//   User.aEl2.href = 'html/template.html';
+//
+//   User.aEl3 = document.createElement('a');
+//   User.aEl3.href = 'html/about.html';
+//
+//   //========================================================================
+//   //Current User in Nav bar
+//   //========================================================================
+//   User.header.appendChild(User.navBar);
+//   User.navUlEl = document.getElementById('navul');
+//   User.navLi = document.createElement('li');
+//   User.navUlEl.appendChild(User.navLi);
+//   User.navH2El = document.createElement('h2');
+//   User.navH2El.id = 'userdisplay';
+//   User.navH2El.textContent = 'User: ' + app.users[app.currentUser].userName;
+//   User.navLi.appendChild(User.navH2El);
+//   //=========================================================================
+//
+//   User.main.appendChild(User.divEl);
+//
+//   User.divEl.appendChild(User.h2El1);
+//   User.divEl.appendChild(User.h2El2);
+//   User.divEl.appendChild(User.h2El3);
+//
+//   User.divEl.appendChild(User.ul2El);
+//
+//   User.ul2El.appendChild(User.liEl2);
+//
+//   User.ul2El.appendChild(User.liEl3);
+//
+//   User.ul2El.appendChild(User.liEl4);
+//
+//   User.liEl2.appendChild(User.aEl1);
+//   User.aEl1.appendChild(User.imgEl1);
+//
+//   User.liEl3.appendChild(User.aEl2);
+//   User.aEl2.appendChild(User.imgEl2);
+//
+//   User.liEl4.appendChild(User.aEl3);
+//   User.aEl3.appendChild(User.imgEl3);
+// };//renders after login
 
-  User.h2El1 = document.createElement('h2');
-  User.h2El1.id = 'jh2';
-  User.h2El1.textContent = 'Take a Quiz';
+User.buttEl = document.getElementById('logout');
+if (app.currentUser < 0) {
+  User.navUl = document.getElementById('navul');
+  User.navLi = document.getElementById('logoutbutt');
+  User.navLi.removeChild(User.buttEl);
+}
 
-  User.h2El2 = document.createElement('h2');
-  User.h2El2.id = 'jh2';
-  User.h2El2.textContent = 'Make a Quiz';
-
-  User.h2El3 = document.createElement('h2');
-  User.h2El3.id = 'jh2';
-  User.h2El3.textContent = 'About us';
-
-  User.ul2El = document.createElement('ul');
-
-  User.liEl2 = document.createElement('li');
-  User.liEl2.id = 'jli';
-
-  User.liEl3 = document.createElement('li');
-  User.liEl3.id = 'jli';
-
-  User.liEl4 = document.createElement('li');
-  User.liEl4.id = 'jli';
-
-  User.imgEl1 = document.createElement('img');
-  User.imgEl1.id = 'jimgs';
-  User.imgEl1.src = 'stockimgs/red-quiz-button.jpg';
-
-  User.imgEl2 = document.createElement('img');
-  User.imgEl2.id = 'jimgs';
-  User.imgEl2.src = 'stockimgs/bigstock-Quill-pen-and-ink-well-resting-89718662.jpg';
-
-  User.imgEl3 = document.createElement('img');
-  User.imgEl3.id = 'jimgs';
-  User.imgEl3.src = 'stockimgs/about-us.png';
-
-  User.aEl1 = document.createElement('a');
-  User.aEl1.href = 'html/quiz.html';
-
-  User.aEl2 = document.createElement('a');
-  User.aEl2.href = 'html/template.html';
-
-  User.aEl3 = document.createElement('a');
-  User.aEl3.href = 'html/about.html';
-
-  //========================================================================
-  //Current User in Nav bar
-  //========================================================================
-  User.header.appendChild(User.navBar);
-  User.navUlEl = document.getElementById('navul');
-  User.navLi = document.createElement('li');
-  User.navUlEl.appendChild(User.navLi);
-  User.navH2El = document.createElement('h2');
-  User.navH2El.id = 'userdisplay';
-  User.navH2El.textContent = 'User: ' + app.users[app.currentUser].userName;
-  User.navLi.appendChild(User.navH2El);
-  //=========================================================================
-
-  User.main.appendChild(User.divEl);
-
-  User.divEl.appendChild(User.h2El1);
-  User.divEl.appendChild(User.h2El2);
-  User.divEl.appendChild(User.h2El3);
-
-  User.divEl.appendChild(User.ul2El);
-
-  User.ul2El.appendChild(User.liEl2);
-
-  User.ul2El.appendChild(User.liEl3);
-
-  User.ul2El.appendChild(User.liEl4);
-
-  User.liEl2.appendChild(User.aEl1);
-  User.aEl1.appendChild(User.imgEl1);
-
-  User.liEl3.appendChild(User.aEl2);
-  User.aEl2.appendChild(User.imgEl2);
-
-  User.liEl4.appendChild(User.aEl3);
-  User.aEl3.appendChild(User.imgEl3);
-};//renders after login
-
-
-
-if (app.currentUser > -1) {//if currentUser exsists then remove login form.
-  User.logoutButtRender();
-  User.splashPageRender();
-} else {
-  User.navBarUnRender();
+if (app.currentUser > -1 && document.getElementById('loginpage')) {//if currentUser exsists then go to home page
+  // window.location.href = 'html/home.html';
 }
 console.log(app.currentUser + 'currentuser after');
 
@@ -159,8 +158,9 @@ User.handleUserLogin = function( event ) {
       localStorage.currentUser = 0;
       User.userNameInput.value = '';
       User.passWordInput.value = '';
-      User.logoutButtRender();
-      User.splashPageRender();
+      window.location.href = 'html/home.html';
+      // User.logoutButtRender();
+      // User.splashPageRender();
 
     } else {
       for (var i = 0; i < app.users.length; i++) {
@@ -173,8 +173,9 @@ User.handleUserLogin = function( event ) {
             localStorage.currentUser = i;
             User.userNameInput.value = '';
             User.passWordInput.value = '';
-            User.logoutButtRender();
-            User.splashPageRender();
+            window.location.href = 'html/home.html';
+            // User.logoutButtRender();
+            // User.splashPageRender();
 
             break;
           } else {//inncorrect password verify
@@ -204,8 +205,9 @@ User.handleUserLogin = function( event ) {
           alert('Welcome!');
           User.userNameInput.value = '';
           User.passWordInput.value = '';
-          User.logoutButtRender();
-          User.splashPageRender();
+          window.location.href = 'html/home.html';
+          // User.logoutButtRender();
+          // User.splashPageRender();
         } else {
           alert('sending back to login');
         }
@@ -216,9 +218,11 @@ User.handleUserLogin = function( event ) {
 
 User.handleUserLogout = function() {
   localStorage.currentUser = -1;
-  User.header.removeChild(User.ulEl);
-  User.main.removeChild(User.divEl);
-  User.main.appendChild(User.form);
+  window.location.href = '../index.html';
+
+  // User.header.removeChild(User.ulEl);
+  // User.main.removeChild(User.divEl);
+  // User.main.appendChild(User.form);
 };
 
 User.buttEl.addEventListener('click', User.handleUserLogout);

@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html id='loginpage'>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Quiz Fellows - Login</title>
     <link rel="stylesheet" href="css\style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   </head>
   <body>
-    <header id="header">
+    <header id="header-login">
       <nav id="navbar">
-        <ul id="navul">
-          <li class="navitem" id="logoutbutt"></li>
-          <li class="navitem"><a href="about.html">About Us </a></li>
-          <li class="navitem"><a href="template.html">Make Quiz </a></li>
-          <li class="navitem"><a href="quiz.html">Take Quiz </a></li>
-          <li class="navitem"><a href="../index.html">Home </a></li>
-        </ul>
+          <img src="stockimgs/code-fellows-logo.png" /><h1>Quiz Fellows</h1>
+          <ul id="navul">
+            <li id="logoutbutt"><button type="button" name="button" id="logout"></button></li>
+          </ul>
       </nav>
     </header>
-    <main id="main">
+    <main id="login-main">
       <form id="form">
         <fieldset>
-          <label id="userlabel" for="username">Username:</label>
-          <input id="username" type="text" name="username"/>
-          <label id="passlabel" for="password">Password:</label>
-          <input id="password" type="password" name="password"/>
-          <button id="loginbutt" type="submit" name="login">Login</button>
+          <div id="username-row">
+            <label id="userlabel" for="username">Username:</label>
+            <input id="username" type="text" name="username"/>
+          </div>
+          <div id="pw-row">
+            <label id="passlabel" for="password">Password:</label>
+            <input id="password" type="password" name="password"/>
+          </div>
+          <button id="loginbutt" type="submit" name="login"> Login</button>
         </fieldset>
       </form>
     </main>
-    <footer></footer>
-    <script type="text/javascript" src="scripts\app.js"></script>
+    <footer>
+      <a href="#">
+        <img src="stockimgs/code-fellows-logo.png" alt="quiz fellows" />
+      </a>
+      <p>&copy;2017 Quiz Fellows, LLC</p>
+    </footer>
+    <script type="text/javascript" src="scripts\app.js">
+
+    </script>
+    <!-- <script type="text/javascript" src="scripts\app.js"></script> -->
   </body>
 </html>
