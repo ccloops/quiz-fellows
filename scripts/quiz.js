@@ -228,10 +228,10 @@ Quiz.prototype.checkAnswers = function () { //determine if there are any unanswe
   }
 };
 
-Quiz.prototype.renderResults = function() { // TODO: must have all answers selected before calling this
+Quiz.prototype.renderResults = function() {
   var sectionEl = document.getElementById( 'rendered-quiz' );
   sectionEl.setAttribute( 'id', 'quiz-results' );
-  var results = '<h2>Results</h2>'; // TODO: ADD USER NAME
+  var results = '<h2>Results</h2>';
   results += '<h3>You earned ' + this.getPoints() + ' out of ' + this.questions.length + ' possible points for a score of ' + this.getPercent() + '%.</h3><ol>';
   for( var i in this.questions ) {
     results += '<li class="';
@@ -271,7 +271,7 @@ Quiz.loadSplash = function() { //setup the splash page on page load
   var user = Quiz.currentUser.userName;
   user = user[ 0 ].toUpperCase() + user.slice( 1 );
   document.getElementById( 'user-name' ).textContent = user + '\'s Quizzes';
-  Quiz.buildQuizList( 'default-quizzes', default201Quizzes );
+  Quiz.buildQuizList( 'default-quizzes', Quiz.default201Quizzes );
   if( Quiz.currentUser.myQuizzes ) {
     Quiz.buildQuizList( 'user-quizzes', Quiz.currentUser.myQuizzes );
   } else {
@@ -317,7 +317,7 @@ Quiz.getQuiz = function( source, index ) { //load the selected quiz into the Qui
       Quiz.currentQuiz.questions.push( Quiz.instantiateQuestion( tempQuiz.questions[ question ] ) );
     }
   } else {
-    Quiz.currentQuiz = default201Quizzes[ index ];
+    Quiz.currentQuiz = Quiz.default201Quizzes[ index ];
   }
 };
 
@@ -349,17 +349,159 @@ Quiz.setupQuizPage = function() {
 //Built in quizzes//
 ////////////////////
 
-/*Objects Quiz*/
-var quiz0 = new Quiz( 'Code 201: Objects 1', 'Practice your skills with JavaScript objects.' );
 
-quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
+Quiz.default201Quizzes = [
+  new Quiz( 'Basic HTML', 'Test your knowledge of basic HTML concepts.' ),
+
+  new Quiz( 'Basic CSS', 'Test your knowledge of basic CSS concepts.' ),
+
+  new Quiz( 'JavaScript Loops', 'Try your skills on some elementary JS Loops.' ),
+
+  new Quiz( 'DOM Manipulation', 'See how much you know about all things DOM.' ),
+
+  new Quiz( 'Object Literals', 'Practice your skills with JavaScript object literals.' ),
+];
+
+//HTML Quiz
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'What does HTML stand for?', [
+  [ 'Hypertext Markup Language' ],
+  'Hyperterminal Markup Language',
+  'Hypertext Markdown Language',
+  'Hyperterminal Markdown Language'
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Where in the HTML file should the link to a CSS stylesheet be placed?', [
+  'The <body>',
+  'The <header>',
+  [ 'The <head>' ],
+  'The <Footer>'
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'How should you begin every HTML file?', [
+  '<html>',
+  [ '<!DOCTYPE html>' ],
+  '<title>',
+  '<DOCTYPE! html>'
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'Which of the following is not a block element?', [
+  '<p>',
+  '<h1>',
+  [ '<span>' ],
+  '<article>',
+] );
+
+Quiz.default201Quizzes[ 0 ].addQuestionAndAnswers( 'True or False?<br>HTML files cannot contain CSS.', [
+  'True',
+  [ 'False' ]
+] );
+
+
+//CSS Quiz
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'What does the \'a\' in RGBa control?', [
+  'The aura',
+  [ 'The opacity' ],
+  'The attribute',
+  'It Doesn’t style anything, it is a just a part of the naming convention'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'How would you select an element with an id value of \'home\'?', [
+  'home { /*styles*/ }',
+  '.home { /*styles*/ }',
+  [ '#home { /*styles*/ }' ],
+  'home.id { /*styles*/ }'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'What does CSS stand for?', [
+  [ 'Cascading Style Sheet' ],
+  'Color Style Sheet',
+  'Creative Style Sheet',
+  'Code Style Sheet',
+  'Croutons, Salads, and Sides'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which of the following is not a block element?', [
+  '<p>',
+  '<h1>',
+  [ '<span>' ],
+  '<article>'
+] );
+
+Quiz.default201Quizzes[ 1 ].addQuestionAndAnswers( 'Which symbol can be used to select all elements on the page for styling?', [
+  '#',
+  '+',
+  '^',
+  [ '*' ]
+] );
+
+
+//For Loops Quiz
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'What are the two main types of loops?', [
+  'If & Else',
+  [ 'For & While' ],
+  'Return & Break',
+  'Try & Catch'
+] );
+
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'Which of the following is the correct structure of a for loop?', [
+  'for ( i < array.length; i = 0; i++ ) { doStuff(); }',
+  'for ( i++; i < array.length; var i = i ) { doStuff(); }',
+  [ 'for ( var i = 0; i < array.length; i++ ) { doStuff(); }' ]
+] );
+
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'True or False?<br>You can have a for loop inside of a for loop.', [
+  [ 'True' ],
+  'False'
+] );
+
+Quiz.default201Quizzes[ 2 ].addQuestionAndAnswers( 'Assume the following:<br>var joel = \'cool\';<br>var rob = \'also cool\';<br>var cat = \'the coolest\';<br>Which of the following loops will execute the code block?', [
+  [ 'while ( joel = \'cool\' ) { console.log(  \'Hello!\' ) }' ],
+  'while ( rob === \'lame\' && rob !== \'lame\' ) { console.log(  \'Hello!\' ) }',
+  'while ( ! cat === \'notcool\' ) { console.log(  \'Hello!\' ) }',
+] );
+
+
+//DOM Quiz
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How can you create an h2 element using JavaScript?', [
+  [ 'var h2El = document.createElement( \'h2\' ); '],
+  'var h2El = document.getElementById( \'h2\' );',
+  'var h2El = document.getElementsByTagName( \'h2\' );',
+  'var h2El = document.appendChild( \'h2\' );',
+  'var h2El = document.newChild( \'h2\' );'
+] );
+
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How might you add textual content to h2el?', [
+  'h2El.appendChild( \'content\' );',
+  'h2El.removeChild( \'content\' );',
+  [ 'h2El.textContent = \'content\';' ],
+  'h2El.createElement = \'content\';',
+  'h2El.textContent( \'content\' );'
+] );
+
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How could you add a <main> element inside of bodyEl?', [
+  'bodyEl.appendChild( \'main\' );',
+  'bodyEl.document.add( main );',
+  [ 'bodyEl.innerHTML = \'<main></main>\' );' ],
+  'bodyEl.outerHTML.set( document.main() );'
+] );
+
+Quiz.default201Quizzes[ 3 ].addQuestionAndAnswers( 'How would you add h2El to your mainEl?', [
+  'mainEl.getElementById( \'h2El\' );',
+  [ 'mainEl.appendChild( h2El );' ],
+  'mainEl.createElement( h2El );',
+  'mainEl.textContent( h2El );'
+] );
+
+
+//Object Literals Quiz
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a variable is referred to as a(n) _______.', [
   'object oriented variable',
   [ 'property' ],
   'literal',
   'method'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is referred to as a(n) _______.', [
   [ 'method' ],
   'action',
   'reaction',
@@ -367,14 +509,14 @@ quiz0.addQuestionAndAnswers( 'Fill in the blank.<br>In an object, a function is 
   'object.do()'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Given an object called "dog", which of the following might make the dog "bark"?', [
   'dog.object.bark();',
   'bark();',
   [ 'dog.bark();' ],
   'dog.bark;'
 ] );
 
-quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'Which of the following is a valid way to access the "breed" property of the "dog" object?<br>Select the best answer.', [
   'dog.breed;',
   'dog[ \'breed\' ]',
   'dog[ breed ]',
@@ -382,53 +524,28 @@ quiz0.addQuestionAndAnswers( 'Which of the following is a valid way to access th
   'A, B, and C are all valid'
 ] );
 
-quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid JavaScript object:<br>var car = { make: \'Ford\' };', [
   [ 'True' ],
   'False'
 ] );
 
-quiz0.addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
+Quiz.default201Quizzes[ 4 ].addQuestionAndAnswers( 'True or False?<br>The following is a valid method declaration for an object literal:<br>bark: function() { console.log( \'Woof!\' ); }', [
   [ 'True' ],
   'False'
 ] );
-
-/*Test Quiz*/
-var quiz1 = new Quiz( 'Code 201: Quiz 2 test', 'Practice your skills with JavaScript objects.' );
-
-quiz1.addQuestionAndAnswers( 'Hi Joel', [
-  'wrong',
-  [ 'correct' ],
-  'asdsad',
-  'asdasd'
-] );
-
-quiz1.addQuestionAndAnswers( 'Question 2', [
-  [ 'correct' ],
-  'nope',
-  'floop',
-  'smosdfohj'
-] );
-
 
 //////////////////
 //PageLoad Setup//
 //////////////////
 
-//Quiz page only
-if( document.getElementById( 'quiz' ) ) {
-  var default201Quizzes = [
-    quiz0,
-    quiz1
-  ];
+//Quiz page and template page//
+Quiz.notLoggedIn = ! localStorage.users || ! localStorage.currentUser || localStorage.currentUser === '-1';
 
-  Quiz.getUser();
-  Quiz.loadSplash();
-  document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
-  document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
-}
-
-//Quiz page and template page
 (function() {
+  if( Quiz.notLoggedIn ) {
+    alert( 'You must first sign in to access this page.' );
+    return window.location.href = '../index.html';
+  }
   var buttEl = document.getElementById('logout');
   function handleUserLogout() {
     localStorage.currentUser = -1;
@@ -436,6 +553,17 @@ if( document.getElementById( 'quiz' ) ) {
   }
   buttEl.addEventListener('click', handleUserLogout);
 })();
+
+
+//Quiz page only
+if( document.getElementById( 'quiz' ) && ! Quiz.notLoggedIn ) {
+  Quiz.getUser();
+  Quiz.loadSplash();
+  document.getElementById( 'default-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+  document.getElementById( 'user-quizzes' ).addEventListener( 'click', Quiz.handleListClick );
+}
+
+
 
 
 ///////
